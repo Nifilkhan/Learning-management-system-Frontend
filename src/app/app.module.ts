@@ -7,6 +7,9 @@ import { SignupComponent } from './authentication/signup/signup.component';
 import { SigninComponent } from './authentication/signin/signin.component';
 import { OtpVerificationComponent } from './authentication/otp-verification/otp-verification.component';
 import { RouterLink } from '@angular/router';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms'
+import { AuthService } from './authentication/shared/service/auth.service.ts.service';
 
 
 
@@ -20,10 +23,12 @@ import { RouterLink } from '@angular/router';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterLink
+    RouterLink,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+   AuthService,provideClientHydration(),provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })

@@ -12,18 +12,22 @@
         <span class="text-gray-500 mb-3"
           >An authentication code has been sent to your email</span
         >
+        <form [formGroup]="otpForm" (ngSubmit)="otpVerficiation()">
         <div class="flex flex-col gap-2">
           <div class="custom-input mb-3 col-12">
             <label for="exampleFormControlInput1" class="form-label"
               >Enter Code</label
             >
             <input
-              type="email"
+              type="text"
               class="form-control"
-              id="exampleFormControlInput1"
+              formControlName="otp"
+              id="otp"
             />
           </div>
         </div>
+        <button class="btn verifyBtn btn-primary p-2" type="submit">Verify</button>
+      </form>
           <div>
             <span
               >Didn’t receive a code?<a
@@ -34,8 +38,9 @@
             >
           </div>
         </div>
-        <button class="btn btn-primary p-2">Verify</button>
+
     </div>
+
     <div class="img flex">
       <img src="/images/login.jpg" alt="Image" />
     </div>
