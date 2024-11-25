@@ -27,6 +27,7 @@
 
  .img img{
   // margin: 20px 40px;
+  max-width: 100%;
   width: 450px;
   height: 650px;
  }
@@ -34,7 +35,7 @@
  .content {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 35px;
   margin-top: 35px;
  }
 
