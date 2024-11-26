@@ -10,3 +10,15 @@ export interface RegisterUser {
 export interface Otp {
   verificationCode:Number
 }
+
+
+export interface Login {
+  email:string;
+  password:string;
+}
+
+export interface LoginResponse {
+  role:string;
+  message:string;
+  token?:string
+}

@@ -10,6 +10,8 @@ import { RouterLink } from '@angular/router';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms'
 import { AuthService } from './authentication/shared/service/auth.service.ts.service';
+import { AdminComponent } from './AdminDashboard/admin/admin.component';
+import { HomeComponent } from './User/home-component/home-component.component';
 
 
 
@@ -18,7 +20,9 @@ import { AuthService } from './authentication/shared/service/auth.service.ts.ser
     AppComponent,
     SignupComponent,
     SigninComponent,
-    OtpVerificationComponent
+    OtpVerificationComponent,
+    AdminComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

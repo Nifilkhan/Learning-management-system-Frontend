@@ -1,6 +1,6 @@
 .background
  {
-  background-color: #e7d9f3;
+  background-color: #DFDCDC;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -122,5 +122,10 @@
 .header{
   justify-content: end;
   display: flex;
+}
+
+.forget a {
+  text-decoration: none;
+  color: red;
 }
 
