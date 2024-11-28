@@ -1,1 +1,91 @@
-<p>admin works!</p>
+<!-- Main Wrapper for Dashboard -->
+<div class="flex h-screen">
+
+  <!-- Sidebar (Sticky) -->
+  <div class="sidebar w-64 fixed top-0 left-0 z-10 bg-blue-800">
+    <div class="flex flex-row align-items-center p-3"><a class="text-white text-2xl font-semibold header">Admin Dashboard</a></div>
+    <ul class="space-y-6 p-0 m-0">
+      <li class="m-0"><a href="#" class="text-white hover:text-gray-300">Dashboard</a></li>
+      <li class="m-0"><a href="#" class="text-white hover:text-gray-300">Manage Users</a></li>
+      <li class="m-0"><a href="#" class="text-white hover:text-gray-300">Manage Instructors</a></li>
+      <li class="m-0"><a href="#" class="text-white hover:text-gray-300">Reports</a></li>
+      <li class="m-0"><a href="#" class="text-white hover:text-gray-300">Settings</a></li>
+    </ul>
+
+    <!-- Logout Button -->
+    <div class="absolute bottom-4 w-full">
+      <button class="logout-btn w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition duration-200">Logout</button>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="flex-1 p-10 ml-64">
+    <!-- Dashboard Header -->
+    <div class="flex justify-between mb-10">
+      <div class="text-3xl font-semibold">Dashboard Overview</div>
+      <div class="text-sm text-gray-500">Welcome, Admin</div>
+    </div>
+
+    <!-- Metrics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="card card-bg p-4 rounded-lg shadow-lg">
+        <div class="text-xl font-semibold">Total Users</div>
+        <div class="text-3xl">1,250</div>
+      </div>
+      <div class="card card-bg p-4 rounded-lg shadow-lg">
+        <div class="text-xl font-semibold">Total Instructors</div>
+        <div class="text-3xl">300</div>
+      </div>
+      <div class="card card-bg p-4 rounded-lg shadow-lg">
+        <div class="text-xl font-semibold">Total Classes</div>
+        <div class="text-3xl">75</div>
+      </div>
+    </div>
+
+    <!-- Dropdown for Data View -->
+    <div class="mb-6">
+      <label for="data-toggle" class="text-lg font-semibold text-gray-700">Switch View:</label>
+      <select id="data-toggle" class="bg-white text-gray-700 border border-gray-300 rounded-md py-2 px-4 ml-2">
+        <option value="instructors">Instructors</option>
+        <option value="students">Students</option>
+      </select>
+    </div>
+
+
+
+    <!-- User Table -->
+    <div class="overflow-x-auto">
+      <table class="table table-striped table-bordered w-full table-scrollable">
+        <thead>
+          <tr class="bg-gradient text-white">
+            <th>ID</th>
+            <th>Profile</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hover:bg-gray-100 transition duration-200">
+            <td>1</td>
+            <td><img src="https://via.placeholder.com/50" alt="Profile" class="rounded-full w-12 h-12"></td>
+            <td>John Doe</td>
+            <td>johndoe&example.com</td>
+            <td>Instructor</td>
+            <td><button class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">Edit</button></td>
+          </tr>
+          <tr class="hover:bg-gray-100 transition duration-200">
+            <td>2</td>
+            <td><img src="https://via.placeholder.com/50" alt="Profile" class="rounded-full w-12 h-12"></td>
+            <td>Jane Smith</td>
+            <td>janesmith&example.com</td>
+            <td>Student</td>
+            <td><button class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

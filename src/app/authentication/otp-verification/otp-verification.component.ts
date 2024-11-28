@@ -16,6 +16,9 @@ export class OtpVerificationComponent implements OnInit {
   constructor(private otpService:AuthService,private router:Router,private fb:FormBuilder) {}
 
   otpForm!:FormGroup;
+
+
+
 ngOnInit(): void {
   this.otpValidation();
 }
@@ -26,6 +29,7 @@ otpValidation():void {
   })
 }
 
+
 otpVerficiation() {
   if(this.otpForm.invalid) {
     return;
@@ -34,9 +38,15 @@ const otpPayload = {otp:this.otpForm.value.otp};
 
 this.otpService.otpVerification(otpPayload).subscribe({
   next:(response) => {
-    console.log(response);
-    this.router.navigate(['/signin'])
-  }
+    if(response.message === 'OTP verified successfully'){
+      console.log(response);
+      this.router.navigate(['/signin'])
+    } else {
+      console.log('Otp is expired')
+    }
+  } ,error(err) {
+      (console.log(err))
+  },
 })
 
 }
