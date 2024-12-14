@@ -48,13 +48,13 @@
         />
       </div>
 
-      <div formArrayName="video">
+      <!-- <div formArrayName="video">
         <div
           *ngFor="let video of videos.controls; let i = index"
           [formGroupName]="i"
         >
           <div class="form-group video-group">
-            <!-- <label for="video{{1}}">Upload Video {{i + 1}}</label> -->
+            <label for="video{{1}}">Upload Video {{i + 1}}</label>
             <div class="">
               <label for="video">Upload videos</label>
               <input
@@ -75,9 +75,9 @@
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
-      </div>
+      </div> -->
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="coverImage">Upload Cover Image</label>
         <input
           type="file"
@@ -86,10 +86,10 @@
           class="form-control"
           name="coverImage"
         />
-        <!-- <div *ngIf="addCourseForm.get('coverImage')?.invalid && addCourseForm.get('coverImage')?.touched" class="text-danger"> -->
-        <!-- Cover image is required. -->
+        <div *ngIf="addCourseForm.get('coverImage')?.invalid && addCourseForm.get('coverImage')?.touched" class="text-danger">
+        Cover image is required.
       </div>
-      <!-- </div> -->
+      </div> -->
 
       <!-- <div class="form-group">
         <label for="status">Status</label>
@@ -101,7 +101,7 @@
       </div> -->
 
       <div class="d-flex justify-content-between">
-        <button class="submit" type="submit">Submit</button>
+        <button class="submit" type="submit"><mat-icon class="mat-18">create</mat-icon> Create</button>
         <button class="cancel" type="reset" (click)="closeForm()">
           cancel
         </button>

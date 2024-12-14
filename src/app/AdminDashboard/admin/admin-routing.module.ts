@@ -33,7 +33,7 @@ const routes: Routes = [
         path:'recent-activities', component:RecentActivitiesComponent
       },
       {
-        path:'content-section', component:SectionManagementComponent
+        path:'content-section/:courseId', component:SectionManagementComponent
       }
     ]
   },

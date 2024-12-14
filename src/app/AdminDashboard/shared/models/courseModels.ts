@@ -7,3 +7,7 @@ export interface Category{
   name:string;
   _id:string;
 }
+
+export interface section{
+  title:string;
+}

@@ -51,8 +51,8 @@ export class AddCourseFormComponent implements OnInit {
       category:['', Validators.required],
       description:['',Validators.required],
       price:['',Validators.required],
-      coverImage:['',Validators.required],
-      video: this.fb.array([this.createVideoField()]),
+      // coverImage:['',Validators.required],
+      // video: this.fb.array([this.createVideoField()]),
       // status:['',Validators.required],
     })
 
@@ -118,29 +118,36 @@ export class AddCourseFormComponent implements OnInit {
         formData.append('price',this.createCourse.get('price')?.value);
         // formData.append('status',this.createCourse.get('status')?.value);
 
-        const coverImageFile = this.createCourse.get('coverImage')?.value;
+        // const coverImageFile = this.createCourse.get('coverImage')?.value;
 
-        if(coverImageFile) {
-          formData.append('coverImage',coverImageFile);
-        } else{
-          console.log('Cover Image file is missing');
-          return;
-        }
+        // if(coverImageFile) {
+        //   formData.append('coverImage',coverImageFile);
+        // } else{
+        //   console.log('Cover Image file is missing');
+        //   return;
+        // }
 
-        this.videos.controls.forEach((videoGroup, i) => {
-          const videoFile = videoGroup.get('video')?.value;
+        // this.videos.controls.forEach((videoGroup, i) => {
+        //   const videoFile = videoGroup.get('video')?.value;
 
-          if(videoFile) {
-            formData.append('videos',videoFile)
-          } else {
-            console.log(`Video ${i + 1} file is missing`);
-            return;
-          }
-        })
+        //   if(videoFile) {
+        //     formData.append('videos',videoFile)
+        //   } else {
+        //     console.log(`Video ${i + 1} file is missing`);
+        //     return;
+        //   }
+        // })
         this.addCourse.uploadCourse(formData).subscribe({
           next:(response) => {
             console.log('Video added sucessfully',response)
-            this.route.navigate(['admin-dashboard','content-section'])
+            const courseId = response?.course._id; // Adjust this to match your backend response structure
+            console.log(response._id);
+            if (!courseId) {
+              console.error('Course ID is undefined. Navigation aborted.');
+              return;
+            }
+
+            this.route.navigate(['admin-dashboard','content-section' ,courseId])
             this.closeForm();
           }, error(err) {
               console.log('Error occured while adding video',err)
@@ -149,7 +156,6 @@ export class AddCourseFormComponent implements OnInit {
       } else {
         this.logFormErrors();
       }
-
     }
 
     logFormErrors() {

@@ -1,19 +1,51 @@
 <div class="video-container">
-  <div class="header-content border-b-[gray] border-b border-solid ">
-    <span class="header-text text-2xl font-medium ">Course Files</span>
+  <div class="header-content">
+    <span class="header-text text-2xl font-medium">Course Files</span>
   </div>
   <div class="px-5">
-  <div class="section">
-    <div class="header-section">
-      <div class="px-3 py-3">
-        <div class="section-header">
-     <span class="font-medium">Section 1: </span><i class="fa-regular fa-file"></i><span>Introduction</span>
-    </div>
-    <div><button class="create-section"><i class="fa-solid fa-plus"></i>Section</button></div>
-  </div>
-  </div>
-</div>
-<div><button class="create-section"><i class="fa-solid fa-plus"></i>Item</button></div>
+    <div class="section">
+      <div class="">
+          <!-- <div class="section-header"></div> -->
 
-</div>
-</div>
+          <!-- <div class="flex flex-row justify-start gap-3 lecture-section"> -->
+          <!-- <button class="create-section "><i class="fa-solid fa-plus"></i> Add Section</button> -->
+          <!-- </div> -->
+          <form [formGroup]="videoForm">
+            <div formArrayName="section">
+              <div
+                *ngFor="let section of section.controls; let i = index"
+                [formGroupName]="i"
+              >
+                <div class="form-group section-group">
+                  <div class="text-title">
+                    <input
+                      type="text"
+                      id="section{{ i }}"
+                      formControlName="title"
+                      class="form-control section-title"
+                      placeholder="Enter the section title"
+                    />
+                    <button
+                      type="button"
+                      class="cancel create-section"
+                      (click)="removeIndex(i)"
+                    >
+                      Cancel
+                    </button>
+                    <button type="button" class="add create-section" (click)="onsubmit(title,courseId)">
+                      Add Section
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <button class="create-section btn-sec" (click)="addSection()">
+        <i class="fa-solid fa-plus"></i>Add Section
+      </button>
+    </div>
+    <div>
+    </div>
+  </div>
