@@ -5,11 +5,6 @@
   <div class="px-5">
     <div class="section">
       <div class="">
-          <!-- <div class="section-header"></div> -->
-
-          <!-- <div class="flex flex-row justify-start gap-3 lecture-section"> -->
-          <!-- <button class="create-section "><i class="fa-solid fa-plus"></i> Add Section</button> -->
-          <!-- </div> -->
           <form [formGroup]="videoForm">
             <div formArrayName="section">
               <div
@@ -32,7 +27,7 @@
                     >
                       Cancel
                     </button>
-                    <button type="button" class="add create-section" (click)="onsubmit(title,courseId)">
+                    <button type="button" class="add create-section" (click)="onsubmit(i)">
                       Add Section
                     </button>
                   </div>

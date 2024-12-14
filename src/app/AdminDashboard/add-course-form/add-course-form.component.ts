@@ -141,7 +141,7 @@ export class AddCourseFormComponent implements OnInit {
           next:(response) => {
             console.log('Video added sucessfully',response)
             const courseId = response?.course._id; // Adjust this to match your backend response structure
-            console.log(response._id);
+            // console.log(response.course._id);
             if (!courseId) {
               console.error('Course ID is undefined. Navigation aborted.');
               return;
