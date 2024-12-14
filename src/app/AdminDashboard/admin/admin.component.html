@@ -1,0 +1,20 @@
+<div class="section">
+  <div class="nav">
+    <div class="sidebar">
+      <div class="logo">
+        <img src="/images/logo-light.png" alt="Logo" />
+      </div>
+      <app-sidebar />
+    </div>
+    <div class="maincontent">
+      <app-header />
+
+      <div class="content-area">
+        <app-card *ngIf="showCard"/>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-add-course-form *ngIf="isVisible" (formVisibility)="showForm()" />

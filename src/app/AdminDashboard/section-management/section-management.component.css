@@ -1,0 +1,44 @@
+.video-container {
+  width: 100%;
+  max-width: 93%;
+  height: 92vh;
+  max-height: 100vh;
+  margin: 50px 65px;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+
+.dropdown .drop-btn {
+  border: none !important;
+  outline: none !important;
+}
+
+
+.header-content {
+  padding: 20px 20px;
+}
+
+.section {
+  width: auto;
+  height: auto;
+  /* overflow-y: scroll; */
+  /* scrollbar-width: none; */
+  border: 1px solid gray;
+  background-color: rgb(229, 231, 228);
+  margin: 35px 0px;
+}
+
+.section-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom:20px;
+}
+
+.create-section {
+  background-color: rgb(229, 231, 228);
+  border: 1px solid black;
+  width: 100%;
+  max-width: 120px;
+  height: 40px;
+}

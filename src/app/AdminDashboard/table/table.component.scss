@@ -1,0 +1,30 @@
+.table-header-content th {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgb(59, 59, 59);
+}
+
+.table-header-content td {
+  font-size: 17px;
+  font-weight: 400;
+  color: rgb(102, 102, 102);
+}
+
+.table-header-content tr th {
+  font-size: 16px;
+  font-weight: 500;
+  background-color: rgb(245, 245, 245);
+}
+.table-header-content tr th {
+  padding: 15px 25px;
+}
+
+.table-header-content tr td {
+  padding: 9px 25px;
+}
+
+/* More specific CSS selector */
+.table tbody tr:hover {
+  background-color: black !important;
+  color: white !important;
+}

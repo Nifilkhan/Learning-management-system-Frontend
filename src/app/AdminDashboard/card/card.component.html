@@ -1,0 +1,59 @@
+<div class="performance-section" >
+  <div class="w-full flex flex-row justify-between items-center my-3">
+    <div>
+  <span class="text-white title">
+    Dashboard Overview
+  </span>
+</div>
+<div class="button-container"><button class="addButton" (click)="toggelForm()"><mat-icon class="m-0 create">add</mat-icon> <div>Course</div></button></div>
+</div>
+     <!-- Dashboard Content (Metrics, Tables, etc.) -->
+     <div class="main-card">
+      <div class="row g-4"> <!-- Reduced the gap for better spacing -->
+
+        <!-- Card 1: Total Users -->
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="card card-bg p-4 rounded-lg shadow-lg">
+            <div class="text-xl d-flex flex-row justify-between">
+              Total Users <span class="material-icons card-icon user m-0">people</span>
+            </div>
+            <div class="text-3xl">1,250</div>
+          </div>
+        </div>
+
+        <!-- Card 2: Total Instructors -->
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="card card-bg p-4 rounded-lg shadow-lg">
+            <div class="text-xl d-flex flex-row justify-between">
+              Total Instructors <span class="material-icons card-icon instructor m-0">school</span>
+            </div>
+            <div class="text-3xl">300</div>
+          </div>
+        </div>
+
+        <!-- Card 3: Total Courses -->
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="card card-bg p-4 rounded-lg shadow-lg">
+            <div class="text-xl d-flex flex-row justify-between">
+              Total Courses <span class="material-icons card-icon courses m-0">class</span>
+            </div>
+            <div class="text-3xl">75</div>
+          </div>
+        </div>
+
+        <!-- Card 4: Active Subscriptions -->
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="card card-bg p-4 rounded-lg shadow-lg">
+            <div class="text-xl d-flex flex-row justify-between">
+              Active Subscriptions <span class="material-icons card-icon subscriptions m-0">subscriptions</span>
+            </div>
+            <div class="text-3xl">1,020</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <app-add-course-form *ngIf="showForm" (formVisibility)="toggelForm()"/>
+</div>

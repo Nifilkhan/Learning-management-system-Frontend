@@ -1,0 +1,83 @@
+.section {
+  width: 100%;
+  display: flex;
+}
+
+/* Nav Container */
+.nav {
+  display: flex;
+  width: 100%;
+  height: 100vh; /* Full height for parent container */
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 248px;  /* Adjust based on your design */
+  background-color: #fff;
+  border-right: 1px solid #9ca3af;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;  /* Full height */
+  overflow-y: auto; /* Optional: for sidebar scrolling if content exceeds viewport */
+}
+/* Main content wrapper */
+.maincontent {
+  flex: 1;
+  margin-left: 248px;  /* Same as sidebar width */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden; /* Prevent overflow */
+}
+
+/* Header */
+app-header {
+  width: 100%;  /* Use the full width of the container */
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Logo Section */
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0; /* Adjust padding for better spacing */
+  // border-bottom: 1px solid #cecfd1; /* Optional: separate the logo from the menu */
+}
+
+.logo img {
+  width: 80%; /* Adjust based on your design */
+  max-width: 150px; /* Prevents stretching */
+}
+
+
+/* Content area (for router-outlet) */
+.content-area {
+  margin-top: 80px;  /* Adjust based on header height */
+  flex-grow: 1;  /* Fill available space */
+  overflow-y: auto;  /* Enable scrolling for main content */
+  scrollbar-width: none;
+}
+
+/* Optional: Adjustments for responsiveness */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    position: relative;
+  }
+  .maincontent {
+    width: 100%;
+    margin-left: 0;
+  }
+  .maincontent app-header {
+    left: 0;
+    width: 100%;
+  }
+}

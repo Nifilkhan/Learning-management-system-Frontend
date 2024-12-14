@@ -1,0 +1,57 @@
+  <div class="px-2 py-3">
+    <ul class="m-0 p-0">
+      <li class="m-0 side-nav " routerLinkActive="active-item" [routerLinkActiveOptions]="{ exact:true }">
+        <a routerLink="/admin-dashboard/overview"  class="menu-link">
+          <div class="menu-item">
+            <mat-icon class="menu-icon m-0">dashboard</mat-icon>
+            <span class="menu-text">Dashboard</span>
+          </div>
+          <mat-icon class="arrow-icon m-0">keyboard_arrow_down</mat-icon>
+        </a>
+      </li>
+
+      <li class="m-0 side-nav" routerLinkActive="active-item">
+        <a routerLink="/admin-dashboard/students" class="menu-link">
+          <div class="menu-item">
+            <mat-icon class="menu-icon m-0">group</mat-icon>
+            <span class="menu-text">Manage User</span>
+          </div>
+          <mat-icon class="arrow-icon m-0">keyboard_arrow_down</mat-icon>
+        </a>
+      </li>
+      <li class="m-0 side-nav"  routerLinkActive="active-item" >
+        <a routerLink="/admin-dashboard/courses" class="menu-link">
+          <div class="menu-item">
+            <mat-icon class="menu-icon m-0">center_focus_strong</mat-icon>
+            <span class="menu-text">Manange Courses</span>
+          </div>
+          <mat-icon class="arrow-icon m-0">keyboard_arrow_down</mat-icon>
+        </a>
+      </li>
+
+      <li class="m-0 side-nav" routerLinkActive="active-item">
+        <a routerLink="/admin-dashboard/messages" class="menu-link">
+          <div class="menu-item">
+            <mat-icon class="menu-icon m-0">message</mat-icon>
+            <span class="menu-text">Messages</span>
+          </div>
+          <mat-icon class="arrow-icon m-0">keyboard_arrow_down</mat-icon>
+        </a>
+      </li>
+
+      <li class="m-0 side-nav" routerLinkActive="active-item">
+        <a routerLink="/admin-dashboard/recent-activities" class="menu-link">
+          <div class="menu-item">
+            <mat-icon class="menu-icon m-0">local_activity</mat-icon>
+            <span class="menu-text">Recent activity</span>
+          </div>
+          <mat-icon class="arrow-icon m-0">keyboard_arrow_down</mat-icon>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="logout-container">
+    <button class="logout-btn"><mat-icon fontSet="fa" fontIcon="fa-right-to-bracket" class="flip-horizontal"></mat-icon>
+      Logout</button>
+  </div>
+

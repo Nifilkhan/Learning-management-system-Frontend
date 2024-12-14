@@ -1,0 +1,47 @@
+<div class="background">
+  <div class="container flex flex-colum justify-between">
+    <div class="content">
+      <div class="header"><h2 class="m-0">LMS</h2></div>
+      <div>
+        <a [routerLink]="'/signin'" class="signinBack"
+          ><i class="fa-solid fa-angle-left"></i>Back to login</a
+        >
+      </div>
+      <div class="flex justify-center flex-col gap-4">
+        <h2 class="m-0"><strong>Verify Otp</strong></h2>
+        <span class="text-gray-500 mb-3"
+          >An authentication code has been sent to your email</span
+        >
+        <form [formGroup]="otpForm" (ngSubmit)="otpVerficiation()">
+        <div class="flex flex-col gap-2">
+          <div class="custom-input mb-3 col-12">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Enter Code</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              formControlName="otp"
+              id="otp"
+            />
+          </div>
+        </div>
+        <button class="btn verifyBtn btn-primary p-2" type="submit">Verify</button>
+      </form>
+          <div>
+            <span
+              >Didn’t receive a code?<a
+                [routerLink]="'/signup'"
+                style="color: red; font-size: 16px"
+                >Resend
+              </a></span
+            >
+          </div>
+        </div>
+
+    </div>
+
+    <div class="img flex">
+      <img src="/images/login.jpg" alt="Image" />
+    </div>
+</div>

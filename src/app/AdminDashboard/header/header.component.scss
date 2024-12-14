@@ -1,0 +1,44 @@
+/* Header Section */
+.header {
+  width: 100%;
+  min-height: 80px;
+  background-color: #fff;
+  padding: 0px 30px;}
+
+.profile {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* Main Content Wrapper */
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 84%;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  flex-direction: row;
+  // gap: 50px;
+  padding: 0 25px;
+}
+
+.items-center {
+  padding: 0 15px;
+}
+
+.searchIcon {
+  position: relative;
+  right: 35px;
+  display: flex;
+  color: rgb(172, 167, 167);
+}
+
+
+.menu-icon {
+  color: rgb(172, 167, 167);
+}

@@ -1,0 +1,27 @@
+.header {
+  margin: 23px 0px 0px 56px;
+}
+.course-main {
+  margin: 35px 50px;
+  height: 70vh;
+  background-color: #ffff;
+  border-radius: 20px;
+}
+
+.table-header {
+  width: 100%;
+  max-width: 100%;
+  padding: 30px;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.header-text {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.pagination {
+  justify-content: center;
+  margin-top: 40px;
+}
+

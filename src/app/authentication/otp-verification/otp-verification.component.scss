@@ -1,0 +1,125 @@
+.background{
+  background-color: #DFDCDC;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+ .container{
+  background-color: #FFFF;
+  width: 950px;
+  height: 830px;
+  border-radius: 30px;
+  padding: 15px 35px;
+ }
+
+ .img {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-height: 100%;
+  align-items: center;
+  height: 100%;
+ }
+
+ .verifyBtn {
+  width: 100%;
+  max-width: 100%;
+ }
+ .img img{
+  // margin: 20px 40px;
+  max-width: 100%;
+  width: 450px;
+  height: 650px;
+ }
+
+ .content {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  margin-top: 35px;
+ }
+
+/* Container for input and label */
+.custom-input {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+/* Style for the label on top */
+.custom-input .form-label {
+  position: absolute;
+  top: -10px; /* Move label above the input */
+  left: 10px; /* Adjust left position inside the border */
+  background-color: white; /* White background to cover the input's border */
+  padding: 0 5px; /* Padding around the label to match the input's spacing */
+  font-size: 0.875rem; /* Adjust font size for the label */
+  color: #495057; /* Color of the label */
+  z-index: 1; /* Ensure label stays above input */
+}
+
+/* Style for the input box */
+.custom-input .form-control {
+  padding: 1rem; /* Space for text inside */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Input focus state */
+.custom-input .form-control:focus {
+  border-color: #ec3427; /* Green border color on focus */
+  box-shadow: none; /* Remove the default focus shadow */
+}
+
+
+.container:last-child {
+  flex:unset
+}
+
+.otherOption::after{
+  content: '';
+  width: 230px;
+  height: 1px;
+  background-color: rgb(187, 186, 186);
+  display: flex;
+
+}
+.otherOption::before{
+  content: '';
+  width: 230px;
+  height: 1px;
+  background-color: rgb(187, 186, 186);
+  display: flex;
+}
+.otherOption{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgb(187, 186, 186);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.icons{
+  padding: 15px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ font-size: 26px;
+  border: 1px solid rgb(13, 13, 240);
+  border-radius: 10px;
+  width: 180px;
+
+}
+.icons img{
+  width: 30px;
+  height: 30px;
+}
+
+.signinBack {
+  text-decoration: none;
+  color: black;
+}
+
