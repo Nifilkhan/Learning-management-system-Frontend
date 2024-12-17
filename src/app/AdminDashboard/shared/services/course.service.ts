@@ -29,4 +29,7 @@ addSection(title:string,courseId:string):Observable<any> {
   return this.http.post<any>(`${this.API_URL}${this.section}addSection/${courseId}`,body)
 }
 
+getSection(courseId:string):Observable<any>{
+  return this.http.get<any>(`${this.API_URL}${this.section}get-section/${courseId}`)
+}
 }

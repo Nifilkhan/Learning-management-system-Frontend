@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CourseService } from '../shared/services/course.service';
 import { section } from '../shared/models/courseModels';
-import { Action } from 'rxjs/internal/scheduler/Action';
+import { response } from 'express';
 
 @Component({
   selector: 'app-section-management',
@@ -11,73 +11,87 @@ import { Action } from 'rxjs/internal/scheduler/Action';
   styleUrls: ['./section-management.component.css']
 })
 export class SectionManagementComponent implements OnInit {
-title!: string;
-courseId!: string;
+  title!: string;
+  courseId!: string;
 
-  constructor(private fb:FormBuilder,private http:CourseService , private route:ActivatedRoute){}
+  constructor(private fb: FormBuilder, private http: CourseService, private route: ActivatedRoute) {}
 
-  videoForm!:FormGroup;
-  sectionAdd:section [] = [];
+  videoForm!: FormGroup;
+  sectionAdd: section[] = [];
 
   ngOnInit() {
     this.createSection();
     this.fetchCourseId();
+    this.getSection();
   }
 
   createSection() {
     this.videoForm = this.fb.group({
-      section:this.fb.array([this.createSectionField()]),
-    })
+      section: this.fb.array([]),
+    });
   }
 
-  createSectionField():FormGroup {
+  createSectionField(): FormGroup {
     return this.fb.group({
-      title:['',Validators.required]
-    })
+      title: ['', Validators.required],
+      isEditable: [true],  // Sections start in editable mode when added
+    });
   }
 
-  get section():FormArray {
+  get section(): FormArray {
     return this.videoForm.get('section') as FormArray;
   }
 
-  removeIndex(index:number) {
-      this.section.removeAt(index);
-  }
-  addSection():void {
-    this.section.push(this.createSectionField())
+  removeIndex(index: number) {
+    this.section.removeAt(index);
   }
 
-    // Fetch courseId from the route parameters
-    fetchCourseId(): void {
-      this.courseId = this.route.snapshot.paramMap.get('courseId') || '';
-      if (!this.courseId) {
-        console.error('Course ID is missing from route parameters.');
-        return;
-      }
+  addSection(): void {
+    this.section.push(this.createSectionField());
+  }
+
+  fetchCourseId(): void {
+    this.courseId = this.route.snapshot.paramMap.get('courseId') || '';
+    if (!this.courseId) {
+      console.error('Course ID is missing from route parameters.');
+      return;
     }
+  }
 
-  onsubmit(index:number) {
-    // console.log(title,courseId);
-    const sectionGroup = this.section.at(index) as FormGroup
+  onsubmit(index: number) {
+    const sectionGroup = this.section.at(index) as FormGroup;
     const title = sectionGroup.get('title')?.value;
-
-    console.log('Title:', title); // Debugging log for title
-    console.log('Course ID:', this.courseId); // Debugging log for courseId
 
     if (!this.courseId) {
       console.error('Course ID is undefined. Navigation aborted.');
       return;
     }
 
-
-    this.http.addSection(title,this.courseId).subscribe({
-      next:(response) => {
+    this.http.addSection(title, this.courseId).subscribe({
+      next: (response) => {
+        console.log(response, 'section');
         this.sectionAdd = response;
+        // Set the section to non-editable after adding
+        sectionGroup.get('isEditable')?.setValue(false);
       },
       error(err) {
-          console.log(err)
+        console.log(err);
       },
-    })
+    });
   }
 
+  toggleSectionTitle(index: number) {
+    const sectionGroup = this.section.at(index) as FormGroup;
+    sectionGroup.get('isEditable')?.setValue(!sectionGroup.get('isEditable')?.value);
+  }
+
+  getSection() {
+    this.http.getSection(this.courseId).subscribe({
+      next:(response:any) => {
+         response;
+        console.log("section response",response);
+
+      }
+    })
+  }
 }

@@ -1,102 +1,116 @@
 .video-container {
-  width: 100%;
-  max-width: 93%;
-  height: auto;
-  max-height: 100vh;
-  margin: 50px 65px;
-  border-radius: 10px;
-  border: 1px solid gray;
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
-.dropdown .drop-btn {
-  border: none !important;
-  outline: none !important;
-}
-
-.header-section {
-  height: auto;
-}
 .header-content {
-  padding: 20px 20px;
-}
-.lecture-section {
-  height: 100vh;
-  max-height: 45px;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.section-title {
-  border-radius: 10px;
-  padding: 10px 20px;
-}
-
-.text-title {
-  display: flex;
-  gap: 40px;
-  width: 100%;
-  align-items:center ;
-}
-.section-group{
-  border: 1px solid gray;
-  padding: 40px 30px;
-  max-height: 130px;
-  border-radius: 10px;
-  display: flex;
-  margin-bottom: 40px;
-}
-
-.section {
-  margin: 30px 0px 0px 0px;
-}
-
-
-.section-header {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom:20px;
-}
-
-.create-section {
-  background-color: rgb(22, 22, 22);
-  color: #FFFF;
-  border: 1px solid black;
-  width: 100%;
-  max-width: 135px;
-  height: 38px;
-  border-radius: 8px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  font-weight: 400;
-  justify-content: space-around;
-  padding: 0px 10px;
-}
-
-.btn-sec {
-  justify-content: space-evenly;
-  width: 100%;
-  max-width: 110px;
-  padding: 0px 0px;
+  text-align: center;
   margin-bottom: 20px;
 }
 
-.cancel {
-  background-color: red;
-  color: #FFFF;
-  border: none;
+.header-text {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
 }
 
-.add {
-  background-color: green;
-  color: #FFFF;
-  border: none;
+.content-wrapper {
+  padding: 20px;
 }
 
-.section-title {
-  width: 100%;
-  max-width: 80%;
-  max-height: 50px;
-  border: 1px solid rgb(231, 231, 231);
+.section-list {
+  margin-bottom: 20px;
+}
+
+.section-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.section-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.section-input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.section-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn.cancel {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.btn.add {
+  background: #2ecc71;
+  color: #fff;
+}
+
+.btn.toggle {
+  background: #f39c12;
+  color: #fff;
+}
+
+.btn.cancel:hover {
+  background: #c0392b;
+}
+
+.btn.add:hover {
+  background: #27ae60;
+}
+
+.btn.toggle:hover {
+  background: #e67e22;
+}
+
+.btn.add-new-section {
+  background: #3498db;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 20px auto;
+  display: block;
+  padding: 10px 20px;
+}
+
+.btn.add-new-section:hover {
+  background: #2980b9;
 }
