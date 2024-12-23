@@ -3,61 +3,54 @@
     <h1 class="header-text">Course Files</h1>
   </div>
   <div class="content-wrapper px-5">
-    <div class="section-list">
-      <form [formGroup]="videoForm">
-        <div formArrayName="section">
-          <div
-            *ngFor="let section of section.controls; let i = index"
-            [formGroupName]="i"
-            class="section-card"
-          >
-            <div class="section-header">
-              <input
+    <form [formGroup]="videoForm">
+      <div formArrayName="section">
+        <div
+          *ngFor="let section of sections.controls; let i = index"
+          [formGroupName]="i"
+          class="section-card"
+        >
+          <div class="section-header">
+            <input
+              *ngIf="section.get('isEditable')?.value"
+              type="text"
+              formControlName="title"
+              class="form-control section-input"
+              placeholder="Enter section title"
+            />
+            <span *ngIf="!section.get('isEditable')?.value">
+              {{ section.get('title')?.value }}
+            </span>
+            <div class="section-actions">
+              <button
                 *ngIf="section.get('isEditable')?.value"
-                type="text"
-                id="section{{ i }}"
-                formControlName="title"
-                class="form-control section-input"
-                placeholder="Enter the section title"
-              />
-              <span *ngIf="!section.get('isEditable')?.value">{{ section.get('title')?.value }}</span>
-              <div class="section-actions">
-                <button
-                  *ngIf="section.get('isEditable')?.value"
-                  type="button"
-                  class="btn cancel"
-                  (click)="removeIndex(i)"
-                >
-                  <i class="fa-solid fa-trash"></i> Cancel
-                </button>
-                <button
-                  *ngIf="section.get('isEditable')?.value"
-                  type="button"
-                  class="btn add"
-                  (click)="onsubmit(i)"
-                >
-                  <i class="fa-solid fa-check"></i> Add Section
-                </button>
-                <button
-                  *ngIf="!section.get('isEditable')?.value"
-                  type="button"
-                  class="btn toggle"
-                  (click)="toggleSectionTitle(i)"
-                >
-                  <i class="fa-solid fa-pen"></i> Edit Section
-                </button>
-              </div>
+                type="button"
+                class="btn save"
+                (click)="saveSection(i)"
+              >
+                Save
+              </button>
+              <button
+                *ngIf="section.get('isEditable')?.value"
+                type="button"
+                class="btn remove"
+                (click)="removeSection(i)"
+              >
+                Remove
+              </button>
+              <button
+                *ngIf="!section.get('isEditable')?.value"
+                type="button"
+                class="btn edit"
+                (click)="toggleEditMode(i)"
+              >
+                Edit
+              </button>
             </div>
           </div>
         </div>
-      </form>
-    </div>
-    <button class="btn add-new-section" (click)="addSection()">
-      <i class="fa-solid fa-plus"></i> Add Section
-    </button>
+      </div>
+    </form>
+    <button class="btn add-section" (click)="addSection()">Add Section</button>
   </div>
-</div>
-
-<div *ngFor="let section of sectionAdd">
-  <span>{{section.title}}</span>
 </div>

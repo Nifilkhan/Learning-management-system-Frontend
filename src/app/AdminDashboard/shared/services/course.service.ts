@@ -15,21 +15,25 @@ private API_URL  = environment.COURSE_API;
 course = 'courses/'
 section = 'section/'
 
-uploadCourse(formData:FormData):Observable<any>{
-  console.log(formData);
-  return this.http.post(`${this.API_URL}${this.course}add-course`,formData)
+uploadCourse(courseData:any):Observable<any>{
+  console.log(courseData);
+  return this.http.post(`${this.API_URL}${this.course}add-course`,courseData)
 }
 
 getCategory():Observable<ApiResponse<Category>> {
   return this.http.get<ApiResponse<Category>>(`${this.API_URL}courses/get-category`)
 }
 
-addSection(title:string,courseId:string):Observable<any> {
-  const body = { title };  // Send both courseId and title in the request body
-  return this.http.post<any>(`${this.API_URL}${this.section}addSection/${courseId}`,body)
+addSection(title: string, courseId: string): Observable<any> {
+  return this.http.post(`${this.API_URL}section/addSection/${courseId}`, { title });
 }
 
-getSection(courseId:string):Observable<any>{
-  return this.http.get<any>(`${this.API_URL}${this.section}get-section/${courseId}`)
+getSections(courseId: string): Observable<any> {
+  return this.http.get(`${this.API_URL}section/get-section/${courseId}`);
 }
+
+deleteSection(courseId:string,sectionId:string):Observable<any> {
+  return this.http.delete(`${this.API_URL}${this.course}${courseId}/section/${sectionId}`)
+}
+
 }
