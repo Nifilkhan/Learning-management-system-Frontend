@@ -33,7 +33,11 @@ getSections(courseId: string): Observable<any> {
 }
 
 deleteSection(courseId:string,sectionId:string):Observable<any> {
-  return this.http.delete(`${this.API_URL}${this.course}${courseId}/section/${sectionId}`)
+  return this.http.delete(`${this.API_URL}section/course/${courseId}/section/${sectionId}`)
+}
+
+editSection(courseId:string,sectionId:string,title:string):Observable<any> {
+  return this.http.put(`${this.API_URL}section/course/${courseId}/section/${sectionId}`,{title})
 }
 
 }

@@ -25,7 +25,7 @@
               <button
                 *ngIf="section.get('isEditable')?.value"
                 type="button"
-                class="btn save"
+                class="btn add"
                 (click)="saveSection(i)"
               >
                 Save
@@ -33,7 +33,7 @@
               <button
                 *ngIf="section.get('isEditable')?.value"
                 type="button"
-                class="btn remove"
+                class="btn cancel"
                 (click)="removeSection(i)"
               >
                 Remove
@@ -41,16 +41,16 @@
               <button
                 *ngIf="!section.get('isEditable')?.value"
                 type="button"
-                class="btn edit"
+                class="btn toggle"
                 (click)="toggleEditMode(i)"
               >
-                Edit
+              {{ section.get('isEditable')?.value ? 'Save' : 'Edit' }}
               </button>
             </div>
           </div>
         </div>
       </div>
     </form>
-    <button class="btn add-section" (click)="addSection()">Add Section</button>
+    <button class="btn add-new-section" (click)="addSection()">Add Section</button>
   </div>
 </div>
