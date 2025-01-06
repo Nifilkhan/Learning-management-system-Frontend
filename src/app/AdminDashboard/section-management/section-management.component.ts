@@ -1,10 +1,9 @@
-import { section } from './../shared/models/courseModels';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CourseService } from '../shared/services/course.service';
-import { response } from 'express';
-import { number } from 'echarts';
+import { Lecture } from '../shared/models/lecture';
+
 
 @Component({
   selector: 'app-section-management',
@@ -33,7 +32,7 @@ export class SectionManagementComponent implements OnInit {
 
   initializeForm() {
     this.videoForm = this.fb.group({
-      section: this.fb.array([])
+      sections: this.fb.array([])
     });
   }
 
@@ -41,8 +40,8 @@ export class SectionManagementComponent implements OnInit {
    * Gets the sections form array.
    * @returns {FormArray} The sections form array.
    */
-  get sections(): FormArray {
-    return this.videoForm.get('section') as FormArray;
+  get sections(): FormArray<FormGroup>{
+    return this.videoForm.get('sections') as FormArray<FormGroup> ;
   }
 
     /**
@@ -56,8 +55,19 @@ export class SectionManagementComponent implements OnInit {
     return this.fb.group({
       title: [title, Validators.required],
       isEditable: [isEditable],
-      id:[id]
+      id:[id],
+      lectures:this.fb.array([]),
     });
+  }
+
+  createLectureField(lecture:any): FormGroup {
+    return this.fb.group({
+      title:[lecture?.title,Validators.required],
+      contentType:[lecture?.contentType,Validators.required],
+      videoUrl:[lecture?.videoUrl || ''],
+      articleContent: [lecture?.articleContent],
+      description:[lecture?.description, Validators.required],
+    })
   }
 
     /**
@@ -72,7 +82,7 @@ export class SectionManagementComponent implements OnInit {
    * @param {number} index - The index of the section to remove.
    */
   removeSection(index: number): void {
-    const section = this.sections.at(index);
+    const section = this.sections.at(index) as FormGroup;
     if(!section) {
       console.error('Section ID not found.');
       return;
@@ -118,9 +128,14 @@ export class SectionManagementComponent implements OnInit {
           return;
         }
         this.sections.clear();
-        sections.forEach(({ title, _id, isDeleted }: { title: string, _id: string, isDeleted: boolean }) => {
+        sections.forEach(({ title, _id, isDeleted,lectures }: { title: string, _id: string, isDeleted: boolean , lectures:any[]}) => {
           if (!isDeleted) { // Only add sections that are not deleted
             const sectionGroup = this.createSectionField(title, false, _id); // Use MongoDB _id
+            const lectureArray = sectionGroup.get('lectures') as FormArray
+
+            lectures.forEach(lecture => {
+              lectureArray.push(this.createLectureField(lecture));
+            })
             this.sections.push(sectionGroup);
           }
         });

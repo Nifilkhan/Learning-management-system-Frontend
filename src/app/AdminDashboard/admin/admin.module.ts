@@ -18,9 +18,9 @@ import { CourseEnrollmentChartComponent } from '../course-enrollment-chart/cours
 import { AddCourseFormComponent } from '../add-course-form/add-course-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableComponent } from '../table/table.component';
+import { SectionComponent } from '../section-component/section-component.component';
+import { LectureComponent } from '../lecture-component/lecture-component.component';
 import { SectionManagementComponent } from '../section-management/section-management.component';
-import { LectureManagementComponent } from '../lecture-management/lecture-management.component';
-
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { LectureManagementComponent } from '../lecture-management/lecture-manage
     AddCourseFormComponent,
     TableComponent,
     SectionManagementComponent,
-    LectureManagementComponent
+    SectionComponent,
+    LectureComponent
   ],
   imports: [
     CommonModule,

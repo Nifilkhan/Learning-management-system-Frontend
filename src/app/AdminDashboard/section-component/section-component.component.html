@@ -1,0 +1,93 @@
+<div [formGroup]="sectionGroup" class="section bg-white shadow-md rounded-md p-4 my-4">
+  <!-- Section Header -->
+  <div
+    class="flex justify-between items-center"
+    *ngIf="!sectionGroup.get('isEditable')?.value"
+  >
+    <span class="text-lg font-semibold text-gray-700">
+      {{ sectionGroup.get('title')?.value }}
+    </span>
+    <div class="flex space-x-2">
+      <button
+        type="button"
+        class="btn add-lecture bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded-md"
+        (click)="addLecture()"
+      >
+        Add Lecture
+      </button>
+      <button
+        type="button"
+        class="btn edit bg-gray-500 hover:bg-gray-600 text-white py-1 px-4 rounded-md"
+        (click)="toggleEdit()"
+      >
+        Edit Section
+      </button>
+    </div>
+  </div>
+
+  <!-- Section in Edit Mode -->
+  <div
+    *ngIf="sectionGroup.get('isEditable')?.value"
+    class="space-y-2 mt-2"
+  >
+    <input
+      formControlName="title"
+      placeholder="Section Title"
+      class="w-full border border-gray-300 rounded-md p-2 text-gray-700"
+    />
+    <div class="flex space-x-2">
+      <button
+        type="button"
+        class="btn save bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded-md"
+        (click)="saveSection()"
+      >
+        Save
+      </button>
+      <button
+        type="button"
+        class="btn remove bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded-md"
+        (click)="removeSection()"
+      >
+        Remove
+      </button>
+    </div>
+  </div>
+
+  <div *ngFor="let lecture of lectures.controls; let i = index" >
+    <app-lecture [lectureGroup]="lecture" [courseId]="courseId" [sectionId]="sectionGroup.get('id')?.value">
+    </app-lecture>
+  </div>
+
+
+  <!-- Lecture List -->
+  <!-- <div class="mt-4 space-y-4">
+    <div
+      *ngFor="let lecture of lectures.controls; let i = index"
+      [formGroupName]="i"
+      class="lecture bg-gray-100 p-4 rounded-md"
+    >
+      <input
+        formControlName="title"
+        placeholder="Lecture Title"
+        class="w-full border border-gray-300 rounded-md p-2 mb-2"
+      />
+      <input
+        formControlName="contentType"
+        placeholder="Content Type"
+        class="w-full border border-gray-300 rounded-md p-2 mb-2"
+      />
+      <textarea
+        formControlName="description"
+        placeholder="Lecture Description"
+        class="w-full border border-gray-300 rounded-md p-2 mb-2"
+      ></textarea>
+      <button
+        type="button"
+        class="btn remove-lecture bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded-md"
+        (click)="removeLecture(i)"
+      >
+        Remove Lecture
+      </button>
+    </div>
+  </div> -->
+</div>
