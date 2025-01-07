@@ -1,35 +1,20 @@
 <div [formGroup]="sectionGroup" class="section bg-white shadow-md rounded-md p-4 my-4">
   <!-- Section Header -->
-  <div
-    class="flex justify-between items-center"
-    *ngIf="!sectionGroup.get('isEditable')?.value"
-  >
+  <div class="flex justify-between items-center">
     <span class="text-lg font-semibold text-gray-700">
       {{ sectionGroup.get('title')?.value }}
     </span>
-    <div class="flex space-x-2">
-      <button
-        type="button"
-        class="btn add-lecture bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded-md"
-        (click)="addLecture()"
-      >
-        Add Lecture
-      </button>
-      <button
-        type="button"
-        class="btn edit bg-gray-500 hover:bg-gray-600 text-white py-1 px-4 rounded-md"
-        (click)="toggleEdit()"
-      >
-        Edit Section
-      </button>
-    </div>
+    <button
+      type="button"
+      class="btn edit bg-gray-500 hover:bg-gray-600 text-white py-1 px-4 rounded-md"
+      (click)="toggleEdit()"
+    >
+      Edit Section
+    </button>
   </div>
 
   <!-- Section in Edit Mode -->
-  <div
-    *ngIf="sectionGroup.get('isEditable')?.value"
-    class="space-y-2 mt-2"
-  >
+  <div *ngIf="sectionGroup.get('isEditable')?.value" class="space-y-2 mt-2">
     <input
       formControlName="title"
       placeholder="Section Title"
@@ -53,41 +38,25 @@
     </div>
   </div>
 
-  <div *ngFor="let lecture of lectures.controls; let i = index" >
-    <app-lecture [lectureGroup]="lecture" [courseId]="courseId" [sectionId]="sectionGroup.get('id')?.value">
-    </app-lecture>
+  <!-- Add Lecture Button -->
+  <div class="mt-4">
+    <button
+      type="button"
+      class="btn add-lecture bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded-md"
+      (click)="addLecture()"
+    >
+      Add Lecture
+    </button>
   </div>
 
-
-  <!-- Lecture List -->
-  <!-- <div class="mt-4 space-y-4">
-    <div
-      *ngFor="let lecture of lectures.controls; let i = index"
-      [formGroupName]="i"
-      class="lecture bg-gray-100 p-4 rounded-md"
-    >
-      <input
-        formControlName="title"
-        placeholder="Lecture Title"
-        class="w-full border border-gray-300 rounded-md p-2 mb-2"
-      />
-      <input
-        formControlName="contentType"
-        placeholder="Content Type"
-        class="w-full border border-gray-300 rounded-md p-2 mb-2"
-      />
-      <textarea
-        formControlName="description"
-        placeholder="Lecture Description"
-        class="w-full border border-gray-300 rounded-md p-2 mb-2"
-      ></textarea>
-      <button
-        type="button"
-        class="btn remove-lecture bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded-md"
-        (click)="removeLecture(i)"
-      >
-        Remove Lecture
-      </button>
+  <!-- Lectures List -->
+  <div formArrayName="lectures" class="mt-4">
+    <div *ngFor="let lecture of lectures.controls; let i = index" [formGroupName]="i">
+      <app-lecture
+        [lectureGroup]="lecture"
+        [courseId]="courseId"
+        [sectionId]="sectionGroup.get('id')?.value"
+      ></app-lecture>
     </div>
-  </div> -->
+  </div>
 </div>

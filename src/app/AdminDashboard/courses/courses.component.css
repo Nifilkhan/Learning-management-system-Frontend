@@ -6,12 +6,23 @@
   height: 70vh;
   background-color: #ffff;
   border-radius: 20px;
+  padding: 30px 40px;
+  gap: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.course {
+  padding: 15px 0px 10px 15px
+}
+.course span {
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .table-header {
   width: 100%;
   max-width: 100%;
-  padding: 30px;
   border-radius: 15px 15px 0px 0px;
 }
 

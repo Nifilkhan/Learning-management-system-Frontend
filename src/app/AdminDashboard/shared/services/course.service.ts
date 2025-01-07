@@ -1,10 +1,9 @@
-import { ApiResponse, Category, section } from './../models/courseModels';
+import { ApiResponse, Category, Course, section } from './../models/courseModels';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Lecture } from '../models/lecture';
-import { log } from 'node:console';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +16,13 @@ private API_URL  = environment.COURSE_API;
 course = 'courses/'
 section = 'section/'
 lecture = 'lecture/'
-uploadCourse(courseData:any):Observable<any>{
+uploadCourse(courseData:Course):Observable<any>{
   console.log(courseData);
   return this.http.post(`${this.API_URL}${this.course}add-course`,courseData)
+}
+
+getCourses():Observable<any> {
+  return this.http.get(`${this.API_URL}${this.course}all-courses`)
 }
 
 getCategory():Observable<ApiResponse<Category>> {
@@ -56,6 +59,10 @@ getPresignedUrl(fileType:string,fileName:string,courseId:string) {
 addLecture(lecture:Lecture,sectionId:string) {
   console.log(lecture,sectionId,'value in the api before subscribing')
   return this.http.post(`${this.API_URL}${this.lecture}sections/${sectionId}/addLecture`, lecture);
+}
+
+getLecture(lectureId:string):Observable<Lecture> {
+  return this.http.get<Lecture>(`${this.API_URL}${this.lecture}getLecture/${lectureId}`);
 }
 
 

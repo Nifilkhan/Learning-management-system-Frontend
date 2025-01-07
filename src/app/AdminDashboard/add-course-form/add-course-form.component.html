@@ -5,7 +5,7 @@
       <mat-icon class="close-icon" (click)="closeForm()">close</mat-icon>
     </div>
 
-    <form [formGroup]="createCourse" (ngSubmit)="onSubmit()">
+    <form [formGroup]="createCourse" (ngSubmit)="submitForm()">
       <div class="form-group">
         <label for="title">Course Title</label>
         <input

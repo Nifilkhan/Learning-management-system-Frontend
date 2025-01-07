@@ -1,17 +1,18 @@
-
-<h4 class="header">All Courses List</h4>
-<div class="course-main">
-  <div class="table-header">
-    <span class="header-text">All Courses</span>
+<div class="course-main container mx-auto px-4 py-8">
+  <div class="table-header bg-blue-500 text-white p-4 rounded-t-lg">
+    <span class="header-text text-xl font-semibold">All Courses</span>
   </div>
-  <app-table />
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-  </nav>
+
+  <div *ngFor="let course of courseData; let i = index">
+  <div class="course-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+    <div
+      class="course bg-blue-100 p-4 rounded-lg shadow-md hover:shadow-lg hover:bg-blue-200 transition duration-300 cursor-pointer"
+      (click)="onClick(course._id)"
+    >
+    <span>course:{{i+1}}</span>
+      <span class="course-name text-lg font-medium">{{course.title}}</span>
+      <div class="course-status text-sm text-gray-600 mt-2">{{course.status}}</div>
+    </div>
+  </div>
+  </div>
 </div>

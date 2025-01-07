@@ -67,6 +67,7 @@ export class SectionManagementComponent implements OnInit {
       videoUrl:[lecture?.videoUrl || ''],
       articleContent: [lecture?.articleContent],
       description:[lecture?.description, Validators.required],
+      lectureId:[lecture?._id]
     })
   }
 
