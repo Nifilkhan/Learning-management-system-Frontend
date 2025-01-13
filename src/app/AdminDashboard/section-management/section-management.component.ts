@@ -3,16 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CourseService } from '../shared/services/course.service';
 import { Lecture } from '../shared/models/lecture';
+import { section } from '../shared/models/courseModels';
 
 
 @Component({
   selector: 'app-section-management',
   templateUrl: './section-management.component.html',
-  styleUrls: ['./section-management.component.css']
+  styleUrls: ['./section-management.component.scss']
 })
 export class SectionManagementComponent implements OnInit {
   courseId!: string;
   videoForm!: FormGroup;
+  sectionData:section [] = [];
+  previewMode = false;
 
   constructor(
     private fb: FormBuilder,
@@ -125,12 +128,11 @@ export class SectionManagementComponent implements OnInit {
         const sections = response.sections;
         if (!sections || sections.length === 0) {
           console.log('No sections found for this course.');
-          this.sections.clear(); // Clear existing sections if no sections are found
+          this.sectionData = [];
           return;
         }
-        this.sections.clear();
-        sections.forEach(({ title, _id, isDeleted,lectures }: { title: string, _id: string, isDeleted: boolean , lectures:any[]}) => {
-          if (!isDeleted) { // Only add sections that are not deleted
+        sections.forEach(({ title, _id,lectures }: { title: string, _id: string , lectures:Lecture[]}) => {
+          // if (!isDeleted) { // Only add sections that are not deleted
             const sectionGroup = this.createSectionField(title, false, _id); // Use MongoDB _id
             const lectureArray = sectionGroup.get('lectures') as FormArray
 
@@ -138,7 +140,7 @@ export class SectionManagementComponent implements OnInit {
               lectureArray.push(this.createLectureField(lecture));
             })
             this.sections.push(sectionGroup);
-          }
+          // }
         });
       },
       error: (err) => console.error('Error fetching sections:', err)
@@ -154,33 +156,24 @@ export class SectionManagementComponent implements OnInit {
     const title = sectionGroup.get('title')?.value;
     const sectionId = sectionGroup.get('id')?.value;
 
-    console.log('saveSection called with index:', index);
-    console.log('sectionId:', sectionId);
-    console.log('title:', title);
-
     if (!this.courseId || !title){
       console.error('Course ID or title is missing.');
       return;
     }
-
     if(sectionId) {
-      console.log('Editing section with ID:', sectionId);
       this.courseService.editSection(this.courseId,sectionId,title).subscribe({
         next:(response) => {
           sectionGroup.get('isEditable')?.setValue(false);
-          console.log('Section updated:',response);
+          this.sectionData = response.section;
         },
         error: (err) => console.error('Error updating section:', err)
       })
     } else{
-      console.log('Adding new section with title:', title);
     this.courseService.addSection(title, this.courseId).subscribe({
       next: (response) => {
-        console.log('Add section response:', response); // Debugging response
         if (response && response.section && response.section._id) {
           sectionGroup.get('id')?.setValue(response.section._id); // Access _id inside section
           sectionGroup.get('isEditable')?.setValue(false); // Update UI state
-          console.log('Section added:', response.section);
         } else {
           console.error('Unexpected response format for addSection:', response);
         }
@@ -199,5 +192,9 @@ export class SectionManagementComponent implements OnInit {
     const sectionGroup = this.sections.at(index) as FormGroup;
     const currentMode = sectionGroup.get('isEditable')?.value;
     sectionGroup.get('isEditable')?.setValue(!currentMode);
+  }
+
+  togglePreview() {
+    this.previewMode = !this.previewMode;
   }
 }

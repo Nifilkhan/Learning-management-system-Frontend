@@ -3,10 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SignupComponent } from './authentication/signup/signup.component';
 import { OtpVerificationComponent } from './authentication/otp-verification/otp-verification.component';
 import { SigninComponent } from './authentication/signin/signin.component';
-import { AdminComponent } from './AdminDashboard/admin/admin.component';
-import { HomeComponent } from './User/home-component/home-component.component';
-import { StudentsComponent } from './AdminDashboard/students/students.component';
-import { OverviewComponent } from './AdminDashboard/overview/overview.component';
+import { HomeComponent } from './user/home/home.component';
 
 const routes: Routes = [
   {
@@ -26,6 +23,9 @@ const routes: Routes = [
   },
   {
     path:'admin-Dasboard',loadChildren: () => import('./AdminDashboard/admin/admin.module').then((m) => m.AdminModule)
+  },
+  {
+    path:'edutech',loadChildren: () => import('./user/home/home.module').then((m) => m.HomeModule)
   }
 ];
 

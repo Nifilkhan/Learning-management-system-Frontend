@@ -1,8 +1,3 @@
-export interface ApiResponse<C> {
-  message?: string;
-  categories: C[];
-}
-
 export interface Category {
   name: string;
   _id: string;
@@ -22,5 +17,14 @@ export interface Course {
 export interface section {
   _id?:string,
   title: string;
-  lecture: [];
+  lecture: Lecture[];
+}
+
+export interface Lecture {
+  _id?:string;
+  title: string;
+  description: string;
+  contentType:string;
+  videoUrl?:string;
+  articleContent?:string;
 }

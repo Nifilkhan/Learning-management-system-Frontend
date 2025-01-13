@@ -1,36 +1,37 @@
-<div [formGroup]="sectionGroup" class="section bg-white shadow-md rounded-md p-4 my-4">
+<div [formGroup]="sectionGroup" class="section p-4  max-w-full">
   <!-- Section Header -->
-  <div class="flex justify-between items-center">
-    <span class="text-lg font-semibold text-gray-700">
-      {{ sectionGroup.get('title')?.value }}
-    </span>
+  <div class="flex justify-between items-center mb-3">
+    <!-- <div *ngFor="let section of sectionsValue; let i=index"> -->
+      <span class="text-lg font-medium text-gray-800">{{sectionGroup.get('title')?.value}}</span>
+    <!-- </div> -->
     <button
       type="button"
-      class="btn edit bg-gray-500 hover:bg-gray-600 text-white py-1 px-4 rounded-md"
+      class="btn text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 py-1 px-3 rounded-md"
       (click)="toggleEdit()"
+      *ngIf="sectionGroup.get('id')?.value"
     >
-      Edit Section
+      Edit
     </button>
   </div>
 
   <!-- Section in Edit Mode -->
-  <div *ngIf="sectionGroup.get('isEditable')?.value" class="space-y-2 mt-2">
+  <div *ngIf="sectionGroup.get('isEditable')?.value" class="space-y-3 mt-3">
     <input
       formControlName="title"
-      placeholder="Section Title"
-      class="w-full border border-gray-300 rounded-md p-2 text-gray-700"
+      placeholder="Edit Section Title"
+      class="w-full border border-gray-300 rounded-md p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
     />
-    <div class="flex space-x-2">
+    <div class="flex space-x-3">
       <button
         type="button"
-        class="btn save bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded-md"
+        class="btn text-sm bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md"
         (click)="saveSection()"
       >
         Save
       </button>
       <button
         type="button"
-        class="btn remove bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded-md"
+        class="btn text-sm bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md"
         (click)="removeSection()"
       >
         Remove
@@ -39,10 +40,10 @@
   </div>
 
   <!-- Add Lecture Button -->
-  <div class="mt-4">
+  <div class="mt-4" *ngIf="sectionGroup.get('id')?.value">
     <button
       type="button"
-      class="btn add-lecture bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded-md"
+      class="btn text-sm bg-gray-700 hover:bg-gray-800 text-white py-2 px-3 rounded-md"
       (click)="addLecture()"
     >
       Add Lecture
@@ -57,6 +58,13 @@
         [courseId]="courseId"
         [sectionId]="sectionGroup.get('id')?.value"
       ></app-lecture>
+    </div>
+  </div>
+
+  <!-- Display Lecture Data (Optional) -->
+  <div class="mt-4">
+    <div *ngFor="let lecture of lectureData; let i = index" class="p-2 border-b border-gray-200">
+      <div class="text-sm text-gray-700">{{lecture.title}}</div>
     </div>
   </div>
 </div>

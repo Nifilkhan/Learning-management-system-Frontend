@@ -12,9 +12,9 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms'
 import { AuthService } from './authentication/shared/service/auth.service.ts.service';
-import { HomeComponent } from './User/home-component/home-component.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AdminModule } from './AdminDashboard/admin/admin.module';
+import { HomeModule } from './user/home/home.module';
 
 
 
@@ -25,7 +25,6 @@ import { AdminModule } from './AdminDashboard/admin/admin.module';
     SignupComponent,
     SigninComponent,
     OtpVerificationComponent,
-    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +35,8 @@ import { AdminModule } from './AdminDashboard/admin/admin.module';
     HttpClientModule,
     MatIconModule,
     MatButtonModule,
-    AdminModule
+    AdminModule,
+    HomeModule
   ],
   providers: [
    AuthService,provideClientHydration(),provideHttpClient(withFetch()), provideAnimationsAsync()

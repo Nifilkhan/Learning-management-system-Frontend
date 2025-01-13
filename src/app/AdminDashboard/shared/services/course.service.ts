@@ -1,9 +1,9 @@
-import { ApiResponse, Category, Course, section } from './../models/courseModels';
+import { ApiResponse, Category, Course } from './../models/courseModels';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Lecture } from '../models/lecture';
+import { PresignedUrl } from '../models/lecture';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,7 @@ addSection(title: string, courseId: string): Observable<any> {
 }
 
 getSections(courseId: string): Observable<any> {
-  return this.http.get(`${this.API_URL}section/get-section/${courseId}`);
+  return this.http.get(`${this.API_URL}${this.section}get-section/${courseId}`);
 }
 
 deleteSection(courseId:string,sectionId:string):Observable<any> {
@@ -45,24 +45,12 @@ editSection(courseId:string,sectionId:string,title:string):Observable<any> {
   return this.http.put(`${this.API_URL}section/course/${courseId}/section/${sectionId}`,{title})
 }
 
-getPresignedUrl(fileType:string,fileName:string,courseId:string) {
-  return this.http.get(`${this.API_URL}${this.lecture}/get-presigned-url`,{
-    params:{
-      fileType,
-      fileName,
-      courseId
-    }
-  });
-}
-
-
-addLecture(lecture:Lecture,sectionId:string) {
-  console.log(lecture,sectionId,'value in the api before subscribing')
-  return this.http.post(`${this.API_URL}${this.lecture}sections/${sectionId}/addLecture`, lecture);
-}
-
-getLecture(lectureId:string):Observable<Lecture> {
-  return this.http.get<Lecture>(`${this.API_URL}${this.lecture}getLecture/${lectureId}`);
+getPresignedUrl(fileType:any,fileName:any,courseId:string):Observable<PresignedUrl>{
+  const params = new HttpParams()
+  .set('fileName',fileName)
+  .set('fileType',fileType)
+  .set('courseId',courseId)
+  return this.http.get<PresignedUrl>(`${this.API_URL}${this.lecture}presigned-url`,{params});
 }
 
 

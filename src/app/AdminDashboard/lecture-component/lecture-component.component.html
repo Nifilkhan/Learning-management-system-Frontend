@@ -54,5 +54,7 @@
 </div>
 
 <div *ngIf="!lectureGroup.get('showAddLecture')?.value">
-    {{lectureGroup.get('title')?.value}}
+    <div *ngFor="let lecture of lectureData">
+      {{lecture.title}}
+    </div>
   </div>

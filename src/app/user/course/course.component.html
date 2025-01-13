@@ -1,0 +1,20 @@
+<div class="container mx-auto p-4">
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div
+      *ngFor="let course of courseData; let i=index"
+      class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300"
+      (click)="onClick(course._id)"
+    >
+      <h2 class="text-lg font-semibold text-gray-800">{{ course.title }}</h2>
+      <p class="text-sm text-gray-600 mt-2">{{ course.description }}</p>
+      <div class="mt-4 flex items-center justify-between">
+        <span class="text-xl font-bold text-green-500">{{ course.price | currency }}</span>
+        <button
+          class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600 transition duration-200"
+        >
+          Enroll Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@
 }
 .course-main {
   margin: 35px 50px;
-  height: 70vh;
+  height: auto;
   background-color: #ffff;
   border-radius: 20px;
   padding: 30px 40px;

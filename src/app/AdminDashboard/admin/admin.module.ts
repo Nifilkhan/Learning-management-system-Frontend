@@ -38,8 +38,7 @@ import { SectionManagementComponent } from '../section-management/section-manage
     TableComponent,
     SectionManagementComponent,
     SectionComponent,
-    LectureComponent
-  ],
+    LectureComponent,  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -47,7 +46,7 @@ import { SectionManagementComponent } from '../section-management/section-manage
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class AdminModule { }

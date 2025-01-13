@@ -13,6 +13,7 @@ export class SigninComponent implements OnInit{
   constructor(private route:Router,private auth:AuthService,private fb:FormBuilder) {}
 
   loginForm!: FormGroup;
+  isLoading:boolean = false;
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
