@@ -15,6 +15,7 @@ export interface Course {
   category: Category; // Assuming this is an ID (e.g., ObjectId as a string)
   price: number | string; // Price can be a number or string
   status: 'draft' | 'published'; // Status options
+  thumbnail:string;
   section: string[]; // Array of Section IDs (MongoDB ObjectId as strings)
 }
 

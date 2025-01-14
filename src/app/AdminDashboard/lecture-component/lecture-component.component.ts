@@ -76,7 +76,7 @@ console.log('type of videoUrl',typeof videoUrl)
       console.log(contentType,"type check")
       try {
         const { preSignedUrl, videoUrl:uploadedVideoUrl } = await firstValueFrom(
-          this.lectureService.getPreSignedUrl(videoUrl.name, videoUrl.type, this.courseId)
+          this.lectureService.getPreSignedUrl(videoUrl.name, videoUrl.type,videoUrl.category, this.courseId)
         );
         console.log('video url:',videoUrl);
         console.log('url:',preSignedUrl);

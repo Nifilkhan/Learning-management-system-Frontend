@@ -15,8 +15,8 @@ export class LectureService {
   private LECTURE_URL = environment.COURSE_API
   lectures = 'lecture/'
 
-  getPreSignedUrl(fileType:string,fileName:string,courseId:string):Observable<PresignedUrl> {
-    return this.courseService.getPresignedUrl(fileName,fileType,courseId);
+  getPreSignedUrl(fileType:string,fileName:string,courseId:string,fileCategory:string):Observable<PresignedUrl> {
+    return this.courseService.getPresignedUrl(fileName,fileType,courseId,fileCategory);
   }
 
   uploadToS3(preSignedUrl:string,file:File):Observable<void> {

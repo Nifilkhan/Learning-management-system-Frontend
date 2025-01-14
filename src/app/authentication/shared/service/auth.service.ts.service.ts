@@ -21,4 +21,8 @@ export class AuthService {
   signin(data:Login):Observable<LoginResponse> {
     return this.http.post<LoginResponse>('http://localhost:6001/api/auth/signin',data)
   }
+
+  logogut():Observable<any> {
+    return this.http.post('http://localhost:6001/api/auth/logout',{})
+  }
 }

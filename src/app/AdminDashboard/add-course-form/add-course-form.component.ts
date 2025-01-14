@@ -1,3 +1,6 @@
+import { PresignedUrl } from './../shared/models/lecture';
+import { response } from 'express';
+import { Category } from './../../user/shared/model/course';
 import {
   Component,
   EventEmitter,
@@ -10,9 +13,10 @@ import {
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CourseService } from '../shared/services/course.service';
 import { File } from 'buffer';
-import { Category, Course } from '../shared/models/courseModels';
+import { Course } from '../shared/models/courseModels';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
+import { LectureService } from '../shared/services/lecture.service';
 
 @Component({
   selector: 'app-add-course-form',
@@ -23,7 +27,8 @@ export class AddCourseFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private addCourse: CourseService,
-    private route: Router
+    private route: Router,
+    private PresignedUrl:LectureService
   ) {
     console.log('Available Routes:', this.route.config);
   }
@@ -59,11 +64,38 @@ export class AddCourseFormComponent implements OnInit {
       category: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
+      thumbnail:['',Validators.required],
     });
 
     console.log(this.createCourse.value);
   }
 
+ async onChangeImage(event:Event) {
+    const inputFile = event.target as HTMLInputElement;
+    const file = inputFile.files?.[0] || null;
+
+    if(file) {
+      try {
+        const {type:fileType,name:fileName} = file;
+        const courseId = this.createCourse.value.category;
+        console.log('file type',fileType);
+        console.log('file name',fileName)
+
+        const response = await lastValueFrom(
+          this.PresignedUrl.getPreSignedUrl(fileName,fileType,courseId,'thumbnail')
+        );
+        console.log('response from the event file',response)
+
+        await lastValueFrom(
+          this.PresignedUrl.uploadToS3(response.preSignedUrl,file)
+        )
+        this.createCourse.patchValue({thumbnail:response.videoUrl});
+        console.log('Thumbnail uploaded successfully');
+      } catch (error) {
+        console.error('Error uploading thumbnail:', error);
+      }
+    }
+  }
   async submitForm() {
     if (this.createCourse.invalid) {
       return;

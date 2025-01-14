@@ -45,11 +45,15 @@ editSection(courseId:string,sectionId:string,title:string):Observable<any> {
   return this.http.put(`${this.API_URL}section/course/${courseId}/section/${sectionId}`,{title})
 }
 
-getPresignedUrl(fileType:any,fileName:any,courseId:string):Observable<PresignedUrl>{
+getPresignedUrl(fileType:any,fileName:any,courseId:string,fileCategory:string):Observable<PresignedUrl>{
   const params = new HttpParams()
   .set('fileName',fileName)
   .set('fileType',fileType)
   .set('courseId',courseId)
+  .set('fileCategory',fileCategory)
+
+  console.log('fileName',fileName);
+  console.log('file type',fileType)
   return this.http.get<PresignedUrl>(`${this.API_URL}${this.lecture}presigned-url`,{params});
 }
 

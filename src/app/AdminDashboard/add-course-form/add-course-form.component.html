@@ -30,6 +30,9 @@
             {{ item.name }}
           </option>
         </select>
+        @if(createCourse.get('category')?.hasError('required') && createCourse.get('category')?.touched){
+          <div class="text-red-600">Category is required</div>
+        }
       </div>
 
       <div class="form-group">
@@ -53,57 +56,19 @@
         />
       </div>
 
-      <!-- <div formArrayName="video">
-        <div
-          *ngFor="let video of videos.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <div class="form-group video-group">
-            <label for="video{{1}}">Upload Video {{i + 1}}</label>
-            <div class="">
-              <label for="video">Upload videos</label>
-              <input
-                type="file"
-                id="video{{ i }}"
-                (change)="onVideoSelected($event, i)"
-                name="video"
-                class="form-control"
-              />
-              <button type="button" (click)="removeVideo(i)" *ngIf="i > 0">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-center">
-          <button type="button" class="add-video" (click)="addVideo()">
-            <i class="fa-solid fa-plus"></i>
-          </button>
-        </div>
-      </div> -->
-
-      <!-- <div class="form-group">
-        <label for="coverImage">Upload Cover Image</label>
+      <div class="form-group">
+        <label for="thumbnail">Upload Cover Image</label>
         <input
           type="file"
-          id="coverImage"
-          (change)="onCoverImageChange($event)"
+          id="thumbnail"
           class="form-control"
-          name="coverImage"
+          (change)="onChangeImage($event)"
+          name="thumbnail"
         />
-        <div *ngIf="addCourseForm.get('coverImage')?.invalid && addCourseForm.get('coverImage')?.touched" class="text-danger">
+        <div *ngIf="createCourse.get('thumbnail')?.invalid && createCourse.get('thumbnail')?.touched" class="text-danger">
         Cover image is required.
       </div>
-      </div> -->
-
-      <!-- <div class="form-group">
-        <label for="status">Status</label>
-        <select id="status" formControlName="status" class="form-control">
-          <option value="" selected disabled>Select status</option>
-          <option value="Draft">Draft</option>
-          <option value="Published">Published</option>
-        </select>
-      </div> -->
+      </div>
 
       <div class="d-flex justify-content-between">
         <button class="submit" type="submit"><mat-icon class="mat-18">create</mat-icon> Create</button>
