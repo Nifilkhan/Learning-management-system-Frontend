@@ -3,12 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LectureService } from '../shared/services/lecture.service';
 import { CourseService } from '../shared/services/course.service';
 import { firstValueFrom } from 'rxjs';
-import { Lecture } from '../shared/models/lecture';
 
-interface PresignedUrlResponse {
-  url: string;
-  videoUrl: string;
-}
 
 @Component({
   selector: 'app-lecture',
@@ -76,7 +71,7 @@ console.log('type of videoUrl',typeof videoUrl)
       console.log(contentType,"type check")
       try {
         const { preSignedUrl, videoUrl:uploadedVideoUrl } = await firstValueFrom(
-          this.lectureService.getPreSignedUrl(videoUrl.name, videoUrl.type,videoUrl.category, this.courseId)
+          this.lectureService.getPreSignedUrl(videoUrl.name, videoUrl.type,videoUrl.category)
         );
         console.log('video url:',videoUrl);
         console.log('url:',preSignedUrl);

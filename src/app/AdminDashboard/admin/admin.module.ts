@@ -1,6 +1,8 @@
 import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgxFileDropModule } from 'ngx-file-drop'
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { StudentsComponent } from '../students/students.component';
@@ -47,6 +49,8 @@ import { SectionManagementComponent } from '../section-management/section-manage
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxFileDropModule,
+    NgxDatatableModule
   ]
 })
 export class AdminModule { }

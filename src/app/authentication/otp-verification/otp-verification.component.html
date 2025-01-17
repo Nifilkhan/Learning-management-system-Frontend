@@ -24,9 +24,23 @@
               formControlName="otp"
               id="otp"
             />
+            <div
+                *ngIf="otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched"
+                class="text-danger"
+              >
+                <div *ngIf="otpForm.get('otp')?.hasError('required')">
+                  OTP is required.
+                </div>
+                <div *ngIf="otpForm.get('otp')?.hasError('minlength')">
+                  OTP must be 6 digits long.
+                </div>
+                <div *ngIf="otpForm.get('otp')?.hasError('maxlength')">
+                  OTP must not exceed 6 digits.
+                </div>
+              </div>
           </div>
         </div>
-        <button class="btn verifyBtn btn-primary p-2" type="submit">Verify</button>
+        <button class="btn verifyBtn btn-primary p-2" type="submit" [disabled]="otpForm.invalid">Verify</button>
       </form>
           <div>
             <span

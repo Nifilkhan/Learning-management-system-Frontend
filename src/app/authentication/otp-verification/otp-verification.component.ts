@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Otp } from '../shared/models/authentication.user.ts';
 import { response } from 'express';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-otp-verification',
@@ -13,7 +14,7 @@ import { response } from 'express';
 export class OtpVerificationComponent implements OnInit {
 
 
-  constructor(private otpService:AuthService,private router:Router,private fb:FormBuilder) {}
+  constructor(private otpService:AuthService,private router:Router,private fb:FormBuilder,private snackBar:MatSnackBar) {}
 
   otpForm!:FormGroup;
 
@@ -40,6 +41,12 @@ this.otpService.otpVerification(otpPayload).subscribe({
   next:(response) => {
     if(response.message === 'OTP verified successfully'){
       console.log(response);
+      this.snackBar.open('User registered succesfully', 'Close', {
+        duration: 3000,
+        panelClass: ['snackbar-success'],
+        horizontalPosition: 'center', // 'start' | 'center' | 'end' | 'left' | 'right'
+      verticalPosition: 'top',
+      });
       this.router.navigate(['/signin'])
     } else {
       console.log('Otp is expired')

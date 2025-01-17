@@ -15,11 +15,10 @@
           class="form-control"
           placeholder="Enter course title"
         />
-        @if (createCourse.get('title')?.hasError('required') && createCourse.get('title')?.touched) {
-          <div class="text-red-600">
-            Title is required
-          </div>
-        }
+        <div *ngIf="createCourse.get('title')?.invalid && createCourse.get('title')?.touched" class="text-red-600">
+          <div *ngIf="createCourse.get('title')?.hasError('required')">Title is required.</div>
+          <div *ngIf="createCourse.get('title')?.hasError('minlength')">title must be at least 5 characters long.</div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -43,6 +42,10 @@
           class="form-control"
           placeholder="Enter course description"
         ></textarea>
+        <div *ngIf="createCourse.get('description')?.invalid && createCourse.get('description')?.touched" class="text-red-600">
+          <div *ngIf="createCourse.get('description')?.hasError('required')">Description is required.</div>
+          <div *ngIf="createCourse.get('description')?.hasError('minlength')">Description must be at least 10 characters long.</div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -54,6 +57,9 @@
           class="form-control"
           placeholder="Enter the price of the course"
         />
+        <div *ngIf="createCourse.get('price')?.invalid && createCourse.get('price')?.touched" class="text-red-600">
+          <div *ngIf="createCourse.get('price')?.hasError('required')">Price is required.</div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -62,16 +68,21 @@
           type="file"
           id="thumbnail"
           class="form-control"
-          (change)="onChangeImage($event)"
+          (change)="onSelectedFile($event)"
+          accept="image/"
           name="thumbnail"
         />
+
+        <div *ngIf="imagePreview">
+          <img [src]="imagePreview" alt="thumbnail preview" class="thumbnail-preview" />
+        </div>
         <div *ngIf="createCourse.get('thumbnail')?.invalid && createCourse.get('thumbnail')?.touched" class="text-danger">
         Cover image is required.
       </div>
       </div>
 
       <div class="d-flex justify-content-between">
-        <button class="submit" type="submit"><mat-icon class="mat-18">create</mat-icon> Create</button>
+        <button class="submit" type="submit" [disabled]="createCourse.invalid"><mat-icon class="mat-18">create</mat-icon> Create</button>
         <button class="cancel" type="reset" (click)="closeForm()">
           cancel
         </button>

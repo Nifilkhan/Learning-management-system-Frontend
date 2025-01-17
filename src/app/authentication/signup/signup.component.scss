@@ -11,7 +11,7 @@
  .container{
   background-color: #FFFF;
   width: 1150px;
-  height: 830px;
+  height: 870px;
   border-radius: 30px;
   padding: 15px 35px;
  }
@@ -19,7 +19,6 @@
  .btn {
   max-width: 100%;
   width: 100%;
-  margin-top: 20px;
  }
  .img {
   display: flex;
@@ -32,14 +31,14 @@
 
  .img img{
   // margin: 20px 40px;
-  width: 450px;
+  width: 415px;
   height: 650px;
  }
 
  .content {
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 10px;
   margin-top: 35px;
  }
 
@@ -128,4 +127,6 @@
   text-decoration: none;
   color: red;
 }
+
+
 

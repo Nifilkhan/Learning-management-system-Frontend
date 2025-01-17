@@ -25,4 +25,8 @@ export class AuthService {
   logogut():Observable<any> {
     return this.http.post('http://localhost:6001/api/auth/logout',{})
   }
+
+  getUsers():Observable<{users:RegisterUser[]}> {
+    return this.http.get<{users:RegisterUser[]}>('http://localhost:6001/api/auth/get-verified-users')
+  }
 }

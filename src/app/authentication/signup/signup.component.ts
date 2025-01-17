@@ -3,6 +3,8 @@ import { AuthService } from '../shared/service/auth.service.ts.service';
 import { RegisterUser } from '../shared/models/authentication.user.ts';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { passwordValidator } from '../shared/validators/validators';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private auth:AuthService,private route:Router,private fb:FormBuilder) {}
+  constructor(private auth:AuthService,private route:Router,private fb:FormBuilder,private snackBar:MatSnackBar) {}
 
   user!:RegisterUser;
   signupForm!:FormGroup;
@@ -26,9 +28,13 @@ export class SignupComponent implements OnInit {
       lastName:['',[Validators.required,Validators.minLength(5)]],
       email:['',[Validators.required,Validators.email]],
       phone:['' , [Validators.required,Validators.pattern('^[0-9]{10}$')]],
-      password:['' , [Validators.required,Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{6,}$')]],
-      confirmPassword:['',[Validators.required,Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{6,}$')]]
+      password:['' , [Validators.required,Validators.minLength(6), passwordValidator()]],
+      confirmPassword:['',[Validators.required,Validators.minLength(6), passwordValidator()]]
     })
+  }
+
+  success(message: string) {
+
   }
 
   onSubmit():void {
@@ -45,7 +51,13 @@ export class SignupComponent implements OnInit {
   this.auth.signup(user).subscribe({
     next:(response)=>{
       console.log('User registered successfully', response);
-      this.route.navigate(['/otp']);
+        this.snackBar.open('Otp sent to your email', 'Close', {
+          duration: 5000,
+          horizontalPosition: 'center', // 'start' | 'center' | 'end' | 'left' | 'right'
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar'],
+        });
+        this.route.navigate(['/otp']);
     }
   })
   }

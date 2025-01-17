@@ -1,4 +1,3 @@
-import { response } from 'express';
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LectureService } from '../shared/services/lecture.service';
@@ -45,6 +44,10 @@ export class SectionComponent implements OnInit {
       id:[lectureId]
 
     })
+  }
+
+  cancel() {
+    this.toggleEditMode.emit();
   }
 
   removeLecture(index: number): void {

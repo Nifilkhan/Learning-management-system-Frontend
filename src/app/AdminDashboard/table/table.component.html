@@ -1,23 +1,25 @@
-<table class="table w-full table-header-content">
+<table class="table w-full table-header-content table-hover cursor-pointer">
   <thead>
     <tr>
       <th>No.</th>
       <th>Course Title</th>
       <th>Category</th>
+      <th>Status</th>
       <th>Enrollment Count</th>
       <th>Price</th>
       <th>Published Date</th>
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody *ngFor="let course of courses; let i = index">
     <tr>
-      <td>1</td>
-      <td>JavaScript Basics</td>
-      <td>Web development</td>
+      <td>{{i+1}}</td>
+      <td>{{course.title}}</td>
+      <td>{{course.category.name}}</td>
+      <td>{{course.status}}</td>
       <td>120</td>
-      <td>$50</td>
-      <td>2024-01-01</td>
+      <td>{{course.price | currency}}</td>
+      <td>{{course.createdAt | date:'shortDate'}}</td>
       <td>
         <div class="dropdown">
           <button class="btn table-drop-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -31,7 +33,7 @@
         </div>
     </td>
     </tr>
-    <tr>
+    <!-- <tr>
       <td>2</td>
       <td><img src="" alt="">JavaScript Basics</td>
       <td>Web development</td>
@@ -150,6 +152,6 @@
           </ul>
         </div>
     </td>
-    </tr>
+    </tr> -->
   </tbody>
 </table>

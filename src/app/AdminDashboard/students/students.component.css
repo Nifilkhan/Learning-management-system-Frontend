@@ -1,6 +1,7 @@
-.user-table {
-  width: 100%;
-  max-width: 100%;
-  margin-top: 7rem;
-  padding: 0px 50px;
+.table thead th {
+  border-top: 0;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #7987a1;
 }

@@ -15,7 +15,8 @@ import { AuthService } from './authentication/shared/service/auth.service.ts.ser
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AdminModule } from './AdminDashboard/admin/admin.module';
 import { HomeModule } from './user/home/home.module';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SharedOverlayComponent } from './AdminDashboard/shared/shared-overlay/shared-overlay.component';
 
 
 
@@ -25,6 +26,7 @@ import { HomeModule } from './user/home/home.module';
     SignupComponent,
     SigninComponent,
     OtpVerificationComponent,
+    SharedOverlayComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { HomeModule } from './user/home/home.module';
     MatIconModule,
     MatButtonModule,
     AdminModule,
-    HomeModule
+    HomeModule,
+    MatSnackBarModule
   ],
   providers: [
    AuthService,provideClientHydration(),provideHttpClient(withFetch()), provideAnimationsAsync()

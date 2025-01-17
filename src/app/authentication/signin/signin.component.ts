@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/service/auth.service.ts.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { passwordValidator } from '../shared/validators/validators';
 
 @Component({
   selector: 'app-signin',
@@ -23,6 +24,7 @@ export class SigninComponent implements OnInit{
   }
 
   onLoginForm() {
+    this.isLoading = true;
     if(this.loginForm.invalid) {
       return
     }
@@ -34,13 +36,15 @@ export class SigninComponent implements OnInit{
         console.log(response)
         if(response && response.role === 'admin'){
           console.log(response)
+          this.isLoading =false;
           this.route.navigate(['/admin-dashboard'])
         } else {
           console.log(response);
           this.route.navigate(['/home'])
         }
-      } ,error(err) {
-          console.log(err)
+      } ,error:(err) => {
+        this.isLoading = false;
+          console.log(err);
       },
     })
   }

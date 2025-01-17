@@ -1,4 +1,5 @@
 <div class="content-overview">
+  <div class="flex flex-row mt-[120px]">
  <div class="chart-main">
   <div class="chart-header">
     <span class="chart-header-txt">
@@ -17,6 +18,32 @@
   </div>
    <app-course-enrollment-chart />
  </div>
+ <div class="card mb-10 mx-[70px] w-[45%]">
+  <div class="card-body">
+    <p class="text-secondary mb-3">Add class <code>.table-hover</code></p>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>LAST NAME</th>
+            <th>EMAIL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of userData; let i = index">
+            <th>{{i+1}}</th>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
 
 
   <div class="table-user">
@@ -33,3 +60,4 @@
 
   </div>
 </div>
+

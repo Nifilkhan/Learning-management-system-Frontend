@@ -15,7 +15,6 @@ export class SectionManagementComponent implements OnInit {
   courseId!: string;
   videoForm!: FormGroup;
   sectionData:section [] = [];
-  previewMode = false;
 
   constructor(
     private fb: FormBuilder,
@@ -194,7 +193,5 @@ export class SectionManagementComponent implements OnInit {
     sectionGroup.get('isEditable')?.setValue(!currentMode);
   }
 
-  togglePreview() {
-    this.previewMode = !this.previewMode;
-  }
+
 }

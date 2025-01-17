@@ -1,22 +1,18 @@
-import { PresignedUrl } from './../shared/models/lecture';
-import { response } from 'express';
 import { Category } from './../../user/shared/model/course';
 import {
   Component,
   EventEmitter,
-  input,
   Input,
   OnInit,
-  output,
   Output,
 } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CourseService } from '../shared/services/course.service';
-import { File } from 'buffer';
 import { Course } from '../shared/models/courseModels';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { LectureService } from '../shared/services/lecture.service';
+import { validateHeaderValue } from 'node:http';
 
 @Component({
   selector: 'app-add-course-form',
@@ -34,9 +30,11 @@ export class AddCourseFormComponent implements OnInit {
   }
 
   createCourse!: FormGroup;
+  @Input() courseId:string | null = null;
   @Output() formVisibility = new EventEmitter<void>();
-  currentfile?: File;
   categories: Category[] = [];
+  imagePreview:string | ArrayBuffer | null | undefined = null;
+  selectedImage:File | null = null
 
   closeForm() {
     this.formVisibility.emit();
@@ -45,6 +43,9 @@ export class AddCourseFormComponent implements OnInit {
   ngOnInit() {
     this.getCategory();
     this.createForm();
+    if(this.courseId){
+      this.loadCourses(this.courseId)
+    }
     // console.log(this.createCourse.value);
   }
 
@@ -60,42 +61,75 @@ export class AddCourseFormComponent implements OnInit {
 
   createForm() {
     this.createCourse = this.fb.group({
-      title: ['', Validators.required],
+      title: ['', [Validators.required,Validators.minLength(5)]],
       category: ['', Validators.required],
-      description: ['', Validators.required],
-      price: ['', Validators.required],
+      description: ['', [Validators.required,Validators.minLength(10)]],
+      price: ['', [Validators.required,Validators.minLength(3)]],
       thumbnail:['',Validators.required],
     });
 
     console.log(this.createCourse.value);
   }
 
- async onChangeImage(event:Event) {
-    const inputFile = event.target as HTMLInputElement;
-    const file = inputFile.files?.[0] || null;
+  async loadCourses(courseId:string) {
+    try {
+      const response = await lastValueFrom(this.addCourse.getCourseById(courseId));
+      console.log('path value for getting course',response)
+      this.createCourse.patchValue({
+        title:response.course.title,
+        category:response.course.category._id,
+        description:response.course.description,
+        price:response.course.price,
+        thumbnail:response.course.thumbnail
+      });
+      if (response.course.thumbnail) {
+        this.imagePreview = response.course.thumbnail;
+      }
+    } catch (error) {
+      console.log('Error while fetching the course',error)
+    }
+  }
 
+  onSelectedFile(event:any) {
+    const file = event.target.files[0];
     if(file) {
+      this.onChangeImage(file)
+    }
+  }
+
+  async onChangeImage(file:File) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.imagePreview = e.target?.result;
+    };
+    reader.readAsDataURL(file);
+    this.selectedImage = file;
       try {
         const {type:fileType,name:fileName} = file;
         const courseId = this.createCourse.value.category;
-        console.log('file type',fileType);
-        console.log('file name',fileName)
 
         const response = await lastValueFrom(
-          this.PresignedUrl.getPreSignedUrl(fileName,fileType,courseId,'thumbnail')
+          this.PresignedUrl.getPreSignedUrl(fileName,fileType,courseId)
         );
-        console.log('response from the event file',response)
-
         await lastValueFrom(
           this.PresignedUrl.uploadToS3(response.preSignedUrl,file)
         )
         this.createCourse.patchValue({thumbnail:response.videoUrl});
-        console.log('Thumbnail uploaded successfully');
       } catch (error) {
         console.error('Error uploading thumbnail:', error);
       }
-    }
   }
+
+  updateForm(courseId:string,course:Course) {
+    this.addCourse.updateCourse(courseId,course).subscribe({
+      next:(response) => {
+        console.log(response)
+      },
+    })
+  }
+
+
+
   async submitForm() {
     if (this.createCourse.invalid) {
       return;
@@ -103,6 +137,11 @@ export class AddCourseFormComponent implements OnInit {
 
     const formData: Course = this.createCourse.value;
     try {
+      if(this.courseId) {
+        await lastValueFrom(this.addCourse.updateCourse(this.courseId,this.createCourse.value));
+        console.log('Course updated successfully!');
+      }
+      else{
       const response = await lastValueFrom(this.addCourse.uploadCourse(formData));
       console.log('Course uploaded successfully');
       const courseId = response?.course._id; // Adjust this to match your backend response structure
@@ -113,6 +152,7 @@ export class AddCourseFormComponent implements OnInit {
 
       this.route.navigate(['admin-dashboard', 'content-section', courseId]);
       this.closeForm();
+    }
     } catch (error) {
       console.error('Error uploading course:', error);
     }

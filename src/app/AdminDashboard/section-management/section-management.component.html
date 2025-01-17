@@ -1,8 +1,7 @@
-<div class="video-container" *ngIf="!previewMode">
+<div class="video-container">
   <div class="header-content">
     <h1 class="header-text">Course Files</h1>
     <button class="bg-red-500 text-white font-medium px-2.5 py-1 rounded-[5px]">Status</button>
-    <button class="bg-green-600 text-white px-2.5 py-1 rounded-[5px]" (click)="togglePreview()">Preview</button>
   </div>
   <div class="content-wrapper px-5">
     <form [formGroup]="videoForm">
@@ -26,7 +25,4 @@
     </form>
     <button class="btn add-new-section" (click)="addSection()">Add Section</button>
   </div>
-</div>
-
-<div *ngIf="previewMode">
 </div>

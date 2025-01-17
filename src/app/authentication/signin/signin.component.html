@@ -1,5 +1,5 @@
 <div class="background">
-  <div class="container flex flex-row justify-between">
+  <div class="container flex flex-row justify-between gap-[40px]">
     <div class="content">
       <div class="header"><h2 class="m-0">LMS</h2></div>
       <div class="flex justify-center flex-col gap-4">
@@ -20,10 +20,18 @@
               id="email"
               placeholder="name@example.com"
             />
+            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger flex flex-col gap-[5px]">
+              <div *ngIf="loginForm.get('email')?.hasError('required')" class="text-danger flex flex-row gap-[5px]">
+                <div>*</div><span>Email is required</span>
+              </div>
+              <div *ngIf="loginForm.get('email')?.hasError('email')" class="text-danger flex flex-row gap-[5px]">
+                <div>*</div> <span>Invalid email format</span>
+              </div>
+            </div>
           </div>
 
           <div class="custom-input mb-3">
-            <label for="exampleFormControlInput1" class="form-label"
+            <label for="password" class="form-label"
               >Email address</label
             >
             <input
@@ -31,8 +39,14 @@
               class="form-control"
               formControlName="password"
               id="password"
-              placeholder="name@example.com"
+              placeholder="Enter your password"
             />
+
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger flex flex-col gap-[5px]">
+              <div *ngIf="loginForm.get('password')?.hasError('required')" class="text-danger flex flex-row gap-[5px]">
+                <div>*</div><span>password is required</span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="flex flex-row justify-between">
@@ -55,7 +69,7 @@
               </a>
           </div>
         </div>
-        <button class="btn btn-primary p-2 mt-4" type="submit">Login</button>
+        <button class="btn btn-primary p-2 mt-4" type="submit" [disabled]="loginForm.invalid">Login</button>
       </form>
         <span class="text-center forget"
           >Don’t have an account?
@@ -82,9 +96,18 @@
 
 
     <div class="img flex">
-      <img src="/images/student.jpg" alt="Image" />
+      <img src="/images/student.jpg" alt="Image" class="object-cover rounded-[20px]"/>
     </div>
   </div>
 </div>
 
-
+<div class="overlay" *ngIf="isLoading">
+<div id="container">
+  <label class="loading-title">Loading ...</label>
+  <span class="loading-circle sp1">
+    <span class="loading-circle sp2">
+      <span class="loading-circle sp3"></span>
+    </span>
+  </span>
+</div>
+</div>
