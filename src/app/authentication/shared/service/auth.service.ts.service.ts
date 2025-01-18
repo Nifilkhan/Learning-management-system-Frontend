@@ -29,4 +29,10 @@ export class AuthService {
   getUsers():Observable<{users:RegisterUser[]}> {
     return this.http.get<{users:RegisterUser[]}>('http://localhost:6001/api/auth/get-verified-users')
   }
+
+  getLoggedInUser():Observable<{ name: string; email: string }> {
+    return this.http.get<{name:string,email:string}>('http://localhost:6001/api/auth/user',{
+      withCredentials:true,
+    })
+  }
 }

@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment.development';
 import { Category } from './../../user/shared/model/course';
 import {
   Component,
@@ -12,7 +13,6 @@ import { Course } from '../shared/models/courseModels';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { LectureService } from '../shared/services/lecture.service';
-import { validateHeaderValue } from 'node:http';
 
 @Component({
   selector: 'app-add-course-form',
@@ -83,7 +83,7 @@ export class AddCourseFormComponent implements OnInit {
         thumbnail:response.course.thumbnail
       });
       if (response.course.thumbnail) {
-        this.imagePreview = response.course.thumbnail;
+        this.imagePreview = `${environment.AWS_S3_URL}${response.course.thumbnail}`;
       }
     } catch (error) {
       console.log('Error while fetching the course',error)
