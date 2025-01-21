@@ -5,6 +5,7 @@ export interface RegisterUser {
   phone: string;
   password: string;
   confirmPassword: string;
+  role?:string
 }
 
 export interface Otp {

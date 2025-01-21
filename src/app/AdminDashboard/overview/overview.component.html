@@ -20,23 +20,23 @@
  </div>
  <div class="card mb-10 mx-[70px] w-[45%]">
   <div class="card-body">
-    <p class="text-secondary mb-3">Add class <code>.table-hover</code></p>
+    <p class="text-secondary mb-3">User list</p>
     <div class="table-responsive">
       <table class="table table-hover">
         <thead>
           <tr>
             <th>#</th>
-            <th>First Name</th>
-            <th>LAST NAME</th>
-            <th>EMAIL</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of userData; let i = index">
             <th>{{i+1}}</th>
-            <td>{{user.firstName}}</td>
-            <td>{{user.lastName}}</td>
+            <td>{{user.firstName}}{{user.lastName}}</td>
             <td>{{user.email}}</td>
+            <td>{{user.phone}}</td>
           </tr>
         </tbody>
       </table>

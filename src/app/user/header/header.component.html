@@ -18,6 +18,7 @@
       <ul class="flex space-x-6 text-sm font-medium text-gray-600">
         <li class="hover:text-blue-600 cursor-pointer"><a routerLink="courses">Course</a></li>
         <li class="hover:text-blue-600 cursor-pointer"><a href="#">My learning</a></li>
+        <li class="hover:text-blue-600 cursor-pointer"><a href="#">Cart</a></li>
       </ul>
       <div class="relative">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
@@ -30,9 +31,9 @@
 
         <div class="absolute">
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon>dialpad</mat-icon>
-              <span>Redial</span>
+            <button mat-menu-item (click)="onLogout()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Logout</span>
             </button>
             <button mat-menu-item disabled>
               <mat-icon>voicemail</mat-icon>

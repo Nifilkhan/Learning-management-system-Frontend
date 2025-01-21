@@ -10,6 +10,7 @@ import { CourseDetailsComponent } from '../course-details/course-details.compone
 import { CourseComponent } from '../course/course.component';
 import { HeaderComponent } from '../header/header.component';
 import { BannerSectionComponent } from '../banner-section/banner-section.component';
+import { LatestCourseComponent } from '../latest-course/latest-course.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { BannerSectionComponent } from '../banner-section/banner-section.compone
     CourseDetailsComponent,
     CourseComponent,
     HeaderComponent,
-    BannerSectionComponent
+    BannerSectionComponent,
+    LatestCourseComponent
   ],
   imports: [
     CommonModule,

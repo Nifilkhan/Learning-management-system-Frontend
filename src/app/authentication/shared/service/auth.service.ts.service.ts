@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   signin(data:Login):Observable<LoginResponse> {
-    return this.http.post<LoginResponse>('http://localhost:6001/api/auth/signin',data)
+    return this.http.post<LoginResponse>('http://localhost:6001/api/auth/signin',data,{withCredentials:true})
   }
 
   logogut():Observable<any> {
@@ -30,9 +30,7 @@ export class AuthService {
     return this.http.get<{users:RegisterUser[]}>('http://localhost:6001/api/auth/get-verified-users')
   }
 
-  getLoggedInUser():Observable<{ name: string; email: string }> {
-    return this.http.get<{name:string,email:string}>('http://localhost:6001/api/auth/user',{
-      withCredentials:true,
-    })
+  getLoggedInUser():Observable<any> {
+    return this.http.get('http://localhost:6001/api/auth/user',{ withCredentials: true })
   }
 }

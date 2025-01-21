@@ -25,7 +25,7 @@
         <label for="category">Category</label>
         <select id="category" formControlName="category" class="form-control">
           <option value="" disabled selected>Select a category</option>
-          <option *ngFor="let item of categories" [value]="item._id">
+          <option *ngFor="let item of categories" [value]="item._id" class="h-[25px]">
             {{ item.name }}
           </option>
         </select>

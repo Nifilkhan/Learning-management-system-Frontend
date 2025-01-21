@@ -1,6 +1,7 @@
 import { response } from 'express';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../authentication/shared/service/auth.service.ts.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,22 +10,28 @@ import { AuthService } from '../../authentication/shared/service/auth.service.ts
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public loggedUser:AuthService){}
+  constructor(public loggedUser:AuthService,private router:ActivatedRoute,private routers:Router){}
 
-  userName:string = '';
-  userEmail:string = '';
+  userData:any;
+  userId:string = ''
 
   ngOnInit(): void {
-    this.loggedUserData;
+    this.loggedUserData();
+
+    // this.router.paramMap.subscribe((params) => {
+    //   this.userId = params.get('userId')!;
+    //   console.log(this.userId)
+    // })
   }
 
   loggedUserData(){
     this.loggedUser.getLoggedInUser().subscribe({
       next:(response) => {
         console.log(response)
-        // this.userName = response.name;
-        // this.userEmail = response.email;
+        this.userData = response
         console.log('logged user data',response)
+      },error:(err) => {
+          console.log('error occured while getting the loggeduser data',err)
       },
     })
   }
@@ -34,6 +41,15 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
-    console.log('pressed in onlogout fucntion')
+    this.loggedUser.logogut().subscribe({
+      next:(response) => {
+        console.log('User loged out succesfully',response);
+        if(response) {
+          this.routers.navigate(['/signin'])
+        }
+      },error:(err) => {
+        console.log('error occured while logout');
+      },
+    })
   }
 }

@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="mb-[30px] ">
+    <span
+      class="text-[40px] not-italic font-medium leading-[50px] tracking-[0.2px] pb-2.5"
+      >Latest courses</span
+    >
+  </div>
+  <div class="grid lg:grid-cols-4 gap-[25px] md:grid-cols-2 sm:grid-cols-1">
+    <div *ngFor="let latestCourse of latestCourses; let i = index">
+      <div
+        class="border px-[15px] py-4 rounded-[15px] border-solid cursor-pointer bg-[#FFFF] transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+      >
+        <img
+          [src]="courseThumbnail[i]"
+          alt="course image"
+          class="w-full max-w-full h-full max-h-[170px]"
+        />
+        <div class="flex flex-col gap-2.5 mt-2.5">
+          <p class="font-medium m-0">{{ latestCourse.title }}</p>
+          <p class="font-light text-gray-700 m-0">
+            {{ latestCourse.description }}
+          </p>
+          <p class="m-0 font-medium">₹{{ latestCourse.price }}</p>
+          <div class="flex justify-between">
+            <button class="border-solid flex bg-white hover:shadow w-full max-w-[40px] h-[35px] justify-center items-center"><mat-icon class="mat-18">shopping_cart</mat-icon></button>
+            <button class="view-more flex"><a routerLink="/home/courses" alt="">View More</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

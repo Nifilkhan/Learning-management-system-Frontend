@@ -17,4 +17,8 @@ readonly course = 'courses'
 getCourse(courseId:string):Observable<{ course:Course}>{
   return this.http.get<{ course:Course}>(`${this.API_URL}${this.course}/get-course/${courseId}`)
 }
+
+getLatestCourse():Observable<{latestCourses:Course[]}>{
+  return this.http.get<{latestCourses:Course[]}>(`${this.API_URL}${this.course}/latest-courses`)
+}
 }

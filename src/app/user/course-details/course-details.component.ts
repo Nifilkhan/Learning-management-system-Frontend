@@ -28,7 +28,7 @@ export class CourseDetailsComponent implements OnInit {
     this.courseService.getCourse(this.courseId).subscribe({
       next:(response) => {
         this.courses = response.course;
-        console.log(response)
+        // console.log(response)
       },
     })
   }
