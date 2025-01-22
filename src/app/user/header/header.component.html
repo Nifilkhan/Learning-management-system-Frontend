@@ -19,32 +19,38 @@
         <li class="hover:text-blue-600 cursor-pointer"><a routerLink="courses">Course</a></li>
         <li class="hover:text-blue-600 cursor-pointer"><a href="#">My learning</a></li>
         <li class="hover:text-blue-600 cursor-pointer"><a href="#">Cart</a></li>
+
       </ul>
       <div class="relative">
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <img
+        <button *ngIf="userData?.user" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <!-- <img
             class="w-8 h-8 rounded-full border-2 border-gray-300"
             src="https://images.pexels.com/photos/27635347/pexels-photo-27635347/free-photo-of-retratos-de-um-jovem-modelo-bruxo-allan-marinsek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt="Profile Image"
-          />
+          /> -->
+          <app-user-profile [userData]="userData?.user!"></app-user-profile>
         </button>
 
         <div class="absolute">
           <mat-menu #menu="matMenu">
+            <div *ngIf="userData?.user as user" class="flex flex-col gap-2 text-center">
+              <div class="flex justify-center shadow-none">
+                <app-user-profile [userData]="userData?.user!"></app-user-profile>
+              </div>
+              <span class="px-3">{{user.firstName}}{{user.lastName}}</span>
+              <span class="px-3">{{ user.email }}</span>
+            </div>
             <button mat-menu-item (click)="onLogout()">
               <mat-icon>exit_to_app</mat-icon>
               <span>Logout</span>
             </button>
-            <button mat-menu-item disabled>
-              <mat-icon>voicemail</mat-icon>
-              <span>Check voice mail</span>
-            </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="onForgetPassword()">
               <mat-icon>notifications_off</mat-icon>
               <span>Disable alerts</span>
             </button>
           </mat-menu>
         </div>
+
       </div>
     </div>
   </div>

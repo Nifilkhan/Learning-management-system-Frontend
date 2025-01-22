@@ -1,0 +1,5 @@
+<div class="avatar" [ngStyle]="{'background-color': backGroundColor}">
+  <!-- Show profile image if available, else fallback to initials -->
+  <img *ngIf="profileImage" [src]="profileImage" [alt]="initials" class="avatar-image " />
+  <span *ngIf="!profileImage">{{ initials }}</span>
+</div>

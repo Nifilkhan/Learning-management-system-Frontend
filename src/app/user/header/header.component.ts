@@ -2,6 +2,7 @@ import { response } from 'express';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../authentication/shared/service/auth.service.ts.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserData } from '../shared/model/user-data';
 
 @Component({
   selector: 'app-header',
@@ -12,24 +13,19 @@ export class HeaderComponent implements OnInit {
 
   constructor(public loggedUser:AuthService,private router:ActivatedRoute,private routers:Router){}
 
-  userData:any;
+  userData:{user:UserData} | null = null;
   userId:string = ''
 
   ngOnInit(): void {
     this.loggedUserData();
-
-    // this.router.paramMap.subscribe((params) => {
-    //   this.userId = params.get('userId')!;
-    //   console.log(this.userId)
-    // })
   }
 
   loggedUserData(){
     this.loggedUser.getLoggedInUser().subscribe({
       next:(response) => {
-        console.log(response)
+        // console.log(response)
         this.userData = response
-        console.log('logged user data',response)
+        console.log('logged user data:',this.userData)
       },error:(err) => {
           console.log('error occured while getting the loggeduser data',err)
       },
