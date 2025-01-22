@@ -18,7 +18,7 @@
         <div class="flex flex-col gap-2.5 mt-2.5">
           <p class="font-medium m-0">{{ latestCourse.title }}</p>
           <p class="font-light text-gray-700 m-0">
-            {{ latestCourse.description }}
+            {{ latestCourse.description | slice: 0:30 }}...
           </p>
           <p class="m-0 font-medium">₹{{ latestCourse.price }}</p>
           <div class="flex justify-between">
