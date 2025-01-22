@@ -2,6 +2,7 @@ import { Login, LoginResponse, Otp, RegisterUser } from './../models/authenticat
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserData } from '../../../user/shared/model/user-data.js';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,8 @@ export class AuthService {
     return this.http.get<{users:RegisterUser[]}>('http://localhost:6001/api/auth/get-verified-users')
   }
 
-  getLoggedInUser():Observable<any> {
-    return this.http.get('http://localhost:6001/api/auth/user',{ withCredentials: true })
+  getLoggedInUser():Observable<{user:UserData}>{ {
+    return this.http.get<{user:UserData}>('http://localhost:6001/api/auth/user',{ withCredentials: true })
   }
+}
 }
