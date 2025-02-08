@@ -35,6 +35,7 @@ export class AddCourseFormComponent implements OnInit {
   categories: Category[] = [];
   imagePreview:string | ArrayBuffer | null | undefined = null;
   selectedImage:File | null = null
+  editMode=false
 
   closeForm() {
     this.formVisibility.emit();
@@ -73,6 +74,7 @@ export class AddCourseFormComponent implements OnInit {
 
   async loadCourses(courseId:string) {
     try {
+      this.editMode = true
       const response = await lastValueFrom(this.addCourse.getCourseById(courseId));
       console.log('path value for getting course',response)
       this.createCourse.patchValue({
@@ -84,6 +86,7 @@ export class AddCourseFormComponent implements OnInit {
       });
       if (response.course.thumbnail) {
         this.imagePreview = `${environment.AWS_S3_URL}${response.course.thumbnail}`;
+        console.log('image url in course',this.imagePreview)
       }
     } catch (error) {
       console.log('Error while fetching the course',error)
@@ -99,6 +102,7 @@ export class AddCourseFormComponent implements OnInit {
 
   async onChangeImage(file:File) {
     const reader = new FileReader();
+    this.editMode = false
     reader.onload = (e) => {
       this.imagePreview = e.target?.result;
     };
@@ -156,5 +160,9 @@ export class AddCourseFormComponent implements OnInit {
     } catch (error) {
       console.error('Error uploading course:', error);
     }
+  }
+
+  redirect() {
+    this.route.navigate(['admin-dashboard', 'content-section', this.courseId]);
   }
 }

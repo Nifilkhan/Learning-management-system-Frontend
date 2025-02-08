@@ -86,6 +86,10 @@
         <button class="cancel" type="reset" (click)="closeForm()">
           cancel
         </button>
+        <button *ngIf="editMode" type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded-lg transition duration-300 shadow-md active:scale-95" (click)="redirect()">
+          Next
+        </button>
+
       </div>
     </form>
   </div>
