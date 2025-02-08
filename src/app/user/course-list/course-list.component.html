@@ -1,0 +1,22 @@
+<div class="max-w-5xl mx-auto flex flex-col gap-6 md:gap-12">
+  <ul>
+    <li *ngFor="let section of sectionData; index as i" >
+      <!-- Toggle Button -->
+      <button
+        class="flex items-center justify-between w-full p-4 text-lg font-medium text-gray-800 bg-gray-100 rounded-lg hover:bg-gray-200"
+        (click)="toggleExpandSection(section)"
+      >
+        <span>{{ section.title }}</span>
+        <span [class.rotate-180]="section.expand">▼</span>
+      </button>
+      <!-- Inner Content -->
+      <div *ngIf="section.expand" class="p-4 bg-gray-50">
+        <div *ngFor="let lecture of section.lecture">
+          <button class="text-blue-500 hover:underline" (click)="selectedLecture(lecture.videoUrl!)">
+            {{ lecture.title }}
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

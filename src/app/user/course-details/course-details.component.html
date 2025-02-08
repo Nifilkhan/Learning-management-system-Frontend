@@ -1,8 +1,12 @@
-<div class="container">
-<h5>courseId:{{courseId}}</h5>
+<div class="main container mx-[32px]">
 
-<div *ngIf="courses">
-  <span>{{courses.title}}</span>
-  <span>{{courses.description}}</span>
-</div>
+  <div class="flex flex-row justify-between list-sec">
+    <div class="w-[54%]">
+      <app-video-player [videoUrl]="selectVideoUrl" [lectureData]="sectionData"></app-video-player>
+    </div>
+
+    <div class="w-1/3">
+      <app-course-list [sectionData]="sectionData" (lectureSelected)="selectLecture($event)" ></app-course-list>
+    </div>
+  </div>
 </div>

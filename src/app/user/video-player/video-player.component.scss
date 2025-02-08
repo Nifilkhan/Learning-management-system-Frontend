@@ -1,0 +1,8 @@
+.video-js {
+  width: 100% !important;
+  max-width: 800px !important;
+  height: 650px !important;
+  max-height: 650px !important;
+  object-fit: contain; /* Ensures video fits properly */
+}
+
