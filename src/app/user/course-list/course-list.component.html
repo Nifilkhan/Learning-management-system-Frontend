@@ -11,10 +11,11 @@
       </button>
       <!-- Inner Content -->
       <div *ngIf="section.expand" class="p-4 bg-gray-50">
-        <div *ngFor="let lecture of section.lecture">
-          <button class="text-blue-500 hover:underline" (click)="selectedLecture(lecture.videoUrl!)">
+        <div *ngFor="let lecture of section.lecture" class="flex justify-between">
+          <button class="text-blue-500 hover:underline" (click)="selectedLecture(lecture)"  [class.locked]="lecture.locked">
             {{ lecture.title }}
           </button>
+          <span *ngIf="lecture.locked" class="lock-icon"><i class="fa-solid fa-lock"></i></span>
         </div>
       </div>
     </li>

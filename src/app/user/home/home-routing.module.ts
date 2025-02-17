@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CourseDetailsComponent } from '../course-details/course-details.component';
 import { CourseComponent } from '../course/course.component';
 import { HomeComponent } from './home.component';
+import { AddCartComponent } from '../cart/add-cart/add-cart.component';
+import { LearningComponent } from '../learning/learning.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,12 @@ const routes: Routes = [
       {
         path:'courseDetail/:courseId',component:CourseDetailsComponent
       },
+      {
+        path:'cart',component:AddCartComponent
+      },
+      {
+        path:'my-learning',component:LearningComponent
+      }
     ]
   },
 ];

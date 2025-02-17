@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/service/auth.service.ts.service';
+import { AuthService } from '../../services/auth.service.ts.service';
 import { RegisterUser } from '../shared/models/authentication.user.ts';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -20,6 +20,10 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupVerify();
+  }
+
+  onLogin() {
+    this.auth.googleLogin();
   }
 
   signupVerify() :void {

@@ -1,20 +1,48 @@
-<div class="container mx-auto p-4">
-  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-    <div
-      *ngFor="let course of courseData; let i=index"
-      class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300"
 
+<div *ngIf="loadingCourse$ | async">
+  <p>Loading courses...</p>
+</div>
+
+<div *ngIf="!(loadingCourse$ | async)">
+<div class="container mx-auto px-4 py-6">
+  <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <div
+      *ngFor="let course of courseData$ | async; let i = index"
+      class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:shadow-xl hover:scale-[1.02] flex flex-col"
     >
-      <h2 class="text-lg font-semibold text-gray-800" (click)="onClick(course._id)">{{ course.title }}</h2>
-      <p class="text-sm text-gray-600 mt-2">{{ course.description }}</p>
-      <div class="mt-4 flex items-center justify-between">
-        <span class="text-xl font-bold text-green-500">{{ course.price | currency }}</span>
-        <button
-          class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600 transition duration-200" (click)="addToCart()"
+      <img
+        [src]="course.thumbnail"
+        alt="courseImage"
+        class="w-full h-48 object-cover rounded-t-lg"
+      />
+      <div class="p-4 flex flex-col flex-grow">
+        <h5
+          class="text-lg font-semibold text-gray-800 cursor-pointer hover:text-gray-700 transition-colors"
+          (click)="onClick(course._id!)"
         >
-          Add To Cart
-        </button>
+          {{ course.title }}
+        </h5>
+        <p class="text-sm text-gray-600 mt-2 flex-grow">
+          {{ course.description }}
+        </p>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="text-lg font-bold text-green-500">
+            {{ course.price | currency }}
+          </span>
+          <button
+            class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-200"
+            (click)="addToCart(course._id!)"
+          >
+            Add To Cart
+          </button>
+
+          <button (click)="buyCourse(course._id!)">
+            Checkout
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </div>
+</div>
+

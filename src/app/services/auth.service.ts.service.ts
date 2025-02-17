@@ -1,8 +1,9 @@
-import { Login, LoginResponse, Otp, RegisterUser } from './../models/authentication.user.ts';
+import {  Login, LoginResponse, Otp, RegisterUser} from '../authentication/shared/models/authentication.user.ts.js' ;
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { UserData } from '../../../user/shared/model/user-data.js';
+import { from, Observable } from 'rxjs';
+import { UserData } from '../user/shared/model/user-data.js';
+import { environment } from '../../environments/environment.development.js';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ import { UserData } from '../../../user/shared/model/user-data.js';
 export class AuthService {
 
   constructor(private http:HttpClient) { }
+
+  private GOOGLE_URL = environment.GOOGLE_CALLBACK_URL;
 
   signup(user:RegisterUser):Observable<any> {
     return this.http.post('http://localhost:6001/api/auth/signup',user)
@@ -31,8 +34,15 @@ export class AuthService {
     return this.http.get<{users:RegisterUser[]}>('http://localhost:6001/api/auth/get-verified-users')
   }
 
-  getLoggedInUser():Observable<{user:UserData}>{ {
+  getLoggedInUser():Observable<{user:UserData}>{
     return this.http.get<{user:UserData}>('http://localhost:6001/api/auth/user',{ withCredentials: true })
-  }
+}
+
+googleLogin() {
+  window.location.href = `${this.GOOGLE_URL}google`
+}
+
+isAuthenticated():Observable<boolean>{
+  return this.http.get<boolean>(`${this.GOOGLE_URL}verify-session`,{withCredentials:true})
 }
 }

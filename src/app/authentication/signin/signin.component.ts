@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../shared/service/auth.service.ts.service';
+import { AuthService } from '../../services/auth.service.ts.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordValidator } from '../shared/validators/validators';
+
 
 @Component({
   selector: 'app-signin',
@@ -15,12 +16,17 @@ export class SigninComponent implements OnInit{
 
   loginForm!: FormGroup;
   isLoading:boolean = false;
+  errorMessage:string = '';
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,Validators.minLength(6)]]
     })
+  }
+
+  onLogin() {
+    this.auth.googleLogin();
   }
 
   onLoginForm() {
@@ -44,7 +50,11 @@ export class SigninComponent implements OnInit{
         }
       } ,error:(err) => {
         this.isLoading = false;
-          console.log(err);
+          if(err.status === 403) {
+            this.errorMessage = 'This email is registered via Google OAuth. Please log in with Google.'
+          } else {
+            this.errorMessage = err.error.message;
+          }
       },
     })
   }

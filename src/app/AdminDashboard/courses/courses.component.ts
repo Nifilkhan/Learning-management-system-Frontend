@@ -1,7 +1,11 @@
-import { CourseService } from './../shared/services/course.service';
+import { CourseService } from '../../services/course.service';
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../shared/models/courseModels';
-import { CoursedetailsService } from '../shared/services/course.details.service';
+import { Course } from '../../user/shared/model/course';
+import { CoursedetailsService } from '../../services/details.service';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { loadCourse } from '../../store/course/course.action';
+import { selectAllCourses, selectCourseLoadingState } from '../../store/course/course.selector';
 
 @Component({
   selector: 'app-courses',
@@ -9,8 +13,19 @@ import { CoursedetailsService } from '../shared/services/course.details.service'
   styleUrls: ['./courses.component.css'],
 })
 export class CoursesComponent implements OnInit {
+  courses$!:Observable<Course[]>;
+  loading$!:Observable<boolean>;
+  totalCourses$!:Observable<number>
+  currentPage$!:Observable<number>
+  totalPage$!:Observable<number>
 
-  constructor(private course:CourseService, private courseDetails:CoursedetailsService) { }
+
+  searchQuery: string = '';
+  category: string = '';
+  limit: number = 10;
+  offset: number = 0;
+
+  constructor(private courseService:CourseService, private store:Store) { }
 
   courseData:Course [] = [];
   isFormVisible = false;
@@ -22,10 +37,15 @@ export class CoursesComponent implements OnInit {
 
 
   getCourse(){
-    this.course.getCourses().subscribe(response => {
-      this.courseData = response.courses;
-    })
+    this.courses$ = this.store.select(selectAllCourses);
+    this.loading$ = this.store.select(selectCourseLoadingState);
   }
+
+
+  loadStore() {
+    this.store.dispatch(loadCourse({search:this.searchQuery, category:this.category, offset:this.offset, limit:this.limit}));
+  }
+
 
   onClick(courseId:string){
     console.log("course id in the onclick method of addCourse",courseId);
@@ -34,7 +54,7 @@ export class CoursesComponent implements OnInit {
   }
 
   deleteCourse(courseId:string){
-    this.course.deleteCourse(courseId).subscribe({
+    this.courseService.deleteCourse(courseId).subscribe({
       next:(response) =>{
         console.log(response);
         this.getCourse();

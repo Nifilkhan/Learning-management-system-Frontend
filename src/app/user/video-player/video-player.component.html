@@ -1,8 +1,6 @@
-<video #videoElement class="video-js vjs-default-skin" controls></video>
+<video *ngIf="selectedLecture?.contentType === 'video'" #videoElement class="video-js vjs-default-skin" controls></video>
 
-<!-- <div *ngFor="let section of lectureData">
-  <div *ngFor="let lecture of section.lecture">
-    <div>{{lecture.title}}</div>
-    <div>{{lecture.description}}</div>
-  </div>
-</div> -->
+<div *ngIf="selectedLecture?.contentType === 'article'">
+    <h1>{{selectedLecture.title}}</h1>
+    <div>{{selectedLecture.articleContent}}</div>
+</div>

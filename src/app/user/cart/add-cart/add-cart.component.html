@@ -1,0 +1,56 @@
+<div class="container mx-auto px-4 py-10">
+  <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-6">
+
+    <!-- 🛒 Cart Title -->
+    <!-- <h2 class="text-2xl font-bold text-gray-800 mb-5">Your Shopping Cart</h2> -->
+
+    <!-- 🚨 Empty Cart Message -->
+    <div *ngIf="!cartItems?.length" class="text-center text-gray-500 py-10">
+      <p class="text-lg">Your cart is empty 😔</p>
+      <a routerLink="/home/courses" class="text-blue-500 mt-4 inline-block hover:underline">
+        Browse Courses
+      </a>
+    </div>
+
+    <!-- 📦 Cart Items List -->
+    <div *ngIf="cartItems?.length">
+      <div *ngFor="let cart of cartItems; let i = index"
+           class="flex items-center justify-between border-b py-5">
+
+        <!-- Course Thumbnail & Details -->
+        <div class="flex items-center">
+          <img [src]="imageUrl[i]" alt="Course Thumbnail"
+               class="w-20 h-20 object-cover rounded-lg shadow-md mr-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">{{ cart.title }}</h3>
+            <p class="text-gray-500 text-sm max-w-xs">{{ cart.description }}</p>
+          </div>
+        </div>
+
+        <!-- Price & Remove Button -->
+        <div class="flex items-center space-x-6">
+          <span class="text-lg font-bold text-blue-600">${{ cart.price }}</span>
+          <button (click)="removeFromCart(cart._id)"
+                  class="text-red-500 hover:text-red-700 transition duration-300">
+            🗑 Remove
+          </button>
+        </div>
+      </div>
+
+      <!-- 🏷️ Total Price -->
+      <div class="flex justify-between items-center mt-6 p-4 bg-gray-100 rounded-lg">
+        <span class="text-lg font-bold text-gray-700">Total Amount:</span>
+        <span class="text-xl font-bold text-green-600">${{ totalAmount }}</span>
+      </div>
+
+      <!-- ✅ Checkout Button -->
+      <div class="mt-6 text-center">
+        <button (click)="checkout()"
+                class="bg-green-500 text-white text-lg font-medium px-6 py-3 rounded-lg hover:bg-green-600 transition duration-300">
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

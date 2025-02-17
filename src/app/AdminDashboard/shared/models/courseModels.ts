@@ -1,3 +1,5 @@
+import { Lecture } from "./lecture";
+
 export interface ApiResponse<C> {
   message?: string;
   categories: C[];
@@ -24,5 +26,7 @@ export interface Course {
 export interface section {
   _id?:string,
   title: string;
-  lecture: [];
+  lecture?: Lecture[];
+  expanded?: boolean;
 }
+

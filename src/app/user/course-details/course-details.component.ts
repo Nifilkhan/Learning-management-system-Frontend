@@ -1,11 +1,12 @@
+
 import { expand, map } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CoursesService } from '../shared/services/course.service';
 
-import { Course, section } from '../shared/model/course';
-import { CourseService } from '../../AdminDashboard/shared/services/course.service';
-import { LectureService } from '../../AdminDashboard/shared/services/lecture.service';
+
+import { Course, Lecture, section } from '../shared/model/course';
+import { CourseService } from '../../services/course.service';
+import { LectureService } from '../../services/lecture.service';
 import { environment } from '../../../environments/environment.development';
 
 @Component({
@@ -17,11 +18,11 @@ export class CourseDetailsComponent implements OnInit {
   courseId!: string;
   courses!: Course;
   sectionData: section[] = [];
-  selectVideoUrl:string = ''
+  selectedLecture!:Lecture;
 
   constructor(
     private route: ActivatedRoute,
-    private courseService: CoursesService,
+    private courseService: CourseService,
     private sectionService: CourseService,
     private lectureService: LectureService
   ) {}
@@ -53,7 +54,7 @@ export class CourseDetailsComponent implements OnInit {
         expand:false,
       }));
 
-      this.sectionData.forEach((section) => {
+      this.sectionData.forEach((section,sectionIndex) => {
         this.lectureService
           .getLectures(section._id!)
           .subscribe((lectureResponse) => {
@@ -64,13 +65,25 @@ export class CourseDetailsComponent implements OnInit {
                 ? `${environment.AWS_S3_URL}${lecture.videoUrl}`
                 : null,
             }));
+
+            if(sectionIndex === 0 && section.lecture.length > 0 && !this.selectedLecture) {
+              const firstVideoLecture = section.lecture.find((lec) => !lec.locked);
+              if(firstVideoLecture) {
+                this.selectLecture(firstVideoLecture)
+              }
+            }
             // console.log(section.lecture.map(lecture => lecture.videoUrl));
           });
       });
     });
   }
 
-  selectLecture(videoUrl:string) {
-    this.selectVideoUrl = videoUrl;
+  selectLecture(lecture:Lecture) {
+    if(lecture.locked) {
+      alert('lecture locked');
+      return;
+    }
+    this.selectedLecture = lecture;
+    console.log('selected lecture from course details component',this.selectedLecture)
   }
 }

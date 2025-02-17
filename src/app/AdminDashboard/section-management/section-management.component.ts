@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CourseService } from '../shared/services/course.service';
+import { CourseService } from '../../services/course.service';
 import { Lecture } from '../shared/models/lecture';
 import { section } from '../shared/models/courseModels';
 

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LectureService } from '../shared/services/lecture.service';
-import { CourseService } from '../shared/services/course.service';
+import { LectureService } from '../../services/lecture.service';
+import { CourseService } from '../../services/course.service';
 import { firstValueFrom } from 'rxjs';
 
 

@@ -2,6 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "video.js/dist/video-js.css";
 
 * {
   margin: 0px;
@@ -11,13 +12,12 @@
 
 body {
   font-family: Arial, sans-serif;
-
 }
 
 .container {
   max-width: 1300px;
   margin: 0 auto;
-  padding:40px 10px 60px 10px;
+  padding: 40px 10px 60px 10px;
 }
 
 /* Success Snackbar Style */
@@ -36,3 +36,27 @@ body {
   text-align: center;
 }
 
+@layer utilities {
+  @keyframes gradientChange {
+    0% {
+      background-position: 0%;
+    }
+
+    50% {
+      background-position: 100%;
+    }
+
+    100% {
+      background-position: 0%;
+    }
+  }
+
+  .gradient {
+    background: linear-gradient(90deg, blue, red);
+    background-size: 200% 200%;
+  }
+
+  .element-to-rotate {
+    animation: gradientChange 4s ease infinite;
+  }
+}

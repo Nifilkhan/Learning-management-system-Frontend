@@ -8,10 +8,15 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { CourseDetailsComponent } from '../course-details/course-details.component';
 import { CourseComponent } from '../course/course.component';
-import { HeaderComponent } from '../header/header.component';
+import { HeaderComponent } from '../header-sec/header/header.component';
 import { BannerSectionComponent } from '../banner-section/banner-section.component';
 import { LatestCourseComponent } from '../latest-course/latest-course.component';
-import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { UserProfileComponent } from '../header-sec/user-profile/user-profile.component';
+import { CourseListComponent } from '../course-list/course-list.component';
+import { VideoPlayerComponent } from '../video-player/video-player.component';
+import { AddCartComponent } from '../cart/add-cart/add-cart.component';
+import { LearningComponent } from '../learning/learning.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,14 +26,19 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
     HeaderComponent,
     BannerSectionComponent,
     LatestCourseComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    CourseListComponent,
+    VideoPlayerComponent,
+    AddCartComponent,
+    LearningComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    FormsModule
   ]
 })
 export class HomeModule { }

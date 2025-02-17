@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LectureService } from '../shared/services/lecture.service';
-import { CourseService } from '../shared/services/course.service';
+import { LectureService } from '../../services/lecture.service';
+import { CourseService } from '../../services/course.service';
 import { Lecture } from '../shared/models/lecture';
 import { section } from '../shared/models/courseModels';
 

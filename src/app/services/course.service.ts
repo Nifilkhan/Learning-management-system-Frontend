@@ -1,9 +1,10 @@
-import { ApiResponse, Category, Course } from './../models/courseModels';
+import { ApiResponse } from '../AdminDashboard/shared/models/courseModels';
+import { Category, Course} from '../user/shared/model/course';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PresignedUrl } from '../models/lecture';
+import { PresignedUrl } from '../AdminDashboard/shared/models/lecture';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ constructor(private http:HttpClient) { }
 
 private API_URL  = environment.COURSE_API;
 readonly course = 'courses/'
+readonly courses = 'courses'
 readonly section = 'section/'
 readonly lecture = 'lecture/'
 
@@ -22,8 +24,14 @@ uploadCourse(courseData:Course):Observable<any>{
   return this.http.post(`${this.API_URL}${this.course}add-course`,courseData)
 }
 
-getCourses():Observable<{courses:Course[]}> {
-  return this.http.get<{courses:Course[]}>(`${this.API_URL}${this.course}all-courses`)
+getCourses(search?:string,category?:string,limit:number = 10 ,offset:number = 0):Observable<{courses:Course[]; totalCourses: number; currentPage: number; totalPages: number;}> {
+  let params = new HttpParams()
+  .set('limit',limit.toString())
+  .set('offset',offset.toString())
+
+  if(search) params = params.set('search',search)
+  if(category) params = params.set('category',category)
+  return this.http.get<{courses:Course[]; totalCourses: number; currentPage: number; totalPages: number;}>(`${this.API_URL}${this.course}all-courses`,{params})
 }
 
 getTotalCount(){
@@ -70,6 +78,14 @@ getPresignedUrl(fileType:any,fileName:any,fileCategory:string):Observable<Presig
   console.log('fileName',fileName);
   console.log('file type',fileType)
   return this.http.get<PresignedUrl>(`${this.API_URL}${this.lecture}presigned-url`,{params});
+}
+
+getCourse(courseId:string):Observable<{ course:Course}>{
+  return this.http.get<{ course:Course}>(`${this.API_URL}${this.courses}/get-course/${courseId}`)
+}
+
+getLatestCourse():Observable<{latestCourses:Course[]}>{
+  return this.http.get<{latestCourses:Course[]}>(`${this.API_URL}${this.courses}/latest-courses`)
 }
 
 

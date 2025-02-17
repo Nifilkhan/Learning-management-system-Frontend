@@ -1,6 +1,6 @@
 import { RegisterUser } from '../../authentication/shared/models/authentication.user.ts';
-import { AuthService } from '../../authentication/shared/service/auth.service.ts.service';
-import { CoursedetailsService } from './../shared/services/course.details.service';
+import { AuthService } from '../../services/auth.service.ts.service.js';
+import { CoursedetailsService } from '../../services/details.service.js';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

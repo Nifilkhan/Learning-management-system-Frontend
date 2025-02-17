@@ -7,9 +7,11 @@
         type="text"
         class="form-input w-full py-2 px-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
         id="search"
+        [(ngModel)]="searchQuery"
+        (input)="onQueryChange()"
         placeholder="What do you want to learn?"
       >
-      <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer">
+      <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer flex" (click)="onLoadSearc()">
         <mat-icon class="m-0">search</mat-icon>
       </div>
     </div>
@@ -17,17 +19,12 @@
     <div class="flex items-center space-x-6">
       <ul class="flex space-x-6 text-sm font-medium text-gray-600">
         <li class="hover:text-blue-600 cursor-pointer"><a routerLink="courses">Course</a></li>
-        <li class="hover:text-blue-600 cursor-pointer"><a href="#">My learning</a></li>
-        <li class="hover:text-blue-600 cursor-pointer"><a href="#">Cart</a></li>
+        <li class="hover:text-blue-600 cursor-pointer"><a routerLink="my-learning">My learning</a></li>
+        <li class="hover:text-blue-600 cursor-pointer"><a routerLink="cart">Cart</a></li>
 
       </ul>
       <div class="relative">
         <button *ngIf="userData?.user" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <!-- <img
-            class="w-8 h-8 rounded-full border-2 border-gray-300"
-            src="https://images.pexels.com/photos/27635347/pexels-photo-27635347/free-photo-of-retratos-de-um-jovem-modelo-bruxo-allan-marinsek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt="Profile Image"
-          /> -->
           <app-user-profile [userData]="userData?.user!"></app-user-profile>
         </button>
 

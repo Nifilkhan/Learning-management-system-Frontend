@@ -1,7 +1,6 @@
-import { response } from 'express';
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../shared/services/users.service';
-import { CourseService } from '../shared/services/course.service';
+import { UsersService } from '../../services/users.service';
+import { CourseService } from '../../services/course.service';
 
 @Component({
   selector: 'app-card',

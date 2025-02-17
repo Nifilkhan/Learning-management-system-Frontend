@@ -8,11 +8,11 @@ import {
   Output,
 } from '@angular/core';
 import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CourseService } from '../shared/services/course.service';
+import { CourseService } from '../../services/course.service';
 import { Course } from '../shared/models/courseModels';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
-import { LectureService } from '../shared/services/lecture.service';
+import { LectureService } from '../../services/lecture.service';
 
 @Component({
   selector: 'app-add-course-form',

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CourseService } from '../../services/course.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  constructor(private searchApi:CourseService){}
+  query:string = ''
+
+  getSearchData() {
+    this.searchApi.getCourses().subscribe({
+      next:(response) => {
+        console.log(response)
+      }
+    })
+  }
 }

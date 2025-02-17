@@ -1,6 +1,6 @@
 import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { NgxFileDropModule } from 'ngx-file-drop'
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
@@ -23,6 +23,11 @@ import { TableComponent } from '../table/table.component';
 import { SectionComponent } from '../section-component/section-component.component';
 import { LectureComponent } from '../lecture-component/lecture-component.component';
 import { SectionManagementComponent } from '../section-management/section-management.component';
+import { StoreModule } from '@ngrx/store';
+import { courseReducer } from '../../store/course/course.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CourseEffects } from '../../store/course/course.effects';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +45,8 @@ import { SectionManagementComponent } from '../section-management/section-manage
     TableComponent,
     SectionManagementComponent,
     SectionComponent,
-    LectureComponent,  ],
+    LectureComponent,
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -50,7 +56,11 @@ import { SectionManagementComponent } from '../section-management/section-manage
     ReactiveFormsModule,
     FormsModule,
     NgxFileDropModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    StoreModule.forFeature('courses', courseReducer), // ✅ Feature store
+    EffectsModule.forFeature([CourseEffects]),
+    AsyncPipe
+
   ]
 })
 export class AdminModule { }

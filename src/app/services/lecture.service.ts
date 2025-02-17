@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CourseService } from './course.service';
 import { Observable } from 'rxjs';
-import { Lecture, PresignedUrl } from '../models/lecture';
-import { environment } from '../../../../environments/environment.development';
+import { Lecture, PresignedUrl} from '../AdminDashboard/shared/models/lecture';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,10 @@ export class LectureService {
 
   deleteLecture(lectureId:String): Observable<any> {
     return this.http.delete(`${this.LECTURE_URL}${this.lectures}delete-lecture${lectureId}`)
+  }
+
+  getLectures(sectionId:string):Observable<{lectures:Lecture[]}> {
+    return this.http.get<{lectures:Lecture[]}>(`${this.LECTURE_URL}${this.lectures}getLectures/${sectionId}`,{withCredentials:true});
   }
 
 }

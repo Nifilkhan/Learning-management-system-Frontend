@@ -4,7 +4,7 @@
     <div class="navbar">
       <mat-icon class="m-0 menu-icon">menu</mat-icon>
       <div class="flex flex-row items-center">
-        <input type="text" class="form-control" id="search" placeholder="search">
+        <input type="text" class="form-control" id="search" placeholder="search" (keyup.enter)="getSearchData()">
         <div class="searchIcon">
         <mat-icon class="m-0">search</mat-icon>
       </div>

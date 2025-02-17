@@ -4,13 +4,14 @@ export interface Category {
 }
 
 export interface Course {
-  _id: string;
+createdAt?: string|number|Date;
+  _id?: string;
   title: string;
   description: string;
   category: Category;
-  price: number | string; 
-  status: 'draft' | 'published'; 
-  section: string[]; 
+  price: number | string;
+  status: 'draft' | 'published';
+  section: string[];
   thumbnail:string;
 }
 
@@ -19,6 +20,8 @@ export interface section {
   _id?:string,
   title: string;
   lecture: Lecture[];
+  expand?:boolean;
+  locked?: boolean;
 }
 
 export interface Lecture {
@@ -26,6 +29,7 @@ export interface Lecture {
   title: string;
   description: string;
   contentType:string;
-  videoUrl?:string;
+  videoUrl?:string | null;
   articleContent?:string;
+  locked?: boolean;
 }

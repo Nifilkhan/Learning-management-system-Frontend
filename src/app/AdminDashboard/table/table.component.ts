@@ -1,8 +1,8 @@
 import { response } from 'express';
 import { Component, OnInit } from '@angular/core';
-import { CourseService } from '../shared/services/course.service';
-import { Course } from '../shared/models/courseModels';
-import { CoursedetailsService } from '../shared/services/course.details.service';
+import { CourseService } from '../../services/course.service';
+import { Course } from '../../user/shared/model/course';
+import { CoursedetailsService } from '../../services/details.service';
 
 @Component({
   selector: 'app-table',
