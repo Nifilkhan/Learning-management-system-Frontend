@@ -4,6 +4,7 @@ import { SignupComponent } from './authentication/signup/signup.component';
 import { OtpVerificationComponent } from './authentication/otp-verification/otp-verification.component';
 import { SigninComponent } from './authentication/signin/signin.component';
 import { HomeComponent } from './user/home/home.component';
+import { ErrorDialogComponent } from './error-handler/error-dialog.component.ts/error-dialog.component.ts.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,12 @@ const routes: Routes = [
   },
   {
     path:'edutech',loadChildren: () => import('./user/home/home.module').then((m) => m.HomeModule)
-  }
+  },
+  {
+    path:'error/:code', component:ErrorDialogComponent
+  },
+  
+
 ];
 
 @NgModule({

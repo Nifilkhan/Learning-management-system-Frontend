@@ -24,13 +24,21 @@ uploadCourse(courseData:Course):Observable<any>{
   return this.http.post(`${this.API_URL}${this.course}add-course`,courseData)
 }
 
-getCourses(search?:string,category?:string,limit:number = 10 ,offset:number = 0):Observable<{courses:Course[]; totalCourses: number; currentPage: number; totalPages: number;}> {
+getCourses(search?:string,category?:string,limit:number = 3 ,offset:number = 0,sortBy?:string, sortOrder?:string):Observable<{courses:Course[]; totalCourses: number; currentPage: number; totalPages: number;}> {
   let params = new HttpParams()
-  .set('limit',limit.toString())
-  .set('offset',offset.toString())
+  .set('limit',limit)
+  .set('offset',offset)
 
   if(search) params = params.set('search',search)
-  if(category) params = params.set('category',category)
+    if(category){
+      params = params.set('category',category)
+    }
+    if(sortBy){
+      params = params.set('sortBy',sortBy)
+    }
+      if(sortOrder){
+        params = params.set('sortOrder',sortOrder)
+      }
   return this.http.get<{courses:Course[]; totalCourses: number; currentPage: number; totalPages: number;}>(`${this.API_URL}${this.course}all-courses`,{params})
 }
 

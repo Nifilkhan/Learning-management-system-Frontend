@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { HomeRoutingModule } from './home-routing.module';
@@ -17,6 +18,7 @@ import { VideoPlayerComponent } from '../video-player/video-player.component';
 import { AddCartComponent } from '../cart/add-cart/add-cart.component';
 import { LearningComponent } from '../learning/learning.component';
 import { FormsModule } from '@angular/forms';
+import { OverlayComponent } from '../../shared/overlay/overlay.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { FormsModule } from '@angular/forms';
     CourseListComponent,
     VideoPlayerComponent,
     AddCartComponent,
-    LearningComponent
+    LearningComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,10 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    FormsModule
+    FormsModule,
+    OverlayComponent,
+    MatButtonModule,
+    MatPaginatorModule,
   ]
 })
 export class HomeModule { }

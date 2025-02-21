@@ -44,7 +44,7 @@ export class HeaderComponent implements AfterViewInit {
     }
     this.setTimeout = setTimeout(() => {
       this.onLoadSearc();
-    },300)
+    },400)
   }
 
 

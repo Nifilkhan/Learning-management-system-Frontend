@@ -15,6 +15,7 @@ export class CardComponent implements OnInit{
   showForm:boolean = false;
   totelUsers!:number;
   totalCourse!:number;
+  isLoading:boolean = false;
 
   ngOnInit(): void {
     this.totalUsers();
@@ -25,20 +26,30 @@ export class CardComponent implements OnInit{
   }
 
   totalUsers():void {
+    this.isLoading = true
     this.userService.getTotalCount().subscribe({
       next:(response) =>{
         console.log(response)
         this.totalCourses();
         this.totelUsers = response.totalCount;
+        this.isLoading = false;
+      },error:(err) => {
+        this.isLoading = false;
+        console.log(err)
       },
     })
   }
 
   totalCourses():void {
+    // this.isLoading = true
     this.courseService.getTotalCount().subscribe({
       next:(response) => {
+        // this.isLoading = false
         console.log(response)
         this.totalCourse = response.totalCourses;
+      },error:(err)=> {
+        console.log(err)
+        // this.isLoading = false
       },
     })
   }

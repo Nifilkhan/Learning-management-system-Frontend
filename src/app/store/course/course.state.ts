@@ -12,6 +12,8 @@ export interface CourseState {
   category:string,
   limit:number,
   offset:number
+  sortBy:string,
+  sortOrder:string
 }
 
 export const inititalState:CourseState = {
@@ -19,10 +21,12 @@ export const inititalState:CourseState = {
   loading:false,
   error:null,
   totalCourses:0,
-  totalPages:1,
-  currentPage:1,
+  totalPages:0,
+  currentPage:0,
   searchQuery:'',
   category:'',
   limit:10,
-  offset:0
+  offset:0,
+  sortBy:'',
+  sortOrder:''
 }

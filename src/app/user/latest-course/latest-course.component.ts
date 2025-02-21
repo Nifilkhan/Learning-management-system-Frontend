@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from '../shared/model/course';
 import { CourseService } from '../../services/course.service';
 import { environment } from '../../../environments/environment.development';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-latest-course',
@@ -13,7 +14,7 @@ export class LatestCourseComponent implements OnInit {
   latestCourses:Course[]=[];
   courseThumbnail:string [] = [];
 
-  constructor(private latestCourseService:CourseService) {}
+  constructor(private latestCourseService:CourseService,private router:Router) {}
 
   ngOnInit(): void {
     this.latestCourse();
@@ -26,5 +27,9 @@ export class LatestCourseComponent implements OnInit {
         this.courseThumbnail = this.latestCourses.map((course) => `${environment.AWS_S3_URL}${course.thumbnail}`)
       },
     })
+  }
+
+  onClick(courseId:string) {
+    this.router.navigate(['/home/courseDetail',courseId])
   }
 }

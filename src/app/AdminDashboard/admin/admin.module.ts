@@ -27,6 +27,7 @@ import { StoreModule } from '@ngrx/store';
 import { courseReducer } from '../../store/course/course.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CourseEffects } from '../../store/course/course.effects';
+import { OverlayComponent } from "../../shared/overlay/overlay.component";
 
 
 @NgModule({
@@ -59,8 +60,8 @@ import { CourseEffects } from '../../store/course/course.effects';
     NgxDatatableModule,
     StoreModule.forFeature('courses', courseReducer), // ✅ Feature store
     EffectsModule.forFeature([CourseEffects]),
-    AsyncPipe
-
-  ]
+    AsyncPipe,
+    OverlayComponent
+]
 })
 export class AdminModule { }

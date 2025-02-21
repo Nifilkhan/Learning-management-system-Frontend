@@ -24,14 +24,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AdminModule } from './AdminDashboard/admin/admin.module';
 import { HomeModule } from './user/home/home.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { SharedOverlayComponent } from './AdminDashboard/shared/shared-overlay/shared-overlay.component';
-import { authInterceptor } from './shared/interceptor/auth.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { courseReducer } from './store/course/course.reducer';
-import { CourseEffects } from './store/course/course.effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CourseService } from './services/course.service';
+import { OverlayComponent } from './shared/overlay/overlay.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ErrorDialogComponent } from './error-handler/error-dialog.component.ts/error-dialog.component.ts.component';
+import { errorHandlingInterceptor } from './error-handler/interceptor/error-handling.interceptor';
 
 
 @NgModule({
@@ -40,7 +39,7 @@ import { CourseService } from './services/course.service';
     SignupComponent,
     SigninComponent,
     OtpVerificationComponent,
-    SharedOverlayComponent,
+    ErrorDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,13 +55,14 @@ import { CourseService } from './services/course.service';
     MatSnackBarModule,
     StoreModule.forRoot({},{}),
     EffectsModule.forRoot([]),
-    // StoreDevtoolsModule.instrument({ maxAge: 25 })
+    OverlayComponent,
+    MatDialogModule
   ],
   providers: [
     AuthService,
     CourseService,
     provideClientHydration(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(),withInterceptors([errorHandlingInterceptor])),
     provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],

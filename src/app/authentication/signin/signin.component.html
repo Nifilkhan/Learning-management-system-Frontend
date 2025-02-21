@@ -8,7 +8,7 @@
           >Login to access your travelwise account</span
         >
 
-        <h2 *ngIf="errorMessage">
+        <h2 *ngIf="errorMessage" class="text-danger">
           {{errorMessage}}
         </h2>
         <form [formGroup]="loginForm" (submit)="onLoginForm()">
@@ -106,12 +106,5 @@
 </div>
 
 <div class="overlay" *ngIf="isLoading">
-<div id="container">
-  <label class="loading-title">Loading ...</label>
-  <span class="loading-circle sp1">
-    <span class="loading-circle sp2">
-      <span class="loading-circle sp3"></span>
-    </span>
-  </span>
-</div>
+<app-overlay></app-overlay>
 </div>

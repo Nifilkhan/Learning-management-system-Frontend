@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SharedOverlayComponent } from './shared-overlay.component';
+import { ErrorDialogComponent } from './error-dialog.component.ts.component';
 
-describe('SharedOverlayComponent', () => {
-  let component: SharedOverlayComponent;
-  let fixture: ComponentFixture<SharedOverlayComponent>;
+describe('ErrorDialogComponentTsComponent', () => {
+  let component: ErrorDialogComponent;
+  let fixture: ComponentFixture<ErrorDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SharedOverlayComponent]
+      declarations: [ErrorDialogComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SharedOverlayComponent);
+    fixture = TestBed.createComponent(ErrorDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

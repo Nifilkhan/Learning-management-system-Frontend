@@ -1,48 +1,88 @@
-
 <div *ngIf="loadingCourse$ | async">
-  <p>Loading courses...</p>
+  <app-overlay></app-overlay>
+</div>
+
+<div class='selected bg-gray-100 px-[100px] py-[20px] rounded-xl shadow-md flex flex-wrap gap-4 items-center justify-between'>
+  <div class="flex items-center gap-2">
+    <label for="category" class="font-semibold text-gray-700">Sort By Category:</label>
+    <select id="category" class="p-2 border rounded-lg bg-white shadow-sm focus:ring focus:ring-blue-300" (change)="onCategoryChange($event)">
+      <option value="all">All Categories</option>
+      <option *ngFor="let cat of categorys" [value]="cat?._id">{{ cat.name }}</option>
+    </select>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <label for="sortBy" class="font-semibold text-gray-700">Sort By:</label>
+    <select id="sortBy" class="p-2 border rounded-lg bg-white shadow-sm focus:ring focus:ring-blue-300" (change)="onSortChange($event)">
+      <option value="title">Title</option>
+      <option value="date">Date</option>
+      <option value="price">Price</option>
+      <option value="category">Category</option>
+    </select>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <label for="sortOrder" class="font-semibold text-gray-700">Sort Order:</label>
+    <select id="sortOrder" class="p-2 border rounded-lg bg-white shadow-sm focus:ring focus:ring-blue-300" (change)="onSortChange($event)">
+      <option value="asc">Low - High</option>
+      <option value="desc">High - Low</option>
+    </select>
+  </div>
 </div>
 
 <div *ngIf="!(loadingCourse$ | async)">
-<div class="container mx-auto px-4 py-6">
-  <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-    <div
-      *ngFor="let course of courseData$ | async; let i = index"
-      class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:shadow-xl hover:scale-[1.02] flex flex-col"
-    >
-      <img
-        [src]="course.thumbnail"
-        alt="courseImage"
-        class="w-full h-48 object-cover rounded-t-lg"
-      />
-      <div class="p-4 flex flex-col flex-grow">
-        <h5
-          class="text-lg font-semibold text-gray-800 cursor-pointer hover:text-gray-700 transition-colors"
-          (click)="onClick(course._id!)"
-        >
-          {{ course.title }}
-        </h5>
-        <p class="text-sm text-gray-600 mt-2 flex-grow">
-          {{ course.description }}
-        </p>
-        <div class="mt-4 flex items-center justify-between">
-          <span class="text-lg font-bold text-green-500">
-            {{ course.price | currency }}
-          </span>
-          <button
-            class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-200"
-            (click)="addToCart(course._id!)"
+  <div *ngIf="(courseData$ | async)?.length > 0; else noCourses">
+  <div class="container mx-auto px-4 py-6">
+    <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div
+        *ngFor="let course of courseData$ | async; let i = index"
+        class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:shadow-xl hover:scale-[1.02] flex flex-col"
+      >
+        <img
+          [src]="course.thumbnail"
+          alt="courseImage"
+          class="w-full h-48 object-cover rounded-t-lg"
+        />
+        <div class="p-4 flex flex-col flex-grow">
+          <h5
+            class="text-lg font-semibold text-gray-800 cursor-pointer hover:text-gray-700 transition-colors"
+            (click)="onClick(course._id!)"
           >
-            Add To Cart
-          </button>
-
-          <button (click)="buyCourse(course._id!)">
-            Checkout
-          </button>
+            {{ course.title }}
+          </h5>
+          <p class="text-sm text-gray-600 mt-2 flex-grow">
+            {{ course.description }}
+          </p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-lg font-bold text-green-500">
+              {{ course.price | currency }}
+            </span>
+            <button
+              class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-200"
+              (click)="addToCart(course._id!)"
+            >
+              Add To Cart
+            </button>
+            <button class="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition duration-200" (click)="buyCourse(course._id!)">
+              Checkout
+            </button>
+          </div>
         </div>
       </div>
     </div>
+    <mat-paginator *ngIf="length > 1" class="paginator mt-6" [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[1, 2,5]"
+      [pageIndex]="pageIndex"
+      [showFirstLastButtons]="true"
+      (page)="onChangeCourse($event)">
+    </mat-paginator>
   </div>
 </div>
 </div>
 
+<ng-template #noCourses>
+  <div class="text-center py-6">
+    <p class="text-lg font-semibold text-gray-700">Nothing found</p>
+  </div>
+</ng-template>

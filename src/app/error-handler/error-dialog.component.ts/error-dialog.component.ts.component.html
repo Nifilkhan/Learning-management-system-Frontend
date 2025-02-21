@@ -1,0 +1,14 @@
+<div class="error-container">
+  <div class="background">
+    <img [src]="errorImage" alt="Error Image" />
+  </div>
+
+  <div class="content">
+    <h1>Error {{ errorCode }}</h1>
+    <p>{{ errorMessage }}</p>
+
+    <button *ngIf="errorCode === 401" (click)="goToLogin()">Login Again</button>
+    <button *ngIf="errorCode === 500" (click)="goToLogin()">Go To Home</button>
+    <button *ngIf="errorCode === 404" (click)="goToHome()">Go To Home</button>
+  </div>
+</div>

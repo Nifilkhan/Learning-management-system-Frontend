@@ -18,8 +18,9 @@ export class CourseEffects {
   loadCourses$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CourseActions.loadCourse),
-      mergeMap(({search,category,limit,offset}) =>
-        this.courseService.getCourses(search,category,limit,offset).pipe(
+      tap(action => console.log('action dispatched',action)),
+      switchMap(({search,category,limit,offset,sortBy,sortOrder}) =>
+        this.courseService.getCourses(search,category,limit,offset,sortBy,sortOrder).pipe(
           map((response) =>{
             const imageUrlResponse = response.courses.map(course => ({
               ...course,
@@ -33,7 +34,7 @@ export class CourseEffects {
             })
             }),
             tap((response) => {
-              console.log(response.courses)
+              console.log('backend response',response)
             }),
           catchError((error) => of(CourseActions.loadCourseFailure({error:error.message})))
 
