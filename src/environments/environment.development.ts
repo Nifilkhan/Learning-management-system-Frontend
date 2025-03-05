@@ -1,4 +1,5 @@
 export const environment = {
+    Production:true,
     COURSE_API:'http://13.50.118.48/:6001/api/',
     AWS_S3_URL :'https://stackup-bucket.s3.ap-south-1.amazonaws.com/',
     GOOGLE_CALLBACK_URL:'http://localhost:6001/api/auth/',

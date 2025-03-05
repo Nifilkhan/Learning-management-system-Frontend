@@ -15,27 +15,27 @@ export class AuthService {
   private GOOGLE_URL = environment.GOOGLE_CALLBACK_URL;
 
   signup(user:RegisterUser):Observable<any> {
-    return this.http.post('http://localhost:6001/api/auth/signup',user)
+    return this.http.post('http://13.50.118.48/:6001/api/auth/signup',user)
   }
 
   otpVerification(otpPayload:{otp:number}):Observable<any> {
-    return this.http.post('http://localhost:6001/api/auth/verify-otp',otpPayload)
+    return this.http.post('http://13.50.118.48/:6001/api/auth/verify-otp',otpPayload)
   }
 
   signin(data:Login):Observable<LoginResponse> {
-    return this.http.post<LoginResponse>('http://localhost:6001/api/auth/signin',data,{withCredentials:true})
+    return this.http.post<LoginResponse>('http://13.50.118.48/:6001/api/auth/signin',data,{withCredentials:true})
   }
 
   logogut():Observable<any> {
-    return this.http.post('http://localhost:6001/api/auth/logout',{})
+    return this.http.post('http://13.50.118.48/:6001/api/auth/logout',{})
   }
 
   getUsers():Observable<{users:RegisterUser[]}> {
-    return this.http.get<{users:RegisterUser[]}>('http://localhost:6001/api/auth/get-verified-users')
+    return this.http.get<{users:RegisterUser[]}>('http://13.50.118.48/:6001/api/auth/get-verified-users')
   }
 
   getLoggedInUser():Observable<{user:UserData}>{
-    return this.http.get<{user:UserData}>('http://localhost:6001/api/auth/user',{ withCredentials: true })
+    return this.http.get<{user:UserData}>('http://13.50.118.48/:6001/api/auth/user',{ withCredentials: true })
 }
 
 googleLogin() {
