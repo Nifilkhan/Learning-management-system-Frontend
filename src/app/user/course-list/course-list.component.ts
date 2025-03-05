@@ -12,11 +12,16 @@ export class CourseListComponent {
   courseDataList!:Course;
   @Input() sectionData:section[] = [];
   @Output() lectureSelected = new EventEmitter<Lecture>();
-
+  @Output() toggleContent = new EventEmitter<void>();
+  isVisible:boolean = false;
 
   constructor(private route:ActivatedRoute) { }
 
-
+isContentVisible(){
+  console.log('second')
+  this.isVisible = !this.isVisible;
+  this.toggleContent.emit();
+}
 
   toggleExpandSection(section:section) {
     section.expand = !section.expand;

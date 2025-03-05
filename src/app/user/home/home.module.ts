@@ -19,6 +19,7 @@ import { AddCartComponent } from '../cart/add-cart/add-cart.component';
 import { LearningComponent } from '../learning/learning.component';
 import { FormsModule } from '@angular/forms';
 import { OverlayComponent } from '../../shared/overlay/overlay.component';
+import { CategoryBannerComponent } from '../category-banner/category-banner.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { OverlayComponent } from '../../shared/overlay/overlay.component';
     VideoPlayerComponent,
     AddCartComponent,
     LearningComponent,
+    CategoryBannerComponent
   ],
   imports: [
     CommonModule,

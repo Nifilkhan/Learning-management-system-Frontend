@@ -13,17 +13,7 @@ import { selectAllCourses, selectCourseLoadingState } from '../../store/course/c
   styleUrls: ['./courses.component.css'],
 })
 export class CoursesComponent implements OnInit {
-  courses$!:Observable<Course[]>;
-  loading$!:Observable<boolean>;
-  totalCourses$!:Observable<number>
-  currentPage$!:Observable<number>
-  totalPage$!:Observable<number>
 
-
-  searchQuery: string = '';
-  category: string = '';
-  limit: number = 10;
-  offset: number = 0;
 
   constructor(private courseService:CourseService, private store:Store) { }
 
@@ -37,13 +27,13 @@ export class CoursesComponent implements OnInit {
 
 
   getCourse(){
-    this.courses$ = this.store.select(selectAllCourses);
-    this.loading$ = this.store.select(selectCourseLoadingState);
-  }
-
-
-  loadStore() {
-    this.store.dispatch(loadCourse({search:this.searchQuery, category:this.category, offset:this.offset, limit:this.limit}));
+    this.courseService.getAllCourse().subscribe({
+      next:(value)=> {
+        this.courseData = value.courses;
+      },error:(err) => {
+        throw new Error('error occured while fetching the courses',err)
+      },
+    })
   }
 
 

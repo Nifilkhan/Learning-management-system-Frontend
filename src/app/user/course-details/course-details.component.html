@@ -1,12 +1,17 @@
-<div class="main container mx-[32px]">
+<div class=" mx-auto px-4">
+  <div class="player">
 
-  <div class="flex flex-row justify-between list-sec">
-    <div class="w-[54%]">
-      <app-video-player [selectedLecture]="selectedLecture" [lectureData]="sectionData"></app-video-player>
+    <span *ngIf="isVisible" class="back-button" (click)="isContentVisible()"><mat-icon class="mat-18">keyboard_arrow_left</mat-icon></span>
+
+    <!-- Video Player -->
+    <div class="app-video-player" [ngClass]="{'full-width': isVisible}">
+      <app-video-player [selectedLecture]="selectedLecture" [lectureData]="sectionData" [isFullScreen]="isVisible"></app-video-player>
     </div>
 
-    <div class="w-1/3">
-      <app-course-list [sectionData]="sectionData" (lectureSelected)="selectLecture($event)" ></app-course-list>
+    <!-- Course List -->
+    <div class="app-course-list" *ngIf="!isVisible">
+      <app-course-list [sectionData]="sectionData" (lectureSelected)="selectLecture($event)" (toggleContent)="isContentVisible()"></app-course-list>
     </div>
+
   </div>
 </div>

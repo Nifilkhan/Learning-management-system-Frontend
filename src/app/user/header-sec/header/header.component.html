@@ -1,57 +1,96 @@
-<header class="bg-white">
-  <div class="container flex align-items-center justify-between py-4">
-    <span class="text-blue-800 font-semibold text-3xl cursor-pointer"><a routerLink="/home">Edutech</a> </span>
+<header class="bg-white shadow-md">
+  <div class="container mx-auto flex items-center justify-between py-4 px-4">
 
-    <div class="flex items-center space-x-3 w-[300px] md:w-[400px] lg:w-[500px] relative">
-      <input
-        type="text"
-        class="form-input w-full py-2 px-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-        id="search"
-        [(ngModel)]="searchQuery"
-        (input)="onQueryChange()"
-        placeholder="What do you want to learn?"
-      >
-      <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer flex" (click)="onLoadSearc()">
-        <mat-icon class="m-0">search</mat-icon>
+    <!-- Logo -->
+    <span class="text-blue-800 font-semibold text-2xl cursor-pointer">
+      <a routerLink="/home">Edutech</a>
+    </span>
+
+    <!-- Mobile Menu Button -->
+    <button class="lg:hidden text-gray-600" (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Navigation & Search (Desktop) -->
+    <div class="hidden lg:flex items-center space-x-6 w-full justify-center">
+      <!-- Search Bar -->
+      <div class="relative w-[200px] sm:w-[300px] md:w-[400px] lg:w-[500px]">
+        <input
+          type="text"
+          class="w-full py-2 px-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          id="search"
+          [(ngModel)]="searchQuery"
+          (input)="onQueryChange()"
+          placeholder="What do you want to learn?"
+        >
+        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer flex" (click)="onLoadSearc()">
+          <mat-icon class="m-0">search</mat-icon>
+        </div>
       </div>
+
+      <!-- Navigation Links -->
+      <ul class="flex space-x-6 text-sm font-medium text-gray-600">
+        <li class="hover:text-blue-600 cursor-pointer"><a routerLink="courses">Courses</a></li>
+        <li class="hover:text-blue-600 cursor-pointer"><a routerLink="my-learning">My Learning</a></li>
+        <li class="hover:text-blue-600 cursor-pointer"><a routerLink="cart">Cart</a></li>
+      </ul>
     </div>
 
-    <div class="flex items-center space-x-6">
-      <ul class="flex space-x-6 text-sm font-medium text-gray-600">
-        <li class="hover:text-blue-600 cursor-pointer"><a routerLink="courses">Course</a></li>
-        <li class="hover:text-blue-600 cursor-pointer"><a routerLink="my-learning">My learning</a></li>
-        <li class="hover:text-blue-600 cursor-pointer"><a routerLink="cart">Cart</a></li>
+    <!-- User Profile -->
+    <div class="relative hidden lg:flex items-center space-x-4">
+      <button *ngIf="userData?.user" mat-icon-button [matMenuTriggerFor]="menu">
+        <app-user-profile [userData]="userData?.user!"></app-user-profile>
+      </button>
 
-      </ul>
-      <div class="relative">
-        <button *ngIf="userData?.user" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <app-user-profile [userData]="userData?.user!"></app-user-profile>
-        </button>
-
-        <div class="absolute">
-          <mat-menu #menu="matMenu">
-            <div *ngIf="userData?.user as user" class="flex flex-col gap-2 text-center">
-              <div class="flex justify-center shadow-none">
-                <app-user-profile [userData]="userData?.user!"></app-user-profile>
-              </div>
-              <span class="px-3">{{user.firstName}}{{user.lastName}}</span>
-              <span class="px-3">{{ user.email }}</span>
-            </div>
-            <button mat-menu-item (click)="onLogout()">
-              <mat-icon>exit_to_app</mat-icon>
-              <span>Logout</span>
-            </button>
-            <button mat-menu-item (click)="onForgetPassword()">
-              <mat-icon>notifications_off</mat-icon>
-              <span>Disable alerts</span>
-            </button>
-          </mat-menu>
+      <mat-menu #menu="matMenu">
+        <div *ngIf="userData?.user as user" class="flex flex-col gap-2 text-center px-3">
+          <div class="flex justify-center">
+            <app-user-profile [userData]="userData?.user!"></app-user-profile>
+          </div>
+          <span class="font-semibold">{{ user.firstName }} {{ user.lastName }}</span>
+          <span class="text-gray-500">{{ user.email }}</span>
         </div>
-
-      </div>
+        <button mat-menu-item (click)="onLogout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+        <button mat-menu-item (click)="onForgetPassword()">
+          <mat-icon>notifications_off</mat-icon>
+          <span>Disable alerts</span>
+        </button>
+      </mat-menu>
     </div>
   </div>
+
+  <!-- Mobile Menu -->
+  <div *ngIf="isMenuOpen" class="lg:hidden bg-white py-4 px-4 shadow-md">
+    <div class="flex justify-between">
+    <div class="lg:flex items-center space-x-6 w-full justify-center">
+      <!-- Search Bar -->
+      <div class="relative w-[80%] sm:w-[full] md:w-[full] lg:w-[full]">
+        <input
+          type="text"
+          class="w-full py-2 px-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          id="search"
+          [(ngModel)]="searchQuery"
+          (input)="onQueryChange()"
+          placeholder="What do you want to learn?"
+        >
+        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer flex" (click)="onLoadSearc()">
+          <mat-icon class="m-0">search</mat-icon>
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <button *ngIf="userData?.user" mat-icon-button [matMenuTriggerFor]="menu">
+        <app-user-profile [userData]="userData?.user!"></app-user-profile>
+      </button>
+    </div>
+  </div>
+    <ul class="flex flex-col space-y-4 text-sm font-medium text-gray-600">
+      <li class="hover:text-blue-600 cursor-pointer"><a routerLink="courses" (click)="toggleMenu()">Courses</a></li>
+      <li class="hover:text-blue-600 cursor-pointer"><a routerLink="my-learning" (click)="toggleMenu()">My Learning</a></li>
+      <li class="hover:text-blue-600 cursor-pointer"><a routerLink="cart" (click)="toggleMenu()">Cart</a></li>
+    </ul>
+  </div>
 </header>
-
-
-

@@ -1,4 +1,106 @@
-.locked {
-  pointer-events: none;
-  opacity: 0.5; /* Grays out the locked lectures */
+// Main Container
+.max-w-5xl {
+  max-width: 1200px;
+}
+
+// Course List Styles
+.course-list {
+  width: 100%;
+  // max-width: 420px;
+  transition: all 0.3s ease-in-out;
+}
+
+// Course Content Header
+.content {
+  border-bottom: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+}
+
+// Lecture Button Styles
+.lecture-button {
+  font-size: 1rem;
+  color: #2563eb; // Blue text
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    text-decoration: underline;
+    color: #1d4ed8; // Darker blue on hover
+  }
+
+  &.locked {
+    color: #9ca3af; // Gray color for locked lectures
+    cursor: not-allowed;
+  }
+}
+
+// Lock Icon Styles
+.lock-icon {
+  font-size: 1rem;
+  color: #ef4444; // Red lock icon for locked lectures
+}
+
+// Toggle Button for Course List (Back Button)
+// .back-button {
+//   cursor: pointer;
+//   font-size: 1.5rem;
+//   color: #2563eb; // Blue color
+//   transition: transform 0.2s ease-in-out;
+//   position: absolute;
+//   top: 0;
+//   &:hover {
+//     transform: scale(1.1);
+//   }
+// }
+
+// Video Player Container
+.video-container {
+  width: 100%;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+}
+
+// When the course list is hidden, expand the video player
+.full-width {
+  width: 100%;
+  max-width: 100%;
+  height: 80vh; // Makes it bigger like Udemy
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .lecture-button {
+    font-size: 0.875rem;
+  }
+
+  .lock-icon {
+    font-size: 0.875rem;
+  }
+}
+
+// Responsive Layout Adjustments
+@media (max-width: 770px) {
+  // .player {
+  //   flex-direction: column;
+  // }
+  .list {
+    padding: 0px 0px !important;
+  }
+
+  .app-video-player {
+    width: 100%;
+  }
+
+  .app-course-list {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+}
+
+
+@media( max-width:1024px) {
+  .btn-close{
+    visibility: hidden;
+  }
 }

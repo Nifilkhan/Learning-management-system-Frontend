@@ -1,5 +1,4 @@
 
-import { expand, map } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -19,6 +18,7 @@ export class CourseDetailsComponent implements OnInit {
   courses!: Course;
   sectionData: section[] = [];
   selectedLecture!:Lecture;
+  isVisible:boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +36,11 @@ export class CourseDetailsComponent implements OnInit {
     } else {
       console.log('courseId is not available');
     }
+  }
+
+  isContentVisible(){
+    console.log('first')
+    this.isVisible = !this.isVisible;
   }
 
   getCourseDetails() {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, Output, ViewChild } from '@angular/core';
 import videojs from 'video.js';
 import Player from "video.js/dist/types/player";
 import { Lecture, section } from '../shared/model/course';
@@ -16,6 +16,7 @@ export class VideoPlayerComponent implements OnChanges,OnDestroy,AfterViewInit {
   @ViewChild('videoElement', { static: false })videoElement!:ElementRef;
   @Input() selectedLecture!:Lecture;
   @Input() lectureData:section [] = []
+  @Input() isFullScreen:boolean = false;
 
   public player!:Player;
 

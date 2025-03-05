@@ -18,7 +18,8 @@ export class HeaderComponent implements AfterViewInit {
   constructor(public loggedUser:AuthService,private router:ActivatedRoute,private routers:Router,private store:Store){}
   userData:{user:UserData} | null = null;
   userId:string | null = null;
-  private searchSubject = new Subject<string>()
+  private searchSubject = new Subject<string>();
+  isMenuOpen = false;
 
   searchQuery: string = '';
   category: string = '';
@@ -38,6 +39,11 @@ export class HeaderComponent implements AfterViewInit {
     this.store.dispatch(loadCourse({search:this.searchQuery,limit:this.limit,category:this.category,offset:this.offset}))
   }
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  
   onQueryChange() {
     if(this.setTimeout) {
       clearTimeout(this.setTimeout)

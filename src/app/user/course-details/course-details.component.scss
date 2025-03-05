@@ -1,7 +1,86 @@
-.main{
-  max-width: 1500px;
- }
+.player {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0;
+  gap: 20px;
+  position: relative;
 
-// .list-sec:first-child{
-//     gap:0px;
-// }
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+}
+
+.app-video-player {
+  width: 100% !important;
+  background: black;
+  // height:77vh;
+
+  @media (min-width: 1024px) {
+    width: 54%;
+  }
+}
+
+.app-course-list {
+  width: 30%;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    // max-width: 400px !important;
+  }
+}
+
+// Full-Screen Mode for Video Player
+.full-width {
+  width: 100%;
+  max-width: 100%;
+  height: 84vh; // Expands fully
+}
+
+// Responsive Layout Adjustments
+@media (max-width: 770px) {
+  // .player {
+  //   flex-direction: column;
+  // }
+
+  .app-video-player {
+    // width: 100%;
+    height: 55vh;
+  }
+
+  .app-course-list {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+}
+.back-button {
+  position: absolute;
+  z-index: 100;
+  top: 165px;
+  right: 5px;
+  background: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #2563eb;
+  transition: transform 0.2sease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+}
+
+
+@media(max-width:550px) {
+    .app-video-player{
+        height: 40vh;
+}
+
+@media(max-width:410px) {
+  .app-video-player{
+      height: 40vh;
+  }
+}
+}
+

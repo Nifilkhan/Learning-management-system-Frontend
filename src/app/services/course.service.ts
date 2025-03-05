@@ -96,5 +96,9 @@ getLatestCourse():Observable<{latestCourses:Course[]}>{
   return this.http.get<{latestCourses:Course[]}>(`${this.API_URL}${this.courses}/latest-courses`)
 }
 
+getAllCourse():Observable<{courses:Course[]}> {
+  return this.http.get<{courses:Course[]}>(`${this.API_URL}${this.courses}/get-courses`)
+}
+
 
 }
