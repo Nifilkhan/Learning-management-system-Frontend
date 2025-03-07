@@ -28,8 +28,8 @@ export class SignupComponent implements OnInit {
 
   signupVerify() :void {
     this.signupForm = this.fb.group({
-      firstName:['',[Validators.required,Validators.minLength(5)]],
-      lastName:['',[Validators.required,Validators.minLength(5)]],
+      firstName:['',[Validators.required,Validators.minLength(2)]],
+      lastName:['',[Validators.required,Validators.minLength(1)]],
       email:['',[Validators.required,Validators.email]],
       phone:['' , [Validators.required,Validators.pattern('^[0-9]{10}$')]],
       password:['' , [Validators.required,Validators.minLength(6), passwordValidator()]],

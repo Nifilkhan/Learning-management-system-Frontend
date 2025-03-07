@@ -1,110 +1,93 @@
-<div class="background">
-  <div class="container flex flex-row justify-between gap-[40px]">
-    <div class="content">
-      <div class="header"><h2 class="m-0">LMS</h2></div>
-      <div class="flex justify-center flex-col gap-4">
-        <h2 class="m-0"><strong>Login</strong></h2>
-        <span class="text-gray-500 mb-3"
-          >Login to access your travelwise account</span
-        >
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-content">
+      <div class="brand-header">
+        <h1 class="brand-title">LMS</h1>
+        <p class="brand-tagline">Learning Management System</p>
+      </div>
 
-        <h2 *ngIf="errorMessage" class="text-danger">
-          {{errorMessage}}
-        </h2>
-        <form [formGroup]="loginForm" (submit)="onLoginForm()">
-        <div class="flex flex-col gap-2">
-          <div class="custom-input mb-3 col-12">
-            <label for="exampleFormControlInput1" class="form-label"
-              >Email address</label
-            >
+      <h2 class="login-title">Welcome back</h2>
+      <p class="login-subtitle">Login to access your account</p>
+
+      <div class="social-login">
+        <button class="google-auth-btn" (click)="onLogin()">
+          <img src="/images/flat-color-icons_google.jpg" alt="Google" class="social-icon" />
+          <span>Continue with Google</span>
+        </button>
+      </div>
+
+      <div class="divider">
+        <span class="divider-text">or login with email</span>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{errorMessage}}
+      </div>
+
+      <form [formGroup]="loginForm" (submit)="onLoginForm()">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <div class="input-container">
             <input
               type="email"
-              class="form-control"
               formControlName="email"
               id="email"
               placeholder="name@example.com"
             />
-            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger flex flex-col gap-[5px]">
-              <div *ngIf="loginForm.get('email')?.hasError('required')" class="text-danger flex flex-row gap-[5px]">
-                <div>*</div><span>Email is required</span>
-              </div>
-              <div *ngIf="loginForm.get('email')?.hasError('email')" class="text-danger flex flex-row gap-[5px]">
-                <div>*</div> <span>Invalid email format</span>
-              </div>
+          </div>
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="validation-error">
+            <div *ngIf="loginForm.get('email')?.hasError('required')">
+              Email is required
+            </div>
+            <div *ngIf="loginForm.get('email')?.hasError('email')">
+              Invalid email format
             </div>
           </div>
+        </div>
 
-          <div class="custom-input mb-3">
-            <label for="password" class="form-label"
-              >Password</label
-            >
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-container">
             <input
-              type="text"
-              class="form-control"
+              type="password"
               formControlName="password"
               id="password"
               placeholder="Enter your password"
             />
-
-            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger flex flex-col gap-[5px]">
-              <div *ngIf="loginForm.get('password')?.hasError('required')" class="text-danger flex flex-row gap-[5px]">
-                <div>*</div><span>password is required</span>
-              </div>
+          </div>
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="validation-error">
+            <div *ngIf="loginForm.get('password')?.hasError('required')">
+              Password is required
             </div>
           </div>
         </div>
-        <div class="flex flex-row justify-between">
-          <div class="form-check form-check-inline m-0">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="inlineCheckbox3"
-              value="option3"
-            />
-            <label class="form" for="exampleFormControlInput1"
-              >Remember Me
-            </label>
+
+        <div class="form-options">
+          <div class="remember-option">
+            <input type="checkbox" id="remember" />
+            <label for="remember">Remember me</label>
           </div>
-          <div class="forget">
-              <a
-                [routerLink]="'/signup'"
-                style="color: red; font-size: 16px"
-                >Forgot Password
-              </a>
+          <div class="forgot-password">
+            <a [routerLink]="'/signup'">Forgot Password?</a>
           </div>
         </div>
-        <button class="btn btn-primary p-2 mt-4" type="submit" [disabled]="loginForm.invalid">Login</button>
+
+        <button class="login-btn" type="submit" [disabled]="loginForm.invalid">
+          Log in
+        </button>
+
+        <p class="signup-option">
+          Don't have an account? <a [routerLink]="'/signup'">Sign up</a>
+        </p>
       </form>
-        <span class="text-center forget"
-          >Don’t have an account?
-          <a [routerLink]="'/signup'" style="color: red; font-size: 16px"
-            >Sign up
-          </a></span
-        >
-      </div>
-      <div class="w-100 text-center flex align-center justify-center" aria-disabled="true">
-        <span class="otherOption">Or Login with</span>
-      </div>
-      <div class="row justify-around">
-        <div class="col-3 icons text-center" style="color: blue">
-          <i class="fa-brands fa-facebook"></i>
-        </div>
-        <div class="col-3 icons text-center cursor-pointer" (click)="onLogin()">
-          <img src="/images/flat-color-icons_google.jpg" alt="Gooole" />
-        </div>
-        <div class="col-3 icons text-center">
-          <i class="fa-brands fa-apple"></i>
-        </div>
-      </div>
     </div>
 
-
-    <div class="img flex">
-      <img src="/images/student.jpg" alt="Image" class="object-cover rounded-[20px]"/>
+    <div class="login-image">
+      <img src="/images/student.jpg" alt="Student" />
     </div>
   </div>
 </div>
 
 <div class="overlay" *ngIf="isLoading">
-<app-overlay></app-overlay>
+  <app-overlay></app-overlay>
 </div>

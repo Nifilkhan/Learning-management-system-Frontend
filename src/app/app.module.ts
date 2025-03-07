@@ -5,6 +5,8 @@ import {
   BrowserModule,
   provideClientHydration,
 } from '@angular/platform-browser';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,7 +58,7 @@ import { errorHandlingInterceptor } from './error-handler/interceptor/error-hand
     StoreModule.forRoot({},{}),
     EffectsModule.forRoot([]),
     OverlayComponent,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
     AuthService,

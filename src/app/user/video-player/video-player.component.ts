@@ -13,12 +13,14 @@ import { threadId } from 'worker_threads';
 })
 export class VideoPlayerComponent implements OnChanges,OnDestroy,AfterViewInit {
 
+
   @ViewChild('videoElement', { static: false })videoElement!:ElementRef;
   @Input() selectedLecture!:Lecture;
   @Input() lectureData:section [] = []
   @Input() isFullScreen:boolean = false;
 
   public player!:Player;
+  isLoading:boolean = true;
 
   ngOnChanges(): void {
     console.log('its in ngonchangees ',this.selectedLecture)
@@ -48,6 +50,10 @@ export class VideoPlayerComponent implements OnChanges,OnDestroy,AfterViewInit {
     if(this.selectedLecture && this.selectedLecture?.contentType === 'video'){
       this.initVideoPlayer();
     }
+
+    setTimeout(() => {
+      this.isLoading = false;
+    },4000)
   }
 
   initVideoPlayer(): void {

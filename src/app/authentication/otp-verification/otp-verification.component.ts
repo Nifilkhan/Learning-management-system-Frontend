@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Otp } from '../shared/models/authentication.user.ts';
 import { response } from 'express';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-otp-verification',
@@ -17,7 +18,11 @@ export class OtpVerificationComponent implements OnInit {
   constructor(private otpService:AuthService,private router:Router,private fb:FormBuilder,private snackBar:MatSnackBar) {}
 
   otpForm!:FormGroup;
-
+  isLoading = false;
+  resendLoading = false;
+  showResendTimer = false;
+  resendTimer = 60;
+  private timersubscription!:Subscription
 
 
 ngOnInit(): void {
@@ -30,15 +35,21 @@ otpValidation():void {
   })
 }
 
+resendOtp() {
+
+}
+
 
 otpVerficiation() {
   if(this.otpForm.invalid) {
     return;
   }
+  this.isLoading = true;
 const otpPayload = {otp:this.otpForm.value.otp};
 
 this.otpService.otpVerification(otpPayload).subscribe({
   next:(response) => {
+    this.isLoading = false;
     if(response.message === 'OTP verified successfully'){
       console.log(response);
       this.snackBar.open('User registered succesfully', 'Close', {
@@ -51,8 +62,9 @@ this.otpService.otpVerification(otpPayload).subscribe({
     } else {
       console.log('Otp is expired')
     }
-  } ,error(err) {
-      (console.log(err))
+  } ,error:(err) => {
+    this.isLoading = false;
+    console.log(err)
   },
 })
 

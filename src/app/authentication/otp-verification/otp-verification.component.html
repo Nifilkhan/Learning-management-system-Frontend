@@ -1,61 +1,87 @@
+<!-- HTML Template -->
 <div class="background">
-  <div class="container flex flex-colum justify-between">
-    <div class="content">
-      <div class="header"><h2 class="m-0">LMS</h2></div>
-      <div>
-        <a [routerLink]="'/signin'" class="signinBack"
-          ><i class="fa-solid fa-angle-left"></i>Back to login</a
-        >
-      </div>
-      <div class="flex justify-center flex-col gap-4">
-        <h2 class="m-0"><strong>Verify Otp</strong></h2>
-        <span class="text-gray-500 mb-3"
-          >An authentication code has been sent to your email</span
-        >
-        <form [formGroup]="otpForm" (ngSubmit)="otpVerficiation()">
-        <div class="flex flex-col gap-2">
-          <div class="custom-input mb-3 col-12">
-            <label for="exampleFormControlInput1" class="form-label"
-              >Enter Code</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="otp"
-              id="otp"
-            />
-            <div
-                *ngIf="otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched"
-                class="text-danger"
-              >
-                <div *ngIf="otpForm.get('otp')?.hasError('required')">
+  <div class="container">
+    <div class="row h-100">
+      <div class="col-md-6 content-section">
+        <div class="header">
+          <h2 class="brand-logo">LMS</h2>
+        </div>
+
+        <div class="back-link">
+          <a [routerLink]="'/signin'" class="back-to-login">
+            <i class="fa-solid fa-arrow-left"></i> Back to login
+          </a>
+        </div>
+
+        <div class="verification-container">
+          <h2 class="verification-title">Verify Your Account</h2>
+          <p class="verification-subtitle">An authentication code has been sent to your email</p>
+
+          <form [formGroup]="otpForm" (ngSubmit)="otpVerficiation()">
+            <div class="otp-input-container">
+              <div class="floating-input">
+                <input
+                  type="text"
+                  id="otp"
+                  class="form-control"
+                  formControlName="otp"
+                  placeholder=" "
+                  maxlength="6"
+                  autocomplete="one-time-code"
+                />
+                <label for="otp">Enter 6-digit Code</label>
+              </div>
+
+              <div class="error-messages" *ngIf="otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched">
+                <div class="error-message" *ngIf="otpForm.get('otp')?.hasError('required')">
                   OTP is required.
                 </div>
-                <div *ngIf="otpForm.get('otp')?.hasError('minlength')">
+                <div class="error-message" *ngIf="otpForm.get('otp')?.hasError('minlength')">
                   OTP must be 6 digits long.
                 </div>
-                <div *ngIf="otpForm.get('otp')?.hasError('maxlength')">
+                <div class="error-message" *ngIf="otpForm.get('otp')?.hasError('maxlength')">
                   OTP must not exceed 6 digits.
                 </div>
               </div>
-          </div>
-        </div>
-        <button class="btn verifyBtn btn-primary p-2" type="submit" [disabled]="otpForm.invalid">Verify</button>
-      </form>
-          <div>
-            <span
-              >Didn’t receive a code?<a
-                [routerLink]="'/signup'"
-                style="color: red; font-size: 16px"
-                >Resend
-              </a></span
+            </div>
+
+            <button
+              type="submit"
+              class="btn-verify"
+              [disabled]="otpForm.invalid || isLoading"
+              [class.loading]="isLoading"
             >
+              <span *ngIf="!isLoading">Verify</span>
+              <div class="spinner" *ngIf="isLoading">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+              </div>
+            </button>
+          </form>
+
+          <div class="resend-container">
+            <span class="resend-text">
+              Didn't receive a code?
+              <button class="btn-resend" (click)="resendOtp()" [disabled]="resendLoading">
+                <span *ngIf="!resendLoading">Resend</span>
+                <div class="spinner spinner-sm" *ngIf="resendLoading">
+                  <div class="bounce1"></div>
+                  <div class="bounce2"></div>
+                  <div class="bounce3"></div>
+                </div>
+              </button>
+            </span>
+            <div *ngIf="showResendTimer" class="resend-timer">
+              Resend available in {{resendTimer}} seconds
+            </div>
           </div>
         </div>
+      </div>
 
+      <div class="col-md-6 image-section">
+        <img src="/images/login.jpg" alt="Secure authentication illustration" class="auth-image" />
+      </div>
     </div>
-
-    <div class="img flex">
-      <img src="/images/login.jpg" alt="Image" />
-    </div>
+  </div>
 </div>

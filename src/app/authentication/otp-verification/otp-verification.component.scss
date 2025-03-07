@@ -1,125 +1,314 @@
-.background{
-  background-color: #DFDCDC;
-  width: 100%;
-  height: 100vh;
+/* Improved OTP Page Styles */
+
+/* Global Styles */
+.background {
+  background-color: #f8f9fa;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
- }
+  padding: 20px;
+}
 
- .container{
-  background-color: #FFFF;
-  width: 950px;
-  height: 830px;
-  border-radius: 30px;
-  padding: 15px 35px;
- }
-
- .img {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  max-height: 100%;
-  align-items: center;
-  height: 100%;
- }
-
- .verifyBtn {
+.container {
+  background-color: #ffffff;
   width: 100%;
-  max-width: 100%;
- }
- .img img{
-  // margin: 20px 40px;
-  max-width: 100%;
-  width: 450px;
-  height: 650px;
- }
+  max-width: 1100px;
+  min-height: 600px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
 
- .content {
+.row {
+  margin: 0;
+}
+
+/* Content Section Styles */
+.content-section {
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  gap: 35px;
-  margin-top: 35px;
- }
-
-/* Container for input and label */
-.custom-input {
-  position: relative;
-  margin-bottom: 1.5rem;
 }
 
-/* Style for the label on top */
-.custom-input .form-label {
-  position: absolute;
-  top: -10px; /* Move label above the input */
-  left: 10px; /* Adjust left position inside the border */
-  background-color: white; /* White background to cover the input's border */
-  padding: 0 5px; /* Padding around the label to match the input's spacing */
-  font-size: 0.875rem; /* Adjust font size for the label */
-  color: #495057; /* Color of the label */
-  z-index: 1; /* Ensure label stays above input */
+.header {
+  margin-bottom: 30px;
 }
 
-/* Style for the input box */
-.custom-input .form-control {
-  padding: 1rem; /* Space for text inside */
-  border: 1px solid #ccc; /* Border color */
-  border-radius: 5px; /* Rounded corners */
-}
-
-/* Input focus state */
-.custom-input .form-control:focus {
-  border-color: #ec3427; /* Green border color on focus */
-  box-shadow: none; /* Remove the default focus shadow */
-}
-
-
-.container:last-child {
-  flex:unset
-}
-
-.otherOption::after{
-  content: '';
-  width: 230px;
-  height: 1px;
-  background-color: rgb(187, 186, 186);
-  display: flex;
-
-}
-.otherOption::before{
-  content: '';
-  width: 230px;
-  height: 1px;
-  background-color: rgb(187, 186, 186);
-  display: flex;
-}
-.otherOption{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: rgb(187, 186, 186);
-  font-size: 14px;
+.brand-logo {
   font-weight: 700;
+  color: #333;
+  margin: 0;
+  font-size: 28px;
 }
 
-.icons{
-  padding: 15px 10px;
-  display: flex;
+.back-to-login {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
- font-size: 26px;
-  border: 1px solid rgb(13, 13, 240);
-  border-radius: 10px;
-  width: 180px;
-
-}
-.icons img{
-  width: 30px;
-  height: 30px;
-}
-
-.signinBack {
+  color: #555;
   text-decoration: none;
-  color: black;
+  font-size: 14px;
+  transition: color 0.2s;
+  margin-bottom: 40px;
 }
 
+.back-to-login:hover {
+  color: #ec3427;
+}
+
+.back-to-login i {
+  margin-right: 8px;
+  font-size: 12px;
+}
+
+.verification-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.verification-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.verification-subtitle {
+  color: #6c757d;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+/* OTP Input Styles */
+.otp-input-container {
+  margin-bottom: 25px;
+}
+
+.floating-input {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.floating-input input {
+  height: 56px;
+  padding: 12px 16px;
+  width: 100%;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s;
+  background-color: #ffffff;
+}
+
+.floating-input input:focus {
+  border-color: #ec3427;
+  box-shadow: 0 0 0 4px rgba(236, 52, 39, 0.1);
+  outline: none;
+}
+
+.floating-input label {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  transition: all 0.3s;
+  pointer-events: none;
+  color: #6c757d;
+  font-size: 15px;
+}
+
+.floating-input input:focus ~ label,
+.floating-input input:not(:placeholder-shown) ~ label {
+  top: 0;
+  left: 12px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  background-color: white;
+  padding: 0 5px;
+  color: #ec3427;
+}
+
+.error-messages {
+  margin-top: 8px;
+}
+
+.error-message {
+  color: #ec3427;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Button Styles */
+.btn-verify {
+  width: 100%;
+  height: 52px;
+  background-color: #ec3427;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-verify:hover:not(:disabled) {
+  background-color: #d12d22;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(236, 52, 39, 0.2);
+}
+
+.btn-verify:disabled {
+  background-color: #f5ada7;
+  cursor: not-allowed;
+}
+
+.btn-verify.loading {
+  background-color: #d12d22;
+}
+
+/* Resend Container */
+.resend-container {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.resend-text {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.btn-resend {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #ec3427;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.btn-resend:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.btn-resend:disabled {
+  color: #999;
+  cursor: not-allowed;
+}
+
+.resend-timer {
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: 5px;
+}
+
+/* Spinner animation */
+.spinner {
+  display: inline-flex;
+  align-items: center;
+}
+
+.spinner > div {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 100%;
+  display: inline-block;
+  animation: bounce 1.4s infinite ease-in-out both;
+  margin: 0 2px;
+}
+
+.spinner-sm > div {
+  width: 6px;
+  height: 6px;
+  background-color: #ec3427;
+}
+
+.spinner .bounce1 {
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  } 40% {
+    transform: scale(1.0);
+  }
+}
+
+/* Image Section Styles */
+.image-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  height: 100%;
+  background-color: #f8f9fa;
+}
+
+.auth-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .image-section {
+    display: none;
+  }
+
+  .content-section {
+    padding: 30px 20px;
+  }
+
+  .container {
+    min-height: auto;
+  }
+}
+
+
+.spinner {
+  display: inline-flex;
+  align-items: center;
+}
+
+.spinner > div {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 100%;
+  display: inline-block;
+  animation: bounce 1.4s infinite ease-in-out both;
+  margin: 0 2px;
+}
+
+.spinner .bounce1 {
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  } 40% {
+    transform: scale(1.0);
+  }
+}

@@ -1,167 +1,163 @@
-<div class="background">
-  <div class="container flex flex-row justify-between">
-    <div class="img flex">
-      <img src="/images/Rectangle 77.jpg" alt="Image" class="object-cover rounded-[20px]" />
+<div class="signup-container">
+  <div class="signup-card">
+    <div class="signup-image">
+      <img src="/images/Rectangle 77.jpg" alt="Student" />
     </div>
 
-    <div class="content">
-      <div class="header"><h2 class="m-0">LMS</h2></div>
-      <div class="flex justify-center flex-col gap-3">
-        <h2 class="m-0"><strong>Sign Up</strong></h2>
-        <span class="text-gray-500 mb-3"
-          >Let's get you all st up so you can access your personal
-          account.</span
-        >
-        <form [formGroup]="signupForm" (submit)="onSubmit()">
-        <div class="flex flex-col gap-[3px] mb-[5px]">
-          <div class="row flex flex-row">
-            <div class="col-6">
-              <div class="custom-input">
-                <label for="exampleFormControlInput1" class="form-label"
-                  >First Name</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="firstName"
-                  id="firstName"
-                  placeholder="Enter Name"
-                />
-                <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched" class="text-danger">
-                  <div *ngIf="signupForm.get('firstName')?.hasError('required')" class="text-sm">First Name is required.</div>
-                  <div *ngIf="signupForm.get('firstName')?.hasError('minlength')" class="text-sm">First Name must be at least 5 characters long.</div>
-                </div>
-              </div>
+    <div class="signup-content">
+      <div class="brand-header">
+        <h1 class="brand-title">LMS</h1>
+        <p class="brand-tagline">Learning Management System</p>
+      </div>
+
+      <h2 class="signup-title">Create account</h2>
+      <p class="signup-subtitle">Let's get you all set up so you can access your personal account.</p>
+
+      <div class="social-signup">
+        <button class="google-auth-btn" (click)="onLogin()">
+          <img src="/images/flat-color-icons_google.jpg" alt="Google" class="social-icon" />
+          <span>Sign up with Google</span>
+        </button>
+      </div>
+
+      <div class="divider">
+        <span class="divider-text">or sign up with email</span>
+      </div>
+
+      <form [formGroup]="signupForm" (submit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="firstName">First Name</label>
+            <div class="input-container">
+              <input
+                type="text"
+                formControlName="firstName"
+                id="firstName"
+                placeholder="Enter first name"
+              />
             </div>
-            <div class="col-6">
-              <div class="custom-input">
-                <label for="exampleFormControlInput1" class="form-label"
-                  >Last Name</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="lastName"
-                  id="lastName"
-                  placeholder="Enter Name"
-                />
-                <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched" class="text-danger">
-                  <div *ngIf="signupForm.get('lastName')?.hasError('required')" class="text-sm">Last Name is required.</div>
-                </div>
+            <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched" class="validation-error">
+              <div *ngIf="signupForm.get('firstName')?.hasError('required')">
+                First Name is required
+              </div>
+              <div *ngIf="signupForm.get('firstName')?.hasError('minlength')">
+                First Name must be at least 2 characters
               </div>
             </div>
           </div>
-          <div class="row flex flex-row justify-between">
-            <div class="col-6">
-              <div class="custom-input">
-                <label for="exampleFormControlInput1" class="form-label"
-                  >Email address</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  formControlName="email"
-                  id="email"
-                  placeholder="name@example.com"
-                />
-                <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-danger">
-                  <div *ngIf="signupForm.get('email')?.hasError('required')" class="text-sm">Email is required.</div>
-                  <div *ngIf="signupForm.get('email')?.hasError('email')" class="text-sm">Please enter a valid email address.</div>
-                </div>
-              </div>
+
+          <div class="form-group half-width">
+            <label for="lastName">Last Name</label>
+            <div class="input-container">
+              <input
+                type="text"
+                formControlName="lastName"
+                id="lastName"
+                placeholder="Enter last name"
+              />
             </div>
-            <div class="col-6">
-              <div class="custom-input">
-                <label for="exampleFormControlInput1" class="form-label"
-                  >Phone Number</label
-                >
-                <input
-                  type="string"
-                  formControlName="phone"
-                  class="form-control"
-                  id="phone"
-                  placeholder="Enter phone number"
-                />
-                <div *ngIf="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched" class="text-danger">
-                  <div *ngIf="signupForm.get('phone')?.hasError('required')" class="text-sm">Phone Number is required.</div>
-                  <div *ngIf="signupForm.get('phone')?.hasError('pattern')" class="text-sm">Phone Number must be 10 digits long.</div>
-                </div>
+            <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched" class="validation-error">
+              <div *ngIf="signupForm.get('lastName')?.hasError('required')">
+                Last Name is required
               </div>
             </div>
           </div>
-          <div class="custom-input mb-3 col-12">
-            <label for="exampleFormControlInput1" class="form-label"
-              >Password</label
-            >
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="email">Email address</label>
+            <div class="input-container">
+              <input
+                type="email"
+                formControlName="email"
+                id="email"
+                placeholder="name@example.com"
+              />
+            </div>
+            <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="validation-error">
+              <div *ngIf="signupForm.get('email')?.hasError('required')">
+                Email is required
+              </div>
+              <div *ngIf="signupForm.get('email')?.hasError('email')">
+                Please enter a valid email address
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group half-width">
+            <label for="phone">Phone Number</label>
+            <div class="input-container">
+              <input
+                type="tel"
+                formControlName="phone"
+                id="phone"
+                placeholder="Enter phone number"
+              />
+            </div>
+            <div *ngIf="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched" class="validation-error">
+              <div *ngIf="signupForm.get('phone')?.hasError('required')">
+                Phone Number is required
+              </div>
+              <div *ngIf="signupForm.get('phone')?.hasError('pattern')">
+                Phone Number must be 10 digits long
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-container">
             <input
               type="password"
               formControlName="password"
-              class="form-control"
               id="password"
               placeholder="Enter a strong password"
             />
-            <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-danger flex flex-column gap-[5px]">
-              <div *ngIf="signupForm.get('password')?.hasError('required')" class="text-danger flex flex-row gap-[5px]">
-                <div>*</div> <span> Password required.</span>
-              </div>
-              <div *ngIf="signupForm.get('password')?.hasError('minlength')" class="text-danger flex flex-row gap-[5px]">
-                <div>*</div> <span> Password must be 6 characters long.</span>
-              </div>
-              <div *ngIf="signupForm.get('password')?.hasError('missingUppercase')" class="text-danger flex flex-row gap-[5px]">
-                <div>*</div> <span>Password must contain at least one uppercase letter</span>
-              </div>
-              <div *ngIf="signupForm.get('password')?.hasError('missingLowercase')" class="text-danger flex flex-row gap-[5px]">
-                <div>*</div> <span>Password must contain at least one lowercase letter</span>
-              </div>
-              <div *ngIf="signupForm.get('password')?.hasError('missingNumber')" class="text-danger flex flex-row gap-[5px]">
-                <div>*</div> <span>Password must contain at least one number</span>
-              </div>
+          </div>
+          <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="validation-error">
+            <div *ngIf="signupForm.get('password')?.hasError('required')">
+              Password is required
+            </div>
+            <div *ngIf="signupForm.get('password')?.hasError('minlength')">
+              Password must be at least 6 characters long
+            </div>
+            <div *ngIf="signupForm.get('password')?.hasError('missingUppercase')">
+              Include at least one uppercase letter
+            </div>
+            <div *ngIf="signupForm.get('password')?.hasError('missingLowercase')">
+              Include at least one lowercase letter
+            </div>
+            <div *ngIf="signupForm.get('password')?.hasError('missingNumber')">
+              Include at least one number
             </div>
           </div>
-          <div class="custom-input mb-3">
-            <label for="exampleFormControlInput1" class="form-label"
-              >Confirm Password</label
-            >
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="input-container">
             <input
               type="password"
               formControlName="confirmPassword"
-              class="form-control"
-              id="ConfirmPassword"
-              placeholder="Confirm the password"
+              id="confirmPassword"
+              placeholder="Confirm your password"
             />
-            <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched" class="text-danger flex flex-column gap-[5px]">
-              <div *ngIf="signupForm.get('confirmPassword')?.hasError('required')" class="text-danger flex flex-row gap-[5px]">
-                <div>*</div> <span> Password required.</span>
-              </div>
+          </div>
+          <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched" class="validation-error">
+            <div *ngIf="signupForm.get('confirmPassword')?.hasError('required')">
+              Please confirm your password
             </div>
           </div>
         </div>
 
-        <button type=submit class="btn btn-primary p-2">Create Account</button>
+        <button type="submit" class="signup-btn">Create Account</button>
+
+        <p class="login-option">
+          Already have an account? <a [routerLink]="'/signin'">Login</a>
+        </p>
       </form>
-        <span class="text-center forget"
-          >Already have an account?
-          <a [routerLink]="'/signin'"
-            >Login</a
-          ></span
-        >
-      </div>
-      <div class="w-100 text-center flex align-center justify-center">
-        <span class="otherOption">Or Sign up with</span>
-      </div>
-      <div class="row justify-around">
-        <div class="col-3 icons text-center" style="color: blue">
-          <i class="fa-brands fa-facebook"></i>
-        </div>
-        <div class="col-3 icons text-center" (click)="onLogin()">
-          <img src="/images/flat-color-icons_google.jpg" alt="Gooole" />
-        </div>
-        <div class="col-3 icons text-center">
-          <i class="fa-brands fa-apple"></i>
-        </div>
-      </div>
     </div>
   </div>
 </div>
-
-

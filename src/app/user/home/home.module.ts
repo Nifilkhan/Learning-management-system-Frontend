@@ -20,6 +20,7 @@ import { LearningComponent } from '../learning/learning.component';
 import { FormsModule } from '@angular/forms';
 import { OverlayComponent } from '../../shared/overlay/overlay.component';
 import { CategoryBannerComponent } from '../category-banner/category-banner.component';
+import { SkeletonComponent } from '../../shared/skeleton/skeleton.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CategoryBannerComponent } from '../category-banner/category-banner.comp
     VideoPlayerComponent,
     AddCartComponent,
     LearningComponent,
-    CategoryBannerComponent
+    CategoryBannerComponent,
+
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,7 @@ import { CategoryBannerComponent } from '../category-banner/category-banner.comp
     OverlayComponent,
     MatButtonModule,
     MatPaginatorModule,
+    SkeletonComponent
   ]
 })
 export class HomeModule { }
