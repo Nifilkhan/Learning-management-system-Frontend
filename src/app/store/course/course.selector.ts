@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector, State } from "@ngrx/store";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { CourseState } from "./course.state";
 
 
@@ -12,6 +12,10 @@ export const selectAllCourses = createSelector(
 export const selectCourseLoadingState = createSelector(
   selectCourseState,
   (state) => state.loading
+)
+export const selectPurchasedCourse = createSelector(
+  selectCourseState,
+  (state) => state.puchasedCourses
 )
 
 export const selectCourseErrorState = createSelector(

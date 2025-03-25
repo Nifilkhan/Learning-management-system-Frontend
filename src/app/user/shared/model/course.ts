@@ -13,6 +13,7 @@ createdAt?: string|number|Date;
   status: 'draft' | 'published';
   section: string[];
   thumbnail:string;
+  isPurchased?:boolean;
 }
 
 

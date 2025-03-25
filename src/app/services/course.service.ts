@@ -39,11 +39,16 @@ getCourses(search?:string,category?:string,limit:number = 3 ,offset:number = 0,s
       if(sortOrder){
         params = params.set('sortOrder',sortOrder)
       }
-  return this.http.get<{courses:Course[]; totalCourses: number; currentPage: number; totalPages: number;}>(`${this.API_URL}${this.course}all-courses`,{params})
+
+      const options = {
+        params,
+        withCredentials:true
+      }
+  return this.http.get<{courses:Course[]; totalCourses: number; currentPage: number; totalPages: number;}>(`${this.API_URL}${this.course}all-courses`, options)
 }
 
 getTotalCount(){
-  return this.http.get<{totalCourses:number}>(`${this.API_URL}${this.course}all-courses`)
+  return this.http.get<{totalCourses:number}>(`${this.API_URL}${this.course}get-courses`)
 }
 
 getCourseById(courseId:string):Observable<{course:Course}>{
@@ -96,9 +101,13 @@ getLatestCourse():Observable<{latestCourses:Course[]}>{
   return this.http.get<{latestCourses:Course[]}>(`${this.API_URL}${this.courses}/latest-courses`)
 }
 
-getAllCourse():Observable<{courses:Course[]}> {
-  return this.http.get<{courses:Course[]}>(`${this.API_URL}${this.courses}/get-courses`)
+getAllCourse():Observable<{courses:Course[]; totalCount:number}> {
+  return this.http.get<{courses:Course[];totalCount:number}>(`${this.API_URL}${this.courses}/get-courses`)
 }
 
+
+getPurcahsedCourses():Observable<{purchased:Course[]}> {
+  return this.http.get<{purchased:Course[]}>(`${this.API_URL}${this.courses}/puchased-courses`, {withCredentials:true})
+}
 
 }

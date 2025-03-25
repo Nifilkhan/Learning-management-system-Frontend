@@ -16,10 +16,10 @@ export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
         errorMessage = `Client Error: ${error.error.message}`;
       } else {
         switch (error.status) {
-          case 401:
-            errorMessage = 'Session expired. Please log in again.';
-            errorCode = 401;
-            break;
+          case 400:
+              errorMessage = 'Email or password is not correct'
+              errorCode = 401;
+            return throwError(() => new Error(error.error.message || 'Invalid credentials')); // ✅ Pass backend error message
           case 404:
             errorMessage = 'Resource not found.';
             errorCode = 404;

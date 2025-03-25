@@ -110,11 +110,14 @@
           <label for="password">Password</label>
           <div class="input-container">
             <input
-              type="password"
+              [type]="password ? 'text' : 'password'"
               formControlName="password"
               id="password"
               placeholder="Enter a strong password"
             />
+            <button type="button" class="toggle-password" (click)="showPassword('password')">
+              <i class="fa-regular" [ngClass]="password ? 'fa-eye' : 'fa-eye-slash'"></i>
+            </button>
           </div>
           <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="validation-error">
             <div *ngIf="signupForm.get('password')?.hasError('required')">
@@ -139,18 +142,28 @@
           <label for="confirmPassword">Confirm Password</label>
           <div class="input-container">
             <input
-              type="password"
+              [type]="confirmPassword ? 'text' : 'password'"
               formControlName="confirmPassword"
               id="confirmPassword"
               placeholder="Confirm your password"
             />
+            <button type="button" class="toggle-password" (click)="showPassword('confirmPassword')">
+              <i class="fa-regular" [ngClass]="confirmPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+            </button>
           </div>
           <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched" class="validation-error">
             <div *ngIf="signupForm.get('confirmPassword')?.hasError('required')">
               Please confirm your password
             </div>
+            <div *ngIf="signupForm.get('confirmPassword')?.hasError('mismatch')">
+              Passwords do not match
+            </div>
           </div>
         </div>
+
+        <h5 *ngIf="errorMessage" class="error-message">
+          {{errorMessage}}
+        </h5>
 
         <button type="submit" class="signup-btn">Create Account</button>
 

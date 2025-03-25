@@ -1,25 +1,33 @@
 <div class="mx-auto my-2 flex flex-col gap-6 md:gap-12 px-4 list">
-  <ul *ngIf="!isVisible" class="course-list">
-    <li class="py-4 px-2 font-semibold content cursor-pointer" (click)="toggleContent.emit()">
-      Course Content <mat-icon class="btn-close">close</mat-icon>
-    </li>
 
-    <li *ngFor="let section of sectionData">
-      <button
-        class="flex items-center justify-between w-full py-4 px-2 text-lg font-medium text-gray-800 bg-gray-100 rounded-lg hover:bg-gray-200"
-        (click)="toggleExpandSection(section)">
-        <span>{{ section.title }}</span>
-        <span [class.rotate-180]="section.expand">▼</span>
-      </button>
+  <ng-container *ngIf="isLoading ; else content">
+    <app-skeleton type="list"></app-skeleton>
+  </ng-container>
 
-      <div *ngIf="section.expand" class="p-4 bg-gray-50">
-        <div *ngFor="let lecture of section.lecture" class="flex justify-between items-center">
-          <button class="lecture-button" (click)="selectedLecture(lecture)" [class.locked]="lecture.locked">
-            {{ lecture.title }}
-          </button>
-          <span *ngIf="lecture.locked" class="lock-icon"><i class="fa-solid fa-lock"></i></span>
+  <ng-template #content>
+    <ul *ngIf="!isVisible" class="course-list">
+      <li class="py-4 px-2 font-semibold content cursor-pointer" (click)="toggleContent.emit()">
+        Course Content <mat-icon class="btn-close">close</mat-icon>
+      </li>
+
+      <li *ngFor="let section of sectionData">
+        <button
+          class="flex items-center justify-between w-full py-4 px-2 text-lg font-medium text-gray-800 bg-gray-100 rounded-lg hover:bg-gray-200"
+          (click)="toggleExpandSection(section)">
+          <span>{{ section.title }}</span>
+          <span [class.rotate-180]="section.expand">▼</span>
+        </button>
+
+        <div *ngIf="section.expand" class="p-4 bg-gray-50">
+          <div *ngFor="let lecture of section.lecture" class="flex justify-between items-center">
+            <button class="lecture-button" (click)="selectedLecture(lecture)" [class.locked]="lecture.locked">
+              {{ lecture.title }}
+            </button>
+            <span *ngIf="lecture.locked" class="lock-icon"><i class="fa-solid fa-lock"></i></span>
+          </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </ng-template>
+
 </div>

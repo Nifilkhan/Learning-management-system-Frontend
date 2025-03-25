@@ -4,4 +4,5 @@ export interface UserData {
   lastName: string;
   email: string;
   profileImage?: string;
+  totalCoursesPurchased: number;
 }

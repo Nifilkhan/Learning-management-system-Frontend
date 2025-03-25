@@ -1,0 +1,16 @@
+<div class="payment-container">
+  <div *ngIf="isProcessing" class="icon-container processing">
+    <mat-icon class="spin">autorenew</mat-icon>
+    <p>Processing Payment...</p>
+  </div>
+
+  <div *ngIf="!isProcessing && isSuccess" class="icon-container success">
+    <mat-icon class="bounce">check_circle</mat-icon>
+    <p>Payment Successful! Redirecting...</p>
+  </div>
+
+  <div *ngIf="!isProcessing && isSuccess === false" class="icon-container failure">
+    <mat-icon class="shake">cancel</mat-icon>
+    <p>Payment Failed! Redirecting...</p>
+  </div>
+</div>

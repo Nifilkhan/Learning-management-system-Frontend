@@ -11,7 +11,7 @@
 
       <div class="social-login">
         <button class="google-auth-btn" (click)="onLogin()">
-          <img src="/images/flat-color-icons_google.jpg" alt="Google" class="social-icon" />
+          <img src="/images/flat-color-icons_google.jpg" alt="Google" class="social-icon" loading="lazy" />
           <span>Continue with Google</span>
         </button>
       </div>
@@ -49,11 +49,14 @@
           <label for="password">Password</label>
           <div class="input-container">
             <input
-              type="password"
+              [type]="passwordVisible ? 'text' : 'password'"
               formControlName="password"
               id="password"
               placeholder="Enter your password"
             />
+            <button type="button" class="toggle-password" (click)="showPassword('password')">
+              <i class="fa-regular" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+            </button>
           </div>
           <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="validation-error">
             <div *ngIf="loginForm.get('password')?.hasError('required')">

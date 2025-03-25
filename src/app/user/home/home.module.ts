@@ -21,6 +21,8 @@ import { FormsModule } from '@angular/forms';
 import { OverlayComponent } from '../../shared/overlay/overlay.component';
 import { CategoryBannerComponent } from '../category-banner/category-banner.component';
 import { SkeletonComponent } from '../../shared/skeleton/skeleton.component';
+import { CartDialogeComponent } from '../cart-dialoge/cart-dialoge.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,7 @@ import { SkeletonComponent } from '../../shared/skeleton/skeleton.component';
     AddCartComponent,
     LearningComponent,
     CategoryBannerComponent,
-
+    CartDialogeComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +50,8 @@ import { SkeletonComponent } from '../../shared/skeleton/skeleton.component';
     OverlayComponent,
     MatButtonModule,
     MatPaginatorModule,
-    SkeletonComponent
+    SkeletonComponent,
+    MatDialogModule
   ]
 })
 export class HomeModule { }

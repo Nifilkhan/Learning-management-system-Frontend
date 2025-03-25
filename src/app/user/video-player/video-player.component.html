@@ -1,7 +1,11 @@
 <div class="video-container" [ngClass]="{'full-width': isFullScreen}">
-  
-  <video *ngIf="selectedLecture?.contentType === 'video'" #videoElement class="video-js vjs-default-skin" controls></video>
+  <!-- <ng-container *ngIf="isVideoLoading ; else content">
+    <app-skeleton type="video"></app-skeleton>
+  </ng-container> -->
 
+  <!-- <ng-template #content> -->
+    <video *ngIf="selectedLecture?.contentType === 'video'" #videoElement class="video-js vjs-default-skin" controls></video>
+  <!-- </ng-template> -->
   <div *ngIf="selectedLecture?.contentType === 'article'" class="article-container">
     <h1 class="article-title">{{ selectedLecture.title }}</h1>
     <div class="article-content">{{ selectedLecture.articleContent }}</div>

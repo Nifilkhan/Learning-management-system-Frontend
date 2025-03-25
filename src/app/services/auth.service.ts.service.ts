@@ -1,4 +1,4 @@
-import {  Login, LoginResponse, Otp, RegisterUser} from '../authentication/shared/models/authentication.user.ts.js' ;
+import {  Login, LoginResponse, RegisterUser} from '../authentication/shared/models/authentication.user.ts.js' ;
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
@@ -13,29 +13,30 @@ export class AuthService {
   constructor(private http:HttpClient) { }
 
   private GOOGLE_URL = environment.GOOGLE_CALLBACK_URL;
+  private AUTH_URL = environment.COURSE_API
 
   signup(user:RegisterUser):Observable<any> {
-    return this.http.post('http://13.50.118.48:6001/api/auth/signup',user)
+    return this.http.post(`${this.AUTH_URL}auth/signup`,user)
   }
 
   otpVerification(otpPayload:{otp:number}):Observable<any> {
-    return this.http.post('http://13.50.118.48:6001/api/auth/verify-otp',otpPayload)
+    return this.http.post(`${this.AUTH_URL}auth/verify-otp`,otpPayload)
   }
 
   signin(data:Login):Observable<LoginResponse> {
-    return this.http.post<LoginResponse>('http://13.50.118.48:6001/api/auth/signin',data,{withCredentials:true})
+    return this.http.post<LoginResponse>(`${this.AUTH_URL}auth/signin`,data,{withCredentials:true})
   }
 
   logogut():Observable<any> {
-    return this.http.post('http://13.50.118.48:6001/api/auth/logout',{})
+    return this.http.post(`${this.AUTH_URL}auth/logout`,{})
   }
 
   getUsers():Observable<{users:RegisterUser[]}> {
-    return this.http.get<{users:RegisterUser[]}>('http://13.50.118.48:6001/api/auth/get-verified-users')
+    return this.http.get<{users:RegisterUser[]}>(`${this.AUTH_URL}auth/get-verified-users`)
   }
 
   getLoggedInUser():Observable<{user:UserData}>{
-    return this.http.get<{user:UserData}>('http://13.50.118.48:6001/api/auth/user',{ withCredentials: true })
+    return this.http.get<{user:UserData}>(`${this.AUTH_URL}auth/user`,{ withCredentials: true })
 }
 
 googleLogin() {

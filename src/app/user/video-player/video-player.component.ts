@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import videojs from 'video.js';
 import Player from "video.js/dist/types/player";
 import { Lecture, section } from '../shared/model/course';
@@ -17,8 +17,15 @@ export class VideoPlayerComponent implements OnChanges,OnDestroy,AfterViewInit {
   @Input() selectedLecture!:Lecture;
   @Input() lectureData:section [] = []
   @Input() isFullScreen:boolean = false;
+  isVideoLoading:boolean = true;
 
   public player!:Player;
+
+  // ngOnInit(): void {
+  //     setTimeout(() => {
+  //       this.isVideoLoading = false
+  //     },2000)
+  // }
 
   ngOnChanges(): void {
     console.log('its in ngonchangees ',this.selectedLecture)
@@ -31,15 +38,21 @@ export class VideoPlayerComponent implements OnChanges,OnDestroy,AfterViewInit {
     }
 
     if(this.selectedLecture?.contentType === 'video' && this.selectedLecture.videoUrl) {
-      if(this.player) {
-        this.player.src({ type: 'video/mp4', src: this.selectedLecture.videoUrl });
-          console.log('player is not initialised...');
-          this.player.load();
-      } else {
-        setTimeout(() => {
-          this.initVideoPlayer();
-        }, 100);
-      }
+      this.isVideoLoading = true;
+      setTimeout(() => {
+        // if(this.videoElement?.nativeElement) {
+          if(this.player) {
+            this.player.src({ type: 'video/mp4', src: this.selectedLecture.videoUrl });
+              console.log('player is not initialised...');
+              this.player.load();
+          } else {
+              this.initVideoPlayer();
+          }
+          this.isVideoLoading = false;
+        // } else {
+        //     console.error("videoElement is not yet available!");
+        // }
+      },2000)
     }
   }
 
@@ -47,6 +60,7 @@ export class VideoPlayerComponent implements OnChanges,OnDestroy,AfterViewInit {
     console.log('ngAfterViewInit - Checking if player should initialize', this.selectedLecture);
     if(this.selectedLecture && this.selectedLecture?.contentType === 'video'){
       this.initVideoPlayer();
+      console.log('player is not initialised in after view init...');
     }
   }
 

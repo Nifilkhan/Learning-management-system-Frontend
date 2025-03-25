@@ -20,10 +20,10 @@ export class TableComponent implements OnInit {
   }
 
   getCourses() {
-    this.courseService.getCourses().subscribe({
+    this.courseService.getAllCourse().subscribe({
       next:(response) => {
         // console.log('get course rewuest fro table:',response)
-        this.courses = response.courses;
+        this.courses = response.courses.slice(0,5);
       },error:(error) => {
         console.log('error ocured while getting the coure',error)
       }

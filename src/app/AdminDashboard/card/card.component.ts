@@ -42,7 +42,7 @@ export class CardComponent implements OnInit{
 
   totalCourses():void {
     // this.isLoading = true
-    this.courseService.getTotalCount().subscribe({
+    this.courseService.getCourses().subscribe({
       next:(response) => {
         // this.isLoading = false
         console.log(response)

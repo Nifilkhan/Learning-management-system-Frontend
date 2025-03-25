@@ -5,6 +5,7 @@ import { CourseComponent } from '../course/course.component';
 import { HomeComponent } from './home.component';
 import { AddCartComponent } from '../cart/add-cart/add-cart.component';
 import { LearningComponent } from '../learning/learning.component';
+import { PaymentProcessingComponent } from '../payment-processing/payment-processing.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,9 @@ const routes: Routes = [
       },
       {
         path:'my-learning',component:LearningComponent
+      },
+      {
+        path:'payment-verify',component:PaymentProcessingComponent
       }
     ]
   },

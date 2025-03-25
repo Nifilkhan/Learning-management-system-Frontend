@@ -1,15 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Category, Course } from '../shared/model/course';
+import { Category } from '../shared/model/course';
 import { CartService } from '../../services/cart.service';
-import { environment } from '../../../environments/environment.development';
 import { PaymentService } from '../../services/payment.service';
 import { CourseService } from '../../services/course.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { loadCourse, loadCourseSuccess } from '../../store/course/course.action';
+import { loadCourse } from '../../store/course/course.action';
 import { selectAllCourses, selectCourseLoadingState, selectCurrentPage, selectTotalCourses, selectTotalPages } from '../../store/course/course.selector';
 import { PageEvent } from '@angular/material/paginator';
+import { CartDialogeComponent } from '../cart-dialoge/cart-dialoge.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-course',
@@ -17,9 +18,8 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrl: './course.component.scss'
 })
 export class CourseComponent implements OnInit {
-[x: string]: any;
 
-   constructor(private courseService:CourseService, private route:Router, private addCartService:CartService,private routes:ActivatedRoute,private cartService:PaymentService,private store:Store) { }
+   constructor(private courseService:CourseService, private route:Router, private addCartService:CartService,private routes:ActivatedRoute,private cartService:PaymentService,private store:Store,private dialoge:MatDialog) { }
   //  messsage:boolean = false;
   //  courseData:Course [] = [];
   //  userId!:string;
@@ -129,6 +129,10 @@ export class CourseComponent implements OnInit {
   }
 
   addToCart(courseId:string){
+    this.dialoge.open(CartDialogeComponent, {
+      width: '400px',
+      data: { message: 'Your course has been successfully added to the cart!' }
+    });
     this.addCartService.addCart(courseId).subscribe({
       next:(response) => {
         console.log(response)
@@ -139,7 +143,7 @@ export class CourseComponent implements OnInit {
 
   buyCourse(courseId:string) {
     console.log('buyying course id',courseId)
-    this.cartService.createCheckoutSession({courseId}).subscribe({
+    this.cartService.createCheckoutSession({courseIds:[courseId]}).subscribe({
       next:(response) => {
           this.cartService.reditrectToCheckout(response.sessionId)
       },error:(err) => {

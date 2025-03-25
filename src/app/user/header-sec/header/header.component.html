@@ -37,9 +37,11 @@
     </div>
 
     <!-- User Profile -->
-    <div class="relative hidden lg:flex items-center space-x-4">
+    <div class="relative hidden lg:block items-center space-x-4 w-10 h-[45px] top-1.5">
       <button *ngIf="userData?.user" mat-icon-button [matMenuTriggerFor]="menu">
-        <app-user-profile [userData]="userData?.user!"></app-user-profile>
+        <div class="w-[35px] h-[35px]">
+          <app-user-profile [userData]="userData?.user!"></app-user-profile>
+        </div>
       </button>
 
       <mat-menu #menu="matMenu">
@@ -55,8 +57,8 @@
           <span>Logout</span>
         </button>
         <button mat-menu-item (click)="onForgetPassword()">
-          <mat-icon>notifications_off</mat-icon>
-          <span>Disable alerts</span>
+          <mat-icon></mat-icon>
+          <span>Forget password</span>
         </button>
       </mat-menu>
     </div>
@@ -65,7 +67,7 @@
   <!-- Mobile Menu -->
   <div *ngIf="isMenuOpen" class="lg:hidden bg-white py-4 px-4 shadow-md">
     <div class="flex justify-between">
-    <div class="lg:flex items-center space-x-6 w-full justify-center">
+    <div class=" space-x-6 w-full justify-center">
       <!-- Search Bar -->
       <div class="relative w-[80%] sm:w-[full] md:w-[full] lg:w-[full]">
         <input

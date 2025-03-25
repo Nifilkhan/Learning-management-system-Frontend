@@ -1,0 +1,57 @@
+.dialog-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+}
+
+.success-icon {
+  font-size: 60px;
+  color: #4CAF50; // Green success color
+  height: 55px !important;
+  width: 60px !important;
+
+}
+
+.dialog-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.dialog-message {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #555;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.close-btn {
+  color: #555;
+}
+
+.view-cart-btn {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: 500;
+  width: 95px;
+  height: 35px;
+  border-radius: 10px;
+}
+
+.continue-shopping{
+  background: #f84f4f;
+  color: #FFF;
+  font-weight: 500;
+  width: 170px;
+  height: 35px;
+  border-radius: 10px;
+}

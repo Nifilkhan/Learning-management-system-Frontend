@@ -72,6 +72,7 @@
   background-color: #ffffff;
   margin-left: 50px;
   width: 45%;
+  height: 460px;
   border-radius: 15px;
 }
 
@@ -104,4 +105,43 @@
 /* Optional: Change thumb color when hovered */
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8; /* Slightly darker color on hover */
+}
+
+
+table tbody tr th,td{
+  padding: 15px 10px;
+}
+
+
+.styled-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.styled-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.styled-button:active {
+  background-color: #004085;
+  transform: translateY(0);
+}
+
+.redirect {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.more {
+  text-align: center;
+  margin-top: 20px;
 }

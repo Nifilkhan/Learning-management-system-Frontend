@@ -6,6 +6,8 @@
 /tmp
 /out-tsc
 /bazel-out
+/ubuntu@13.50.118.48
+
 
 # Node
 /node_modules

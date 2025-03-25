@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service.ts.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { passwordValidator } from '../shared/validators/validators';
+import { catchError, throwError } from 'rxjs';
 
 
 @Component({
@@ -17,6 +17,7 @@ export class SigninComponent implements OnInit{
   loginForm!: FormGroup;
   isLoading:boolean = false;
   errorMessage:string = '';
+  passwordVisible:boolean = false;
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -29,6 +30,10 @@ export class SigninComponent implements OnInit{
     this.auth.googleLogin();
   }
 
+  showPassword(password:string) {
+    this.passwordVisible = !this.passwordVisible;
+  }
+
   onLoginForm() {
     this.isLoading = true;
     if(this.loginForm.invalid) {
@@ -37,7 +42,13 @@ export class SigninComponent implements OnInit{
 
     const loginData =this.loginForm.value;
 
-    this.auth.signin(loginData).subscribe({
+    this.auth.signin(loginData).pipe(
+      catchError((error) => {
+        this.isLoading = false
+        this.errorMessage = error.message;
+        return throwError(() => error);
+      })
+    ).subscribe({
       next:(response) => {
         console.log(response)
         if(response && response.role === 'admin'){
@@ -48,13 +59,10 @@ export class SigninComponent implements OnInit{
           console.log(response);
           this.route.navigate(['/home'])
         }
+        this.loginForm.reset();
       } ,error:(err) => {
+        console.log('error in response...',err)
         this.isLoading = false;
-          if(err.status === 403) {
-            this.errorMessage = 'This email is registered via Google OAuth. Please log in with Google.'
-          } else {
-            this.errorMessage = err.error.message;
-          }
       },
     })
   }

@@ -1,3 +1,42 @@
-<div class="container">
-  <p>learning works!</p>
+<div class="container p-4">
+  <h2 class="mb-6 text-2xl font-bold">My Learning</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let purchasedCourse of purchasedCoursec; let i = index" class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:shadow-lg hover:scale-105">
+      <div class="relative pb-[56.25%]"> <!-- 16:9 aspect ratio -->
+        <img [src]="imageUrl[i]" alt="course-thumbnail" class="absolute inset-0 w-full h-full object-cover">
+      </div>
+
+      <div class="p-4">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">{{purchasedCourse.title}}</h3>
+        <p class="text-gray-600 mb-4 line-clamp-2">{{purchasedCourse.description}}</p>
+
+        <div class="flex items-center justify-between">
+          <button class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors flex items-center" (click)="onClick(purchasedCourse._id!)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Watch Lectures
+          </button>
+
+          <span class="text-sm text-gray-500">
+            <!-- You can add progress information here -->
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state when no courses -->
+  <div *ngIf="purchasedCoursec?.length === 0" class="bg-gray-50 rounded-lg p-8 text-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+    </svg>
+    <h3 class="text-xl font-medium text-gray-700 mb-2">No courses yet</h3>
+    <p class="text-gray-500 mb-4">You haven't purchased any courses yet.</p>
+    <button routerLink="/courses" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+      Browse Courses
+    </button>
+  </div>
 </div>

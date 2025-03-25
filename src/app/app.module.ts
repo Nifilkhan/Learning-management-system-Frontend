@@ -33,6 +33,8 @@ import { OverlayComponent } from './shared/overlay/overlay.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorDialogComponent } from './error-handler/error-dialog.component.ts/error-dialog.component.ts.component';
 import { errorHandlingInterceptor } from './error-handler/interceptor/error-handling.interceptor';
+import { SkeletonComponent } from "./shared/skeleton/skeleton.component";
+import { PaymentProcessingComponent } from './user/payment-processing/payment-processing.component';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import { errorHandlingInterceptor } from './error-handler/interceptor/error-hand
     SigninComponent,
     OtpVerificationComponent,
     ErrorDialogComponent,
+    PaymentProcessingComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,11 +58,12 @@ import { errorHandlingInterceptor } from './error-handler/interceptor/error-hand
     AdminModule,
     HomeModule,
     MatSnackBarModule,
-    StoreModule.forRoot({},{}),
+    StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     OverlayComponent,
     MatDialogModule,
-  ],
+    SkeletonComponent
+],
   providers: [
     AuthService,
     CourseService,

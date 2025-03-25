@@ -1,6 +1,6 @@
-<div *ngIf="loadingCourse$ | async">
+<!-- <div *ngIf="loadingCourse$ | async">
   <app-overlay></app-overlay>
-</div>
+</div> -->
 
 <div class="bg-gray-100 px-6 sm:px-8 md:px-12 lg:px-[100px] py-5 rounded-xl shadow-md flex flex-wrap gap-4 items-center justify-center md:justify-between">
 
@@ -80,9 +80,8 @@
       </div>
 
       <!-- Paginator (Always Visible on Larger Screens) -->
-      <div class="mt-6 flex justify-center">
+      <!-- <div class="mt-6 flex justify-center" *ngIf="(courseData$ | async)?.length > 2"> -->
         <mat-paginator
-          *ngIf="length > 1"
           class="paginator"
           [length]="length"
           [pageSize]="pageSize"
@@ -92,7 +91,7 @@
           (page)="onChangeCourse($event)"
         >
         </mat-paginator>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Course, Lecture, section } from '../shared/model/course';
 import { ActivatedRoute } from '@angular/router';
 
@@ -7,15 +7,22 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.scss'
 })
-export class CourseListComponent {
+export class CourseListComponent implements OnInit {
 
   courseDataList!:Course;
   @Input() sectionData:section[] = [];
   @Output() lectureSelected = new EventEmitter<Lecture>();
   @Output() toggleContent = new EventEmitter<void>();
   isVisible:boolean = false;
+  isLoading:boolean = true;
 
   constructor(private route:ActivatedRoute) { }
+
+  ngOnInit(): void {
+      setTimeout(() => {
+        this.isLoading = false
+      }, 2000);
+  }
 
 isContentVisible(){
   console.log('second')

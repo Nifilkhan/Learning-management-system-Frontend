@@ -9,7 +9,7 @@ import { passwordValidator } from '../shared/validators/validators';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
 
@@ -17,6 +17,9 @@ export class SignupComponent implements OnInit {
 
   user!:RegisterUser;
   signupForm!:FormGroup;
+  password:boolean = false;
+  confirmPassword:boolean = false;
+  errorMessage:string=''
 
   ngOnInit(): void {
     this.signupVerify();
@@ -34,22 +37,24 @@ export class SignupComponent implements OnInit {
       phone:['' , [Validators.required,Validators.pattern('^[0-9]{10}$')]],
       password:['' , [Validators.required,Validators.minLength(6), passwordValidator()]],
       confirmPassword:['',[Validators.required,Validators.minLength(6), passwordValidator()]]
-    })
+    },{validators:this.passwordMatchValidator})
   }
 
   success(message: string) {
 
   }
 
+
+  showPassword(field:string) {
+    if(field === 'password') {
+      this.password = !this.password;
+    } else if(field === 'confirmPassword') {
+      this.confirmPassword = !this.confirmPassword;
+    }
+  }
+
   onSubmit():void {
-    if(this.signupForm.invalid) {
-      console.log('Form Data:', this.signupForm.value);
-      // return;
-    }
-    if(this.signupForm.value.password !== this.signupForm.value.confirmPassword){
-      throw new Error('password and confirm password must be same')
-      // return;
-    }
+    if(this.signupForm.valid) {
   const user :RegisterUser = this.signupForm.value;
 
   this.auth.signup(user).subscribe({
@@ -62,7 +67,28 @@ export class SignupComponent implements OnInit {
           panelClass: ['success-snackbar'],
         });
         this.route.navigate(['/otp']);
-    }
+        this.signupForm.reset();
+    },error:(err) => {
+      if(err.error.message.includes('Email already registered')) {
+        this.errorMessage = 'Email is already registered. Please use a different email.';
+      } else{
+        this.errorMessage = err.error.message || 'An error occurred during signup';
+      }
+      this.errorMessage = err.message
+    },
   })
+  }else {
+    this.errorMessage = 'Please fill out the form correctly';
+  }
+  }
+
+  passwordMatchValidator(form:FormGroup) {
+    const password = form.get('password');
+    const confirmPassword = form.get('confirmPassword');
+    if(password && confirmPassword && password.value !== confirmPassword.value) {
+      confirmPassword.setErrors({mismatch:true});
+    } else{
+      confirmPassword?.setErrors(null);
+    }
   }
 }

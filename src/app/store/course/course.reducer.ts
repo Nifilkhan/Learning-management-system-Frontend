@@ -18,11 +18,13 @@ export const courseReducer = createReducer(
   })),
 
 
-  on(CourseActions.loadCourseSuccess, (state, { courses, totalPages,totalCourses,currentPage }) => ({
+  on(CourseActions.loadCourseSuccess, (state, { courses, totalPages,totalCourses,currentPage,puchasedCourse,
+   }) => ({
     ...state,
     courses,
     totalCourses,
     totalPages,
+    puchasedCourse,
     currentPage,
     loading: false,
     error:null

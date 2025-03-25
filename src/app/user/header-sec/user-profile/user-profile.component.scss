@@ -1,19 +1,52 @@
+.relative {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+button.mat-mdc-menu-trigger {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;  /* Remove padding */
+  border-radius: 50%;
+  overflow: hidden; /* Prevents hover effect from overflowing */
+}
+
+.mat-mdc-icon-button {
+//   width: var(--mdc-icon-button-state-layer-size, 0px) !important;
+//  height: var(--mdc-icon-button-state-layer-size, 0px)  !important;
+//   padding: 0px !important;
+
+display: none !important;
+}
+
+
 .avatar {
   width: 35px;
   height: 35px;
-  border-radius: 50%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  color: white;
+  justify-content: center;
+  border-radius: 50%;
   font-size: 16px;
   font-weight: bold;
+  color: white;
   text-transform: uppercase;
-  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  overflow: hidden; /* Ensures the hover effect is restricted */
 }
 
-.avatar-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.avatar:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Subtle hover effect inside */
+  transform: scale(1.05);
+}
+
+button.mat-mdc-menu-trigger:hover {
+  background-color: transparent; /* Prevents hover effect outside */
 }

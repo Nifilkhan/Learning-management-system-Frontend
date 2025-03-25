@@ -1,63 +1,73 @@
 <div class="content-overview">
   <div class="flex flex-row mt-[120px]">
- <div class="chart-main">
-  <div class="chart-header">
-    <span class="chart-header-txt">
-      Sale details
-    </span>
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown button
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
+    <div class="chart-main">
+      <div class="chart-header">
+        <span class="chart-header-txt"> Sale details </span>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Dropdown button
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+      </div>
+      <app-course-enrollment-chart />
+    </div>
+    <div class="card mb-10 mx-[70px] w-[45%]">
+      <div class="card-body">
+        <p class="text-secondary mb-3">User list</p>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of limitUserData; let i = index">
+                <th>{{ i + 1 }}</th>
+                <td>{{ user.firstName }}{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="redirect">
+            <button
+              class="styled-button"
+              routerLink="/admin-dashboard/students"
+            >
+              See more
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-   <app-course-enrollment-chart />
- </div>
- <div class="card mb-10 mx-[70px] w-[45%]">
-  <div class="card-body">
-    <p class="text-secondary mb-3">User list</p>
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of userData; let i = index">
-            <th>{{i+1}}</th>
-            <td>{{user.firstName}}{{user.lastName}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.phone}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-</div>
-
 
   <div class="table-user">
     <div class="table-header">
       <div class="mb-4">
-      <span class="table-text"> Course list</span>
+        <span class="table-text"> Course list</span>
+      </div>
+    </div>
+    <!-- Courses Table -->
+    <div class="table-main-sec">
+      <app-table />
+      <div class="more">
+        <button routerLink="/admin-dashboard/courses">See More</button>
+      </div>
     </div>
   </div>
-     <!-- Courses Table -->
-      <div class="table-main-sec">
-<app-table />
-  <div class="more"><button routerLink="/admin-dashboard/courses">See More</button></div>
 </div>
-
-  </div>
-</div>
-

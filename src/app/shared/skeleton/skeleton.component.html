@@ -1,5 +1,11 @@
-<ngx-skeleton-loader
-  [count]="count"
-  [appearance]="'line'"
-  [ngClass]="className"
-></ngx-skeleton-loader>
+<div class="skeleton-container">
+  <!-- Course List Skeleton -->
+  <ng-container *ngIf="type === 'list'">
+    <div class="skeleton-box list-skeleton" *ngFor="let _ of [].constructor(5)"></div>
+  </ng-container>
+
+  <!-- Video Player Skeleton -->
+  <ng-container *ngIf="type === 'video'">
+    <div class="skeleton-box video-skeleton"></div>
+  </ng-container>
+</div>

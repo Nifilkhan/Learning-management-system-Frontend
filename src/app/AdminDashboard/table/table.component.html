@@ -1,157 +1,49 @@
-<table class="table w-full table-header-content table-hover cursor-pointer">
-  <thead>
-    <tr>
-      <th>No.</th>
-      <th>Course Title</th>
-      <th>Category</th>
-      <th>Status</th>
-      <th>Enrollment Count</th>
-      <th>Price</th>
-      <th>Published Date</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let course of courses; let i = index">
-    <tr>
-      <td>{{i+1}}</td>
-      <td>{{course.title}}</td>
-      <td>{{course.category.name}}</td>
-      <td>{{course.status}}</td>
-      <td>120</td>
-      <td>{{course.price | currency}}</td>
-      <td>{{course.createdAt | date:'shortDate'}}</td>
-      <td>
-        <div class="dropdown">
-          <button class="btn table-drop-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li><button class="dropdown-item" type="button">Something else here</button></li>
-          </ul>
-        </div>
-    </td>
-    </tr>
-    <!-- <tr>
-      <td>2</td>
-      <td><img src="" alt="">JavaScript Basics</td>
-      <td>Web development</td>
-      <td>120</td>
-      <td>$50</td>
-      <td>2024-01-01</td>
-      <td>
-        <div class="dropdown">
-          <button class="btn table-drop-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li><button class="dropdown-item" type="button">Something else here</button></li>
-          </ul>
-        </div>
-    </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>JavaScript Basics</td>
-      <td>Web development</td>
-      <td>120</td>
-      <td>$50</td>
-      <td>2024-01-01</td>
-      <td>
-        <div class="dropdown">
-          <button class="btn table-drop-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li><button class="dropdown-item" type="button">Something else here</button></li>
-          </ul>
-        </div>
-    </td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>JavaScript Basics</td>
-      <td>Web development</td>
-      <td>120</td>
-      <td>$50</td>
-      <td>2024-01-01</td>
-      <td>
-        <div class="dropdown">
-          <button class="btn table-drop-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li><button class="dropdown-item" type="button">Something else here</button></li>
-          </ul>
-        </div>
-    </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>JavaScript Basics</td>
-      <td>Web development</td>
-      <td>120</td>
-      <td>$50</td>
-      <td>2024-01-01</td>
-      <td>
-        <div class="dropdown">
-          <button class="btn table-drop-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li><button class="dropdown-item" type="button">Something else here</button></li>
-          </ul>
-        </div>
-    </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>JavaScript Basics</td>
-      <td>Web development</td>
-      <td>120</td>
-      <td>$50</td>
-      <td>2024-01-01</td>
-      <td>
-        <div class="dropdown">
-          <button class="btn table-drop-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li><button class="dropdown-item" type="button">Something else here</button></li>
-          </ul>
-        </div>
-    </td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>JavaScript Basics</td>
-      <td>Web development</td>
-      <td>120</td>
-      <td>$50</td>
-      <td>2024-01-01</td>
-      <td>
-        <div class="dropdown">
-          <button class="btn table-drop-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li><button class="dropdown-item" type="button">Something else here</button></li>
-          </ul>
-        </div>
-    </td>
-    </tr> -->
-  </tbody>
-</table>
+<!-- HTML Component Template -->
+<div class="table-responsive">
+  <table class="table w-full table-header-content table-hover cursor-pointer">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Course Title</th>
+        <th>Category</th>
+        <!-- <th class="hide-sm">Status</th> -->
+        <th class="hide-sm">Enrollment</th>
+        <th>Price</th>
+        <th class="hide-md">Published</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of courses; let i = index">
+        <td>{{i+1}}</td>
+        <td class="course-title">{{course.title}}</td>
+        <td>{{course.category.name}}</td>
+        <!-- <td class="hide-sm">
+          <span class="status-badge" [ngClass]="getStatusClass(course.status)">
+            {{course.status}}
+          </span>
+        </td> -->
+        <td class="hide-sm">120</td>
+        <td>{{course.price | currency}}</td>
+        <td class="hide-md">{{course.createdAt | date:'shortDate'}}</td>
+        <td>
+          <div class="dropdown">
+            <button class="btn table-drop-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><button class="dropdown-item" type="button">View Details</button></li>
+              <li><button class="dropdown-item" type="button">Edit Course</button></li>
+              <li><button class="dropdown-item text-danger" type="button">Delete</button></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- If no courses are available -->
+<div *ngIf="courses?.length === 0" class="no-data">
+  <p>No courses available.</p>
+</div>

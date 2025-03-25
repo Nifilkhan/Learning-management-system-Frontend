@@ -11,6 +11,5 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 })
 export class SkeletonComponent {
 
-  @Input() count = 1;
-  @Input() className = '';
+  @Input() type:'list' | 'video' = 'list';
 }

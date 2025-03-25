@@ -1,6 +1,10 @@
+import { map } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../../services/cart.service';
 import { environment } from '../../../../environments/environment.development';
+import { PaymentService } from '../../../services/payment.service';
+import { Course } from '../../shared/model/course';
+import { CheckoutRequest } from '../../shared/model/CheckoutRequest';
 
 @Component({
   selector: 'app-add-cart',
@@ -10,11 +14,11 @@ import { environment } from '../../../../environments/environment.development';
 export class AddCartComponent implements OnInit {
 
   userId:string | null = null;
-  cartItems:any;
+  cartItems:Course[] = [];
   imageUrl:string [] = [];
   totalAmount:number = 0;
 
-  constructor(private cartService:CartService){}
+  constructor(private cartService:CartService,private paymentService:PaymentService){}
 
 
   ngOnInit(): void {
@@ -36,7 +40,7 @@ export class AddCartComponent implements OnInit {
     this.cartService.removeCart(courseId).subscribe({
       next:(response) => {
         console.log('cart item deleted succesfully',response);
-        this.cartItems = this.cartItems.filter((cart: { _id: string; }) => cart._id !== courseId);
+        this.cartItems = this.cartItems.filter((cart: { _id?: string; }) => cart._id !== courseId);
       this.calculateTotal();
       },
     })
@@ -45,8 +49,19 @@ export class AddCartComponent implements OnInit {
   calculateTotal() {
   this.totalAmount = this.cartItems.reduce((acc: any,item: { price: any; }) => acc + item.price,0)
   }
-  checkout() {
 
+
+  checkout() {
+    const courseIds = this.cartItems.map(item => item._id).filter((id): id is string => id !== undefined);
+    const checkOutData:CheckoutRequest = {courseIds};
+
+    this.paymentService.createCheckoutSession(checkOutData).subscribe({
+      next:(response) => {
+        this.paymentService.reditrectToCheckout(response.sessionId);
+      }, error:(err) => {
+        console.log('error while during payment',err)
+      },
+    })
   }
 
 }

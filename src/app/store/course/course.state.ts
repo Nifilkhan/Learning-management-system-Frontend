@@ -1,3 +1,4 @@
+import { CheckoutRequest } from '../../user/shared/model/CheckoutRequest';
 import { Course } from '../../user/shared/model/course';
 
 export interface CourseState {
@@ -13,6 +14,7 @@ export interface CourseState {
   limit:number,
   offset:number
   sortBy:string,
+  puchasedCourses:Course[],
   sortOrder:string
 }
 
@@ -28,5 +30,6 @@ export const inititalState:CourseState = {
   limit:10,
   offset:0,
   sortBy:'',
-  sortOrder:''
+  sortOrder:'',
+  puchasedCourses:[]
 }
