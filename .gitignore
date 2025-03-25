@@ -2,6 +2,7 @@
 
 # Compiled output
 /dist
+/ubuntu@13.50.118.48
 /tmp
 /out-tsc
 /bazel-out
